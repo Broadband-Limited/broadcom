@@ -20,7 +20,7 @@ const works = [
       'Provided telecom network solutions, implementing dominant GSM, UMTS, and CDMA products.',
     bgColor: '#0048cc',
     color: '255 255 255',
-    img: '/images/2.png',
+    img: '/images/telecom.webp',
   },
   {
     title: 'Maintenance for Mobile Industry',
@@ -30,7 +30,7 @@ const works = [
     bgColor: '#5f69f7',
     gradient: 'linear-gradient(81.97deg,#2d4ebd 6.68%,#656cff 96.4%)',
     color: '255 255 255',
-    img: '/images/3.png',
+    img: '/images/maintenance.webp',
   },
 ]
 
@@ -42,33 +42,45 @@ const container = {
 const Slide = ({ title, short, description, color, img }) => {
   return (
     <motion.div
-      className="slide container-custom-md md:h-full"
+      className="slide w-full h-screen md:h-[80vh] flex flex-col md:flex-row items-center gap-2 md:gap-16"
       variants={container}
       initial="hidden"
       animate="show"
     >
-      <div className="md:h-full flex flex-col md:flex-row justify-center items-center gap-8 md:gap-28">
-        <div className="img-box md:h-full flex-1">
-          <Image
-            className="w-full aspect-auto"
-            src={img}
-            alt={title} // Added alt attribute
-            width={1000} // Adjust dimensions as needed
-            height={1000}
-          />
-        </div>
-        <div className="content flex-1 flex flex-col items-center md:items-start gap-6">
-
-          <p className="tracking-widest text-white opacity-90 text-center md:text-left">{title}</p>
-          <h4 className="text-3xl tracking-tight font-medium text-balance text-white text-center md:text-left">
-            {short}
-          </h4>
-          <p className="opacity-70 leading-relaxed text-balance text-gray-300 text-center md:text-left">
-            {description}
-          </p>
-        </div>
+      <div className="img-box w-full h-1/2 md:w-1/2 md:h-full flex-shrink-0 overflow-hidden">
+        <Image
+          className="w-full h-full aspect-auto"
+          src={img}
+          alt={title} // Added alt attribute
+          width={1000} // Adjust dimensions as needed
+          height={1000}
+        />
       </div>
+
+      <div className="content w-full h-1/2 md:w-1/2 md:h-full flex-shrink-0 p-6 pb-16 md:pb-0 md:p-0 md:pr-16 flex flex-col items-center justify-center md:items-start gap-3 md:gap-6">
+        <p className="tracking-widest text-white opacity-90 text-center md:text-left">
+          {title}
+        </p>
+        <h4 className="text-3xl tracking-tight font-medium text-balance text-white text-center md:text-left">
+          {short}
+        </h4>
+        <p className="opacity-70 leading-relaxed text-balance text-gray-200 text-center md:text-left">
+          {description}
+        </p>
+      </div>
+
     </motion.div>
+  )
+}
+
+const SliderDot = ({ isActive, onClick, color }) => {
+  return (
+    <div
+      className={`relative w-3 h-3 rounded-full flex items-center justify-center bg-white before:absolute before:w-[170%] before:h-[170%] before:rounded-full before:border-2  ${
+        isActive ? 'opacity-100 before:block' : 'before:hidden opacity-50 hover:opacity-100'
+      }`}
+      onClick={onClick}
+    />
   )
 }
 
@@ -76,7 +88,7 @@ const CaseStudy = () => {
   const [slideNo, setSlideNo] = useState(1)
   return (
     <motion.section
-      className="relative min-h-screen flex items-center justify-center text-[#feffdd] pb-36 md:p-0"
+      className="relative h-screen md:h-[80vh] flex items-center justify-center text-[#feffdd] p-0"
       style={{
         background: works[slideNo - 1].gradient
           ? works[slideNo - 1].gradient
@@ -96,46 +108,14 @@ const CaseStudy = () => {
       </AnimatePresence>
 
       <div className="sliders absolute top-[95%] md:top-1/2 md:right-12 flex md:flex-col gap-6 cursor-pointer">
-        <div
-          className={`relative w-2 h-2 rounded-full ${
-            slideNo === 1
-              ? 'border-spaced opacity-100'
-              : 'opacity-50 hover:opacity-100'
-          }`}
-          style={{
-            backgroundColor: `rgb(${works[slideNo - 1].color})`,
-            border: `1px solid rgb(${works[slideNo - 1].color})`,
-          }}
-          onClick={() => {
-            setSlideNo(1)
-          }}
-        />
-        <div
-          className={`relative w-2 h-2 rounded-full ${
-            slideNo === 2
-              ? 'border-spaced opacity-100'
-              : 'opacity-50 hover:opacity-100'
-          }`}
-          style={{
-            backgroundColor: `rgb(${works[slideNo - 1].color})`,
-          }}
-          onClick={() => {
-            setSlideNo(2)
-          }}
-        />
-        <div
-          className={`relative w-2 h-2 rounded-full ${
-            slideNo === 3
-              ? 'border-spaced opacity-100'
-              : 'opacity-50 hover:opacity-100'
-          }`}
-          style={{
-            backgroundColor: `rgb(${works[slideNo - 1].color})`,
-          }}
-          onClick={() => {
-            setSlideNo(3)
-          }}
-        />
+        {works.map((work, index) => (
+          <SliderDot
+            key={index}
+            isActive={slideNo === index + 1}
+            color={work.color}
+            onClick={() => setSlideNo(index + 1)}
+          />
+        ))}
       </div>
     </motion.section>
   )
