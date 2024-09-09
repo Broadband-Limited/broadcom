@@ -12,10 +12,10 @@ const Header = () => {
 
   const menuItems = [
     { href: '/', label: 'Home' },
-    { href: '/', label: 'Services' },
-    { href: '/', label: 'Industries' },
-    { href: '/', label: 'About' },
-    { href: '/', label: 'Contact Us' },
+    { href: '/services', label: 'Services' },
+    { href: '/industries', label: 'Industries' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact Us' },
   ]
 
   return (
