@@ -11,7 +11,7 @@ const works = [
       'Design, implementation, and commissioning of wireless and wire-line telecommunication products, with expertise in mobile networks, fiber optics, and Radio Access Network.',
     bgColor: '#07a077',
     color: '254 255 221',
-    img: '/images/1.png',
+    img: '/images/net.webp',
   },
   {
     title: 'Network Solutions in Africa',
@@ -34,11 +34,49 @@ const works = [
   },
 ]
 
+const container = {
+  hidden: { opacity: 0, y: '10vh' },
+  show: { opacity: 1, y: 0 },
+}
+
+const Slide = ({ title, short, description, color, img }) => {
+  return (
+    <motion.div
+      className="slide container-custom-md md:h-full"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      <div className="md:h-full flex flex-col md:flex-row justify-center items-center gap-8 md:gap-28">
+        <div className="img-box md:h-full flex-1">
+          <Image
+            className="w-full aspect-auto"
+            src={img}
+            alt={title} // Added alt attribute
+            width={1000} // Adjust dimensions as needed
+            height={1000}
+          />
+        </div>
+        <div className="content flex-1 flex flex-col items-center md:items-start gap-6">
+
+          <p className="tracking-widest text-white opacity-90 text-center md:text-left">{title}</p>
+          <h4 className="text-3xl tracking-tight font-medium text-balance text-white text-center md:text-left">
+            {short}
+          </h4>
+          <p className="opacity-70 leading-relaxed text-balance text-gray-300 text-center md:text-left">
+            {description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 const CaseStudy = () => {
   const [slideNo, setSlideNo] = useState(1)
   return (
     <motion.section
-      className="relative min-h-screen flex items-center justify-center text-[#feffdd] pb-36 md:pb-0"
+      className="relative min-h-screen flex items-center justify-center text-[#feffdd] pb-36 md:p-0"
       style={{
         background: works[slideNo - 1].gradient
           ? works[slideNo - 1].gradient
@@ -100,52 +138,6 @@ const CaseStudy = () => {
         />
       </div>
     </motion.section>
-  )
-}
-
-const container = {
-  hidden: { opacity: 0, y: '10vh' },
-  show: { opacity: 1, y: 0 },
-}
-
-const Slide = ({ title, short, description, color, img }) => {
-  return (
-    <motion.div
-      className="slide container-custom-md"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-28">
-        <div className="img-box flex-1">
-          <Image
-            className="w-full aspect-auto"
-            src={img}
-            alt={title} // Added alt attribute
-            width={500} // Adjust dimensions as needed
-            height={500}
-          />
-        </div>
-        <div className="content flex-1 flex flex-col items-center md:items-start gap-6">
-
-          <p className="tracking-widest text-white opacity-90 text-center md:text-left">{title}</p>
-          <h4 className="text-3xl tracking-tight font-medium text-balance text-white text-center md:text-left">
-            {short}
-          </h4>
-          <p className="opacity-70 leading-relaxed text-balance text-gray-300 text-center md:text-left">
-            {description}
-          </p>
-          <button
-            className="md:mr-auto border-b-[3px] text-white"
-            style={{
-              borderColor: `rgb(${color} / 0.5)`,
-            }}
-          >
-            View Case Study
-          </button>
-        </div>
-      </div>
-    </motion.div>
   )
 }
 
