@@ -76,7 +76,7 @@ const ServiceCard = ({ service }) => {
   return (
     <div className="service-card w-full flex flex-col gap-9 md:gap-12 p-4">
       <div className="flex items-center gap-2">
-        <IconComponent className="icon text-4xl text-blue-600" />
+        <IconComponent className="icon opacity-50" fontSize="large" />
         <h3 className='text-2xl gelasio'>{service.title}</h3>
       </div>
       <p className="text-gray-600">{service.description}</p>
