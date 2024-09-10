@@ -1,0 +1,71 @@
+[
+  {
+    "icon": "CellTowerOutlined",
+    "title": "Telecommunication Solutions",
+    "description": "We offer comprehensive telecommunication solutions, enabling reliable and efficient communication infrastructure for businesses across Africa.",
+    "image": "images/telecommunication.webp",
+    "domains": [
+      {
+        "title": "Network Design & Optimization",
+        "description": "We specialize in designing and optimizing robust telecom networks to ensure seamless communication with minimal disruptions.",
+        "icon": "NetworkCheckOutlined"
+      },
+      {
+        "title": "Fiber Optic Infrastructure",
+        "description": "Our expertise includes the installation and maintenance of fiber optic cables for high-speed data transmission.",
+        "icon": "CableOutlined"
+      },
+      {
+        "title": "Wireless Solutions",
+        "description": "We provide wireless communication solutions that support both urban and rural connectivity needs.",
+        "icon": "WifiOutlined"
+      }
+    ]
+  },
+  {
+    "icon": "SettingsOutlined",
+    "title": "Managed Services",
+    "description": "Our managed services help businesses focus on their core operations while we handle their IT infrastructure, offering proactive support and optimization.",
+    "image": "images/managed-services.webp",
+    "domains": [
+      {
+        "title": "Infrastructure Management",
+        "description": "We manage and maintain critical infrastructure to ensure high availability and optimal performance.",
+        "icon": "StorageOutlined"
+      },
+      {
+        "title": "24/7 Network Monitoring",
+        "description": "Our services include round-the-clock monitoring of network systems to detect and resolve issues before they impact business operations.",
+        "icon": "MonitorOutlined"
+      },
+      {
+        "title": "Cloud Solutions",
+        "description": "We offer cloud migration and management services, ensuring scalability, security, and cost-efficiency for businesses.",
+        "icon": "CloudOutlined"
+      }
+    ]
+  },
+  {
+    "icon": "EnergySavingsLeafOutlined",
+    "title": "Sustainable Energy Solutions",
+    "description": "We provide sustainable energy solutions that help businesses reduce their carbon footprint and achieve energy efficiency.",
+    "image": "images/sustainable-energy.webp",
+    "domains": [
+      {
+        "title": "Solar Power Solutions",
+        "description": "Our solar power installations are designed to provide reliable and eco-friendly energy alternatives.",
+        "icon": "SolarPowerOutlined"
+      },
+      {
+        "title": "Energy Audits",
+        "description": "We conduct energy audits to help businesses understand their energy consumption and identify areas for improvement.",
+        "icon": "FactCheckOutlined"
+      },
+      {
+        "title": "Hybrid Energy Systems",
+        "description": "We develop hybrid energy systems that combine renewable energy sources for greater efficiency and reliability.",
+        "icon": "BatteryChargingFullOutlined"
+      }
+    ]
+  }
+]

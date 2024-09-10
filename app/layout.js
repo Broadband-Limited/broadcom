@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="flex flex-col">
         <Header />
-        <main>{children}</main>
+        <main className='flex-shrink-0'>{children}</main>
         <Footer />
       </body>
     </html>
