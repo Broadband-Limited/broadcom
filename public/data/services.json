@@ -1,70 +1,100 @@
 [
   {
     "icon": "CellTowerOutlined",
-    "title": "Telecommunication Solutions",
-    "description": "We offer comprehensive telecommunication solutions, enabling reliable and efficient communication infrastructure for businesses across Africa.",
-    "image": "images/telecommunication.webp",
+    "title": "Network Implementation Division",
+    "description": "Providing comprehensive network implementation services for telecom infrastructure.",
+    "image": "images/net.webp",
     "domains": [
       {
-        "title": "Network Design & Optimization",
-        "description": "We specialize in designing and optimizing robust telecom networks to ensure seamless communication with minimal disruptions.",
-        "icon": "NetworkCheckOutlined"
+        "title": "GSM Network Optimization",
+        "description": "Improving GSM network performance through optimization techniques.",
+        "icon": "NetworkCheckIcon"
       },
       {
-        "title": "Fiber Optic Infrastructure",
-        "description": "Our expertise includes the installation and maintenance of fiber optic cables for high-speed data transmission.",
-        "icon": "CableOutlined"
+        "title": "GSM Sites Roll Out",
+        "description": "Complete roll out of GSM network sites including planning, construction, and setup.",
+        "icon": "BuildIcon"
       },
       {
-        "title": "Wireless Solutions",
-        "description": "We provide wireless communication solutions that support both urban and rural connectivity needs.",
-        "icon": "WifiOutlined"
+        "title": "Tower Rigging",
+        "description": "Professional tower rigging services for telecom networks.",
+        "icon": "ConstructionIcon"
+      },
+      {
+        "title": "VSAT Installation",
+        "description": "Satellite-based communication solutions in remote areas.",
+        "icon": "SatelliteIcon"
+      },
+      {
+        "title": "Civil Works",
+        "description": "Expert civil works for telecom infrastructure projects.",
+        "icon": "EngineeringIcon"
       }
     ]
   },
   {
-    "icon": "SettingsOutlined",
-    "title": "Managed Services",
-    "description": "Our managed services help businesses focus on their core operations while we handle their IT infrastructure, offering proactive support and optimization.",
+    "icon": "WifiOutlined",
+    "title": "Solutions Division",
+    "description": "Offering cutting-edge solutions for wireless and fiber networks, intelligent transport, and more.",
+    "image": "images/solutions-division.webp",
+    "domains": [
+      {
+        "title": "Optic Fibre Solutions",
+        "description": "High-speed data transmission using fiber optics.",
+        "icon": "FiberManualRecordIcon"
+      },
+      {
+        "title": "Wireless Networks",
+        "description": "Deploying wireless networks for seamless connectivity.",
+        "icon": "WifiIcon"
+      },
+      {
+        "title": "Green Energy Solutions",
+        "description": "Sustainable energy solutions like solar and wind for telecom sites.",
+        "icon": "BatteryChargingFullIcon"
+      },
+      {
+        "title": "Mobile Broadband",
+        "description": "Expanding mobile broadband coverage in underserved areas.",
+        "icon": "CellWifiIcon"
+      },
+      {
+        "title": "Intelligent Transport Networks",
+        "description": "Developing networks to support smart transport systems.",
+        "icon": "DirectionsBusIcon"
+      }
+    ]
+  },
+  {
+    "icon": "EngineeringOutlined",
+    "title": "Managed Services Department",
+    "description": "Comprehensive management services for telecom infrastructure and systems.",
     "image": "images/managed-services.webp",
     "domains": [
       {
-        "title": "Infrastructure Management",
-        "description": "We manage and maintain critical infrastructure to ensure high availability and optimal performance.",
-        "icon": "StorageOutlined"
+        "title": "Generators",
+        "description": "Supplying and managing backup power generators for telecom sites.",
+        "icon": "PowerIcon"
       },
       {
-        "title": "24/7 Network Monitoring",
-        "description": "Our services include round-the-clock monitoring of network systems to detect and resolve issues before they impact business operations.",
-        "icon": "MonitorOutlined"
+        "title": "Air Conditioner Systems",
+        "description": "Climate control solutions for telecom infrastructures.",
+        "icon": "AcUnitIcon"
       },
       {
-        "title": "Cloud Solutions",
-        "description": "We offer cloud migration and management services, ensuring scalability, security, and cost-efficiency for businesses.",
-        "icon": "CloudOutlined"
-      }
-    ]
-  },
-  {
-    "icon": "EnergySavingsLeafOutlined",
-    "title": "Sustainable Energy Solutions",
-    "description": "We provide sustainable energy solutions that help businesses reduce their carbon footprint and achieve energy efficiency.",
-    "image": "images/sustainable-energy.webp",
-    "domains": [
-      {
-        "title": "Solar Power Solutions",
-        "description": "Our solar power installations are designed to provide reliable and eco-friendly energy alternatives.",
-        "icon": "SolarPowerOutlined"
+        "title": "Site Security",
+        "description": "Ensuring the security of telecom sites through surveillance and fencing solutions.",
+        "icon": "SecurityIcon"
       },
       {
-        "title": "Energy Audits",
-        "description": "We conduct energy audits to help businesses understand their energy consumption and identify areas for improvement.",
-        "icon": "FactCheckOutlined"
+        "title": "Battery Banks",
+        "description": "Installing and managing battery backup systems for telecom sites.",
+        "icon": "BatteryFullIcon"
       },
       {
-        "title": "Hybrid Energy Systems",
-        "description": "We develop hybrid energy systems that combine renewable energy sources for greater efficiency and reliability.",
-        "icon": "BatteryChargingFullOutlined"
+        "title": "Environmental Monitoring",
+        "description": "Monitoring environmental conditions to ensure optimal site operations.",
+        "icon": "ThermostatIcon"
       }
     ]
   }

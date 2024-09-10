@@ -17,6 +17,7 @@
   box-sizing: border-box;
   color: var(--black);
   font-family: "Roboto", system-ui;
+  transition: all 0.5s ease;
 }
 
 .roboto {
