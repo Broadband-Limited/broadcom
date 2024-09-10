@@ -8,27 +8,27 @@
       {
         "title": "GSM Network Optimization",
         "description": "Improving GSM network performance through optimization techniques.",
-        "icon": "NetworkCheckIcon"
+        "icon": "NetworkCheckOutlined"
       },
       {
         "title": "GSM Sites Roll Out",
         "description": "Complete roll out of GSM network sites including planning, construction, and setup.",
-        "icon": "BuildIcon"
+        "icon": "BuildOutlined"
       },
       {
         "title": "Tower Rigging",
         "description": "Professional tower rigging services for telecom networks.",
-        "icon": "ConstructionIcon"
+        "icon": "ConstructionOutlined"
       },
       {
         "title": "VSAT Installation",
         "description": "Satellite-based communication solutions in remote areas.",
-        "icon": "SatelliteIcon"
+        "icon": "SatelliteOutlined"
       },
       {
         "title": "Civil Works",
         "description": "Expert civil works for telecom infrastructure projects.",
-        "icon": "EngineeringIcon"
+        "icon": "EngineeringOutlined"
       }
     ]
   },
@@ -41,27 +41,27 @@
       {
         "title": "Optic Fibre Solutions",
         "description": "High-speed data transmission using fiber optics.",
-        "icon": "FiberManualRecordIcon"
+        "icon": "FiberManualRecordOutlined"
       },
       {
         "title": "Wireless Networks",
         "description": "Deploying wireless networks for seamless connectivity.",
-        "icon": "WifiIcon"
+        "icon": "WifiOutlined"
       },
       {
         "title": "Green Energy Solutions",
         "description": "Sustainable energy solutions like solar and wind for telecom sites.",
-        "icon": "BatteryChargingFullIcon"
+        "icon": "BatteryChargingFullOutlined"
       },
       {
         "title": "Mobile Broadband",
         "description": "Expanding mobile broadband coverage in underserved areas.",
-        "icon": "CellWifiIcon"
+        "icon": "CellWifiOutlined"
       },
       {
         "title": "Intelligent Transport Networks",
         "description": "Developing networks to support smart transport systems.",
-        "icon": "DirectionsBusIcon"
+        "icon": "DirectionsBusOutlined"
       }
     ]
   },
@@ -74,27 +74,27 @@
       {
         "title": "Generators",
         "description": "Supplying and managing backup power generators for telecom sites.",
-        "icon": "PowerIcon"
+        "icon": "PowerOutlined"
       },
       {
         "title": "Air Conditioner Systems",
         "description": "Climate control solutions for telecom infrastructures.",
-        "icon": "AcUnitIcon"
+        "icon": "AcUnit"
       },
       {
         "title": "Site Security",
         "description": "Ensuring the security of telecom sites through surveillance and fencing solutions.",
-        "icon": "SecurityIcon"
+        "icon": "Security"
       },
       {
         "title": "Battery Banks",
         "description": "Installing and managing battery backup systems for telecom sites.",
-        "icon": "BatteryFullIcon"
+        "icon": "BatteryFull"
       },
       {
         "title": "Environmental Monitoring",
         "description": "Monitoring environmental conditions to ensure optimal site operations.",
-        "icon": "ThermostatIcon"
+        "icon": "Thermostat"
       }
     ]
   }

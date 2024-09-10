@@ -30,6 +30,11 @@ import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 import PowerIcon from '@mui/icons-material/Power';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import SecurityIcon from '@mui/icons-material/Security';
+import SatelliteOutlinedIcon from '@mui/icons-material/SatelliteOutlined';
+import CellWifiOutlinedIcon from '@mui/icons-material/CellWifiOutlined';
+import DirectionsBusOutlinedIcon from '@mui/icons-material/DirectionsBusOutlined';
+import BatteryFullOutlinedIcon from '@mui/icons-material/BatteryFullOutlined';
+import ThermostatOutlinedIcon from '@mui/icons-material/ThermostatOutlined';
 
 // Updated iconMap
 const iconMap = {
@@ -44,7 +49,7 @@ const iconMap = {
   PowerOutlined: PowerOutlinedIcon,
   AcUnitOutlined: AcUnitOutlinedIcon,
   SecurityOutlined: SecurityOutlinedIcon,
-  
+
   // New icons
   NetworkCheck: NetworkCheckIcon,
   Build: BuildIcon,
@@ -54,8 +59,15 @@ const iconMap = {
   BatteryChargingFull: BatteryChargingFullIcon,
   Power: PowerIcon,
   AcUnit: AcUnitIcon,
-  Security: SecurityIcon
+  Security: SecurityIcon,
+  SatelliteOutlined: SatelliteOutlinedIcon,
+  Engineering: EngineeringOutlinedIcon,
+  CellWifiOutlined: CellWifiOutlinedIcon,
+  DirectionsBusOutlined: DirectionsBusOutlinedIcon,
+  BatteryFull: BatteryFullOutlinedIcon,
+  Thermostat: ThermostatOutlinedIcon,
 };
+
 
 
 
@@ -75,7 +87,7 @@ const ServiceCard = ({ service }) => {
 
   return (
     <div className="service-card w-full flex flex-col gap-9 md:gap-12 p-4">
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row md:items-center gap-2 md:border-b border-black border-opacity-20">
         <IconComponent className="icon opacity-50" fontSize="large" />
         <h3 className='text-2xl gelasio'>{service.title}</h3>
       </div>
@@ -118,8 +130,8 @@ const DomainCard = ({ domain }) => {
   return (
     <div className="domain w-full flex flex-col gap-4 md:border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 md:p-4">
       <div className="flex items-center gap-2">
-        <DomainIcon className="icon" />
-        <h4 className="font-semibold">{domain.title}</h4>
+        <DomainIcon className="icon opacity-50" />
+        <h4 className="font-semibold text-r-blue">{domain.title}</h4>
       </div>
       <p className="text-gray-700 text-sm">{domain.description}</p>
     </div>
