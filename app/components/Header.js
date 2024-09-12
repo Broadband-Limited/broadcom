@@ -18,13 +18,13 @@ const Header = () => {
   ]
 
   return (
-    <header className="w-full flex items-center justify-between relative px-6 md:px-48 py-6">
+    <header className="w-full flex items-center justify-between fixed z-50 top-0 px-6 md:px-48 py-6 bg-white bg-opacity-25 backdrop-blur-xl h-24">
       
       <Logo />
 
       <nav
-        className={`menu absolute z-50 top-0 left-0 bg-r-black w-screen h-screen ${
-          isMenuOpen ? 'flex' : 'hidden'
+        className={`menu absolute z-50 left-0 bg-r-black w-screen h-screen flex ${
+          isMenuOpen ? 'top-0 opacity-100' : '-top-[100vh] opacity-0'
         } flex-col`}
       >
         <div className="w-full flex items-center justify-between px-6 md:px-48 py-6">
@@ -35,7 +35,7 @@ const Header = () => {
         <ul className="menu-list w-full h-full border-t px-6 md:px-64 py-6 flex flex-col gap-4">
           {menuItems.map((item) => (
             <li className="menu-item w-full h-fit py-4" key={item.href}>
-              <Link href={item.href} className="text-r-ash text-4xl uppercase font-bold w-full" onClick={toggleMenu}>
+              <Link href={item.href} className="text-r-ash text-4xl uppercase font-bold w-full hover:text-r-blue" onClick={toggleMenu}>
                 {item.label}
               </Link>
             </li>

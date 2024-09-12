@@ -3,17 +3,6 @@ import './globals.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-})
-
 export const metadata = {
   title: 'Broadband Communication Networks',
   description: 'Communication technologies solution provider',
@@ -22,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col">
+      <body className="flex flex-col relative pt-24">
         <Header />
         <main className='flex-shrink-0'>{children}</main>
         <Footer />

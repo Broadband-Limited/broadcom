@@ -1,10 +1,15 @@
 import React from "react";
+import Landing from "../components/Contact/Landing";
+import GetInTouch from "../components/Contact/GetInTouch";
+import Follow from "../components/Contact/Follow";
 
 const Contact = () => {
   return (
-    <section>
-      <p>Welcome to the contact page!</p>
-    </section>
+    <>
+      <Landing />
+      <GetInTouch />
+      <Follow />
+    </>
   );
 }
 
