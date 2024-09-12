@@ -1,5 +1,5 @@
 'use client'
-import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
