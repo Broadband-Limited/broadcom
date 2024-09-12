@@ -1,10 +1,11 @@
 import React from 'react'
+import Landing from '../components/About/Landing'
 
 const About = () => {
   return (
-    <section>
-      <p>Welcome to the about page!</p>
-    </section>
+    <>
+      <Landing />
+    </>
   )
 }
 
