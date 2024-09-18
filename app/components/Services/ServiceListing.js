@@ -113,7 +113,7 @@ const ServiceCard = ({ service }) => {
         </div>
 
         {/* Desktop view: Grid */}
-        <div className="hidden md::grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="hidden md:grid md::grid-cols-2 lg:grid-cols-2 gap-8">
           {service.domains.map((domain, index) => (
             <DomainCard key={index} domain={domain} />
           ))}
