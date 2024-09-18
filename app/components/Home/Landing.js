@@ -2,12 +2,29 @@
 import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import Image from 'next/image'
 
 const container = {
   hidden: { opacity: 0, y: '5vh' },
   show: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: '-1vh' },
 }
+
+const images = [
+  "award.webp",
+  "award2.webp",
+  "broadcom.webp",
+  "mission.webp",
+  "net.webp",
+  "news.webp",
+  "product.webp",
+  "society.webp",
+  "solution.webp",
+  "vision.webp"
+]
 
 const Landing = () => {
   const { scrollYProgress } = useScroll()
@@ -23,10 +40,21 @@ const Landing = () => {
     }
   }, [])
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 4500,
+  };
+
   return (
     <section className="flex flex-col items-center gap-8 md:px-64">
 
-      <div className="w-full">
+      <div className="w-full h-48 md:h-auto md:mb-16 appear">
         <h2 className="text-4xl font-bold">
           <span className="whitespace-nowrap">We deliver</span>
           <div className="auto-scroll">
@@ -87,24 +115,23 @@ const Landing = () => {
         </h2>
       </div>
 
-      <motion.div
-        // style={{ x }}
-        className="flex-shrink-0 w-screen hidden"
+      <div
+        className="flex-shrink-0 w-full shadow-2xl appear"
       >
-        <video
-          className="w-full h-full"
-          autoPlay
-          loop
-          muted
-          preload="auto"
-          poster=""
-        >
-          <source
-            src=""
-            type="video/mp4"
-          />
-        </video>
-      </motion.div>
+        <Slider {...settings}>
+          {images.map((image, index) => (
+            <div key={index} className="image w-full aspect-[21/9]">
+              <Image
+                src={`/images/${image}`}
+                alt=""
+                width={1000}
+                height={1000}
+                className="object-cover w-full"
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </section>
   )
 }
