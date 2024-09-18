@@ -9,7 +9,8 @@ const works = [
     short: 'Wireless projects in Kenya.',
     description:
       'Design, implementation, and commissioning of wireless and wire-line telecommunication products, with expertise in mobile networks, fiber optics, and Radio Access Network.',
-    bgColor: '#07a077',
+    bgColor: '#0048cc',
+    gradient: 'linear-gradient(81.97deg,#2d4ebd 6.68%,#656cff 96.4%)',
     color: '254 255 221',
     img: '/images/net.webp',
   },
@@ -19,6 +20,7 @@ const works = [
     description:
       'Provided telecom network solutions, implementing dominant GSM, UMTS, and CDMA products.',
     bgColor: '#0048cc',
+    gradient: 'linear-gradient(81.97deg,#2d4ebd 6.68%,#656cff 96.4%)',
     color: '255 255 255',
     img: '/images/telecom.webp',
   },

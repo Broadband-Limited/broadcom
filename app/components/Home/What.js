@@ -4,7 +4,7 @@ import DigitalTrans from '../DigitalTrans'
 import ProductDev from '../ProductDev'
 
 const ServiceCard = ({ Icon, title, description }) => (
-  <article className="flex flex-col gap-8 appear">
+  <article className="flex flex-col gap-8">
     <div className="flex items-center md:flex-col md:items-start gap-4">
       <Icon />
       <h3 className="text-xl gelasio">{title}</h3>
@@ -44,7 +44,7 @@ const What = () => {
 
       <div className="services-wrapper w-full flex flex-col">
 
-        <div className="services w-full flex flex-col md:flex-row gap-16">
+        <div className="services w-full flex flex-col md:flex-row gap-16 appear">
           {servicesData.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
