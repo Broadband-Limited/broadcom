@@ -3,7 +3,7 @@ import Image from 'next/image'
 const Landing = () => {
   return (
     <section className="flex flex-col items-center gap-8 md:px-64 mb-16">
-      <div className="w-full">
+      <div className="w-full appear">
         <h2 className="text-4xl font-bold">
           Bridging Africa with Innovative Telecom. Solutions
         </h2>
@@ -18,7 +18,7 @@ const Landing = () => {
         </p>
       </div>
 
-      <div className="flex-shrink-0 w-screen md:w-full h-auto md:aspect-[16/9] overflow-hidden">
+      <div className="flex-shrink-0 w-screen md:w-full h-auto md:aspect-[16/9] overflow-hidden appear">
         <Image
           alt="Broadcom Services"
           src={'/images/broadcom.webp'}

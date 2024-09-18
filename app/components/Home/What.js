@@ -4,7 +4,7 @@ import DigitalTrans from '../DigitalTrans'
 import ProductDev from '../ProductDev'
 
 const ServiceCard = ({ Icon, title, description }) => (
-  <article className="flex flex-col gap-8">
+  <article className="flex flex-col gap-8 appear">
     <div className="flex items-center md:flex-col md:items-start gap-4">
       <Icon />
       <h3 className="text-xl gelasio">{title}</h3>
@@ -37,7 +37,7 @@ const servicesData = [
 const What = () => {
   return (
     <section className="min-h-screen relative overflow-x-hidden flex flex-col gap-8 md:px-64">
-      <h2 className="flex items-center text-xl isolate container-custom-xs">
+      <h2 className="flex items-center text-xl isolate container-custom-xs appear ">
         <span className="bg-white pr-2 roboto">WHAT WE CAN DO FOR YOU</span>
         <span className="bg-gray-300 h-[2px] absolute inline-block w-screen -z-10" />
       </h2>

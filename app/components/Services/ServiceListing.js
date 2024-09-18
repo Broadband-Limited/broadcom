@@ -87,12 +87,12 @@ const ServiceCard = ({ service }) => {
 
   return (
     <div className="service-card w-full flex flex-col gap-9 md:gap-12 p-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-2 md:border-b border-black border-opacity-20">
+      <div className="flex flex-col md:flex-row md:items-center gap-2 md:border-b border-black border-opacity-20 appear">
         <IconComponent className="icon opacity-50" fontSize="large" />
         <h3 className='text-2xl gelasio'>{service.title}</h3>
       </div>
-      <p className="text-gray-600">{service.description}</p>
-      <div className="image w-full aspect-[4/3] md:aspect-[21/9] relative overflow-hidden">
+      <p className="text-gray-600 appear">{service.description}</p>
+      <div className="image w-full aspect-[4/3] md:aspect-[21/9] relative overflow-hidden appearFromLeft">
         <Image
           src={`/${service.image}`}
           alt={service.title}
@@ -128,7 +128,7 @@ const DomainCard = ({ domain }) => {
   const DomainIcon = iconMap[domain.icon] || (() => null)
   
   return (
-    <div className="domain w-full flex flex-col gap-4 md:border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 md:p-4">
+    <div className="domain w-full flex flex-col gap-4 md:border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 md:p-4 appear">
       <div className="flex items-center gap-2">
         <DomainIcon className="icon opacity-50" />
         <h4 className="font-semibold text-r-blue">{domain.title}</h4>

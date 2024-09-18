@@ -19,7 +19,7 @@ const socialAccounts = [
 
 const Follow = () => {
   return(
-    <section className="flex flex-col items-center gap-8 md:px-64">
+    <section className="flex flex-col items-center gap-8 md:px-64 appear">
       <h2 className="text-2xl font-bold">follow us</h2>
       <p className="text-gray-600">Stay connected with us on our social media platforms to get the latest updates and industry insights.</p>
 

@@ -38,7 +38,7 @@ const GetInTouch = () => {
   return(
     <section className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 md:px-64 mb-16">
       {contactItems.map((item, index) => (
-        <div key={index} className="w-full aspect-[4/3] md:aspect-auto flex flex-col justify-between md:gap-8 border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 p-4 md:shadow md:hover:shadow-lg">
+        <div key={index} className="w-full aspect-[4/3] md:aspect-auto flex flex-col justify-between md:gap-8 border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 p-4 md:shadow md:hover:shadow-lg appear">
           <item.icon className="text-5xl opacity-50" />
           <div>
             <h3 className="text-xl mt-4 capitalize">{item.title}</h3>

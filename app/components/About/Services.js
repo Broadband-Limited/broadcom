@@ -30,14 +30,14 @@ const divisions = [
 const Services = () => {
   return (
     <section className="flex flex-col gap-8 md:px-64 mb-16">
-      <div className="w-full flex items-center gap-4">
+      <div className="w-full flex items-center gap-4 appear">
         <MiscellaneousServicesOutlined
           fontSize="large"
           className="opacity-50"
         />
         <h2 className="text-2xl font-bold">Our services</h2>
       </div>
-      <p className="text-gray-600">
+      <p className="text-gray-600 appear">
         Broadcom&apos;s expertise is divided into three key divisions:
       </p>
 
@@ -45,7 +45,7 @@ const Services = () => {
         {divisions.map((division, index) => (
           <div
             key={index}
-            className="w-full flex flex-col gap-4 md:gap-6 md:border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 md:p-4"
+            className="w-full flex flex-col gap-4 md:gap-6 md:border-2 border-x-blue-500 border-opacity-20 hover:border-opacity-100 md:p-4 appear"
           >
             <div className="image w-full aspect-[16/9] overflow-hidden">
               <Image
