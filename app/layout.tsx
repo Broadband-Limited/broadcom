@@ -1,6 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Alata, Montserrat } from 'next/font/google';
 import './globals.css';
+import Header from '@/shared/components/navigation/Header';
 
 const alata = Alata({
   variable: '--font-alata',
@@ -54,14 +55,20 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
+export const viewport: Viewport = {
+  interactiveWidget: 'resizes-content',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${alata.variable} ${montserrat.variable} antialiased`}>
+    <html lang="en" className="hide-scrollbar">
+      <body
+        className={`${alata.variable} ${montserrat.variable} hide-scrollbar antialiased`}>
+        <Header />
         {children}
       </body>
     </html>
