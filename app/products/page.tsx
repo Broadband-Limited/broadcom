@@ -1,10 +1,20 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+
 export default function ProductsPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/');
+  }, [router]);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Products</h1>
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Product cards will go here */}
-      </div>
-    </div>
+    <section className='flex flex-col items-center justify-center gap-16 min-h-screen'>
+      <div className="w-16 aspect-square border-8 border-light-blue border-r-transparent rounded-full animate-spin"></div>
+      <h3>Redirecting to home page...</h3>
+    </section>
   );
 }
