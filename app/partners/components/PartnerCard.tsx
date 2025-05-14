@@ -1,0 +1,43 @@
+import { Partner, partners } from '@/shared/data/partners';
+import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const PartnerCard = ({ name, description, image, link }: Partner) => {
+  const index = partners.findIndex(
+    (partner) => partner.name === name && partner.image === image
+  );
+
+  return (
+    <div
+      className={`w-full border-t py-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-24 ${
+        index === partners.length - 1 && 'border-b'
+      }`}>
+      <Image
+        src={`/images/partners/${image}.webp`}
+        alt={`Broadband Communication Networks Ltd and ${name} partnership`}
+        width={500}
+        height={500}
+        className={`w-full md:w-1/2 aspect-square overflow-hidden border border-cyan shadow-2xl ${
+          index! % 2 === 0 && 'md:order-1'
+        }`}
+      />
+
+      <div className="w-full md:w-1/2">
+        <Link
+          href={link}
+          target="_blank"
+          className="flex items-center gap-2 text-purple border-b border-purple w-fit mb-4 pb-1 px-1 md:hover:border-transparent transition-all duration-300">
+          <h3>{name}</h3>
+          <ExternalLink size={24} />
+        </Link>
+
+        <p className="whitespace-pre-wrap text-sm md:text-base">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default PartnerCard;
