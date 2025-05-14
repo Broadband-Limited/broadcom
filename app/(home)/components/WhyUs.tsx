@@ -26,7 +26,7 @@ interface PointProps {
 const Point: React.FC<PointProps> = ({ title, description }) => {
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-foreground font-black text-4xl text-center">{title}</h2>
+      <h2 className="!text-foreground !font-black text-center">{title}</h2>
       <p className='text-center opacity-75'>{description}</p>
     </div>
   )

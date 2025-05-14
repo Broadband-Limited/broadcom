@@ -34,7 +34,7 @@ const Header = () => {
   );
 
   return (
-    <header className="w-full h-[10vh] sticky z-50 top-0 flex-shrink-0 px-4 md:px-12 flex items-center justify-between bg-dark-blue shadow-2xl border-b border-light-blue">
+    <header className="w-full h-[10vh] sticky z-50 top-0 flex-shrink-0 px-4 md:px-12 flex items-center justify-between bg-dark-blue shadow-2xl">
       <Link href="/" className="logo">
         <Image
           src="/images/logo.png"

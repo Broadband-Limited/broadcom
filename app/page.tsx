@@ -1,3 +1,4 @@
+import ContactUs from './(home)/components/ContactUs';
 import Hero from './(home)/components/Hero';
 import What from './(home)/components/What';
 import Who from './(home)/components/Who';
@@ -10,6 +11,7 @@ export default function Home() {
       <Who />
       <What />
       <WhyUs />
+      <ContactUs />
     </>
   );
 }

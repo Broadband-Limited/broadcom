@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Alata, Montserrat } from 'next/font/google';
 import './globals.css';
 import Header from '@/shared/components/navigation/Header';
+import Footer from '@/shared/components/navigation/Footer';
 
 const alata = Alata({
   variable: '--font-alata',
@@ -67,9 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="hide-scrollbar">
       <body
-        className={`${alata.variable} ${montserrat.variable} hide-scrollbar antialiased`}>
+        className={`${alata.variable} ${montserrat.variable} hide-scrollbar antialiased relative`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
