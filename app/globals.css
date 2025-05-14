@@ -6,6 +6,8 @@
   --dark-blue: #00356c;
   --light-blue: #0066cccc;
 
+  --purple: #b32af3;
+
   --font-size: 1rem;
   --font-ratio: 1.4;
 }
@@ -189,4 +191,39 @@ img {
 
 .lines-header::after {
   left: 105%;
+}
+
+.hexagon-clip {
+  -webkit-clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+@keyframes moving-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.moving-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--purple),
+    var(--light-blue),
+    var(--purple),
+    var(--light-blue)
+  );
+  background-size: 400% 400%;
+  animation: moving-gradient 5s linear infinite;
 }
