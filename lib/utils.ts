@@ -24,14 +24,7 @@ export function formatRelativeTime(dateString: string): string {
     
     return 'Just now';
   } catch (error) {
-    console.error('Invalid date format:', dateString);
+    console.error('Invalid date format:', dateString, error);
     return '';
   }
 }
-
-// Example outputs:
-// "in 2 years"
-// "3 months ago"
-// "1 day ago"
-// "in 5 hours"
-// "Just now"
