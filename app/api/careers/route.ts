@@ -5,14 +5,14 @@ import { supabase } from '@/lib/supabase/client';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get('category');
+    const department = searchParams.get('department');
     const location = searchParams.get('location');
     const id = searchParams.get('id');
 
     let query = supabase.from('jobs').select('*');
 
-    if (category) {
-      query = query.eq('category', category);
+    if (department) {
+      query = query.eq('department', department);
     }
 
     if (location) {
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
     if (!data || data.length === 0) {
       console.warn(
-        `No job listings found with params: category=${category}, location=${location}, id=${id}`
+        `No job listings found with params: department=${department}, location=${location}, id=${id}`
       );
       // Return empty jobs array without relying on cookie-based caching
       return NextResponse.json({ jobs: [] }, { status: 200 });
