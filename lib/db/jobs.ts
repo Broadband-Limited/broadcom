@@ -1,5 +1,6 @@
 import { Job } from '@/shared/types/career';
 import { createServer, createServiceRoleServer } from '../supabase/server';
+import { supabase } from '../supabase/client';
 
 export const getJobs = async () => {
   const supabase = await createServer();
@@ -25,12 +26,12 @@ export const getJobById = async (id: string) => {
     .select('*')
     .eq('id', id)
     .single();
-  
+
   if (error) {
     console.error('Error fetching job:', error);
     throw new Error('Failed to fetch job');
   }
-  
+
   return job;
 };
 
@@ -57,3 +58,27 @@ export const deleteJob = async (id: string) => {
   const supabase = await createServiceRoleServer();
   return supabase.from('jobs').delete().eq('id', id);
 };
+
+/**
+ * Get all jobs directly from the database for static site generation
+ * This version avoids using cookies or browser-specific APIs
+ */
+export async function getJobsForStaticGeneration() {
+  try {
+    // Direct database query approach that doesn't use cookies
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .order('posted_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching jobs for static generation:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Failed to fetch jobs for static generation:', error);
+    return [];
+  }
+}

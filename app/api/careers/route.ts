@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const location = searchParams.get('location');
     const id = searchParams.get('id');
 
-    let query = supabase.from('job_postings').select('*');
+    let query = supabase.from('jobs').select('*');
 
     if (category) {
       query = query.eq('category', category);

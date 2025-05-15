@@ -1,4 +1,4 @@
-import { getJobById, getJobs } from '@/lib/db/jobs';
+import { getJobById, getJobsForStaticGeneration } from '@/lib/db/jobs';
 import ApplicationForm from '../components/ApplicationForm';
 import { formatRelativeTime } from '@/lib/utils';
 import {
@@ -23,7 +23,7 @@ interface CareerPageProps {
 export async function generateMetadata({
   params,
 }: CareerPageProps): Promise<Metadata> {
-  const id = (await params).id;
+  const { id } = await params;
   const job = await getJobById(id);
 
   if (!job) {
@@ -38,7 +38,8 @@ export async function generateMetadata({
 
 // Generate static params for all jobs
 export async function generateStaticParams() {
-  const jobs = await getJobs();
+  // Use a special function for static generation that doesn't use cookies
+  const jobs = await getJobsForStaticGeneration();
 
   return jobs.map((job) => ({
     id: job.id,
@@ -46,7 +47,7 @@ export async function generateStaticParams() {
 }
 
 export default async function CareerPage({ params }: CareerPageProps) {
-  const id = (await params).id;
+  const { id } = await params;
   const job = await getJobById(id);
 
   return (
