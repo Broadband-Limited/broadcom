@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { handleApiResponse } from '@/lib/cache';
 import { supabase } from '@/lib/supabase/client';
 
@@ -52,9 +52,4 @@ export async function GET(request: NextRequest) {
       isPublic: false,
     });
   }
-}
-
-// Add a 404 handler for any unexpected routes
-export function GET_FALLBACK() {
-  return NextResponse.json({ error: 'Resource not found' }, { status: 404 });
 }
