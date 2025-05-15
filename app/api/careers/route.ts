@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { handleApiResponse } from '@/lib/cache';
 import { supabase } from '@/lib/supabase/client';
 
@@ -27,10 +27,10 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('Supabase query error:', error);
-      return handleApiResponse(
+      // Use NextResponse directly to avoid cookie access during static generation
+      return NextResponse.json(
         { error: 'Failed to fetch job listings' },
-        null,
-        { maxAge: 60, isPublic: true }
+        { status: 500 }
       );
     }
 
@@ -38,18 +38,23 @@ export async function GET(request: NextRequest) {
       console.warn(
         `No job listings found with params: category=${category}, location=${location}, id=${id}`
       );
-      return handleApiResponse({ jobs: [] }, 'careers', {
-        maxAge: 60,
-        isPublic: true,
-      });
+      // Return empty jobs array without relying on cookie-based caching
+      return NextResponse.json({ jobs: [] }, { status: 200 });
     }
 
+    // Check if we're in a static generation context
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+      // During static generation, don't use handleApiResponse which may access cookies
+      return NextResponse.json({ jobs: data }, { status: 200 });
+    }
+
+    // During regular request handling, use handleApiResponse for caching
     return handleApiResponse({ jobs: data }, 'careers');
   } catch (error) {
     console.error('Error fetching job listings:', error);
-    return handleApiResponse({ error: 'Internal server error' }, null, {
-      maxAge: 0,
-      isPublic: false,
-    });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
