@@ -20,6 +20,7 @@ const pages = [
   },
   { name: 'partners', href: '/partners' },
   { name: 'about us', href: '/about' },
+  { name: 'careers', href: '/careers' },  
   { name: 'contact us', href: '/contact' },
 ];
 
@@ -73,7 +74,7 @@ const Header = () => {
                 {/* Desktop Dropdown */}
                 <div className="hidden md:block w-full">
                   <button
-                    className={`uppercase md:text-background opacity-80 ${
+                    className={`uppercase md:text-background md:!text-sm opacity-80 ${
                       isSolutionsActive
                         ? 'text-light-blue underline underline-offset-4'
                         : ''
@@ -161,7 +162,7 @@ const Header = () => {
               className={`flex items-center justify-between w-full md:w-fit border-b md:border-0 border-black border-opacity-25 py-4 md:py-0 hover:pl-8 md:hover:pl-0 transition-all duration-300`}
               onClick={() => setMenuOpen(false)}>
               <p
-                className={`capitalize md:uppercase md:!text-background ${
+                className={`capitalize md:uppercase md:!text-background md:!text-sm ${
                   (page.href === '/' && pathname === '/') ||
                   (page.href !== '/' && pathname.includes(page.href))
                     ? 'underline underline-offset-4'
