@@ -24,7 +24,7 @@ const pages = [
 ];
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
   const [isSolutionsSubmenuOpen, setIsSolutionsSubmenuOpen] = useState(false);
   const pathname = usePathname();
@@ -47,12 +47,8 @@ const Header = () => {
 
       <nav
         className={`absolute top-0 ${
-          open ? 'left-0' : '-left-full'
-        } transition-all ease-in duration-700 z-10 md:static h-screen md:h-fit w-screen md:w-fit py-6 px-8 md:p-0 flex flex-col md:flex-row md:items-center md:gap-12 bg-background md:bg-transparent shadow-2xl md:shadow-none`}>
-        <div
-          className="absolute top-0 left-full w-[25vw] h-full md:hidden"
-          onClick={() => setOpen(!open)}></div>
-
+          menuOpen ? 'left-0' : '-left-full'
+        } transition-all duration-300 z-10 md:static h-screen md:h-fit w-screen md:w-fit py-6 px-8 md:p-0 flex flex-col md:flex-row md:items-center md:gap-12 bg-background md:bg-transparent shadow-2xl md:shadow-none`}>
         <div className="w-full flex items-center justify-between md:hidden logo mb-8">
           <Image
             src="/images/logo-black.png"
@@ -61,7 +57,7 @@ const Header = () => {
             height={150}
             className="object-contain"
           />
-          <button className="close-menu" onClick={() => setOpen(!open)}>
+          <button className="close-menu" onClick={() => setMenuOpen(!menuOpen)}>
             <X size={24} />
           </button>
         </div>
@@ -92,7 +88,7 @@ const Header = () => {
                             key={subIndex}
                             href={subItem.href}
                             className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100"
-                            onClick={() => setOpen(false)}>
+                            onClick={() => setMenuOpen(false)}>
                             <p
                               className={`${
                                 pathname.includes(subItem.href)
@@ -138,7 +134,7 @@ const Header = () => {
                           href={subItem.href}
                           className="flex items-center justify-between w-full border-b border-black border-opacity-25 py-4 pr-4 hover:pl-8 transition-all duration-300"
                           onClick={() => {
-                            setOpen(false);
+                            setMenuOpen(false);
                             setIsSolutionsSubmenuOpen(false);
                           }}>
                           <p
@@ -163,7 +159,7 @@ const Header = () => {
               key={index}
               href={page.href}
               className={`flex items-center justify-between w-full md:w-fit border-b md:border-0 border-black border-opacity-25 py-4 md:py-0 hover:pl-8 md:hover:pl-0 transition-all duration-300`}
-              onClick={() => setOpen(false)}>
+              onClick={() => setMenuOpen(false)}>
               <p
                 className={`capitalize md:uppercase md:!text-background ${
                   (page.href === '/' && pathname === '/') ||
@@ -181,7 +177,7 @@ const Header = () => {
 
       <button
         className="menu-button flex md:hidden"
-        onClick={() => setOpen(!open)}>
+        onClick={() => setMenuOpen(!menuOpen)}>
         <Menu size={32} className="text-background" />
       </button>
     </header>
