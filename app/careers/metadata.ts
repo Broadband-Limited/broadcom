@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-export const careersMetadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Careers at Broadcom | Join Our Team',
   description:
     'Explore career opportunities at Broadcom. Find your next role in technology innovation and make an impact in the tech industry.',
