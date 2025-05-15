@@ -1,14 +1,15 @@
 import { supabase } from '@/lib/supabase/client';
+import { v4 as uuidv4 } from 'uuid';
 
 export const uploadResume = async (file: File) => {
-  const filePath = `${Date.now()}_${file.name}`;
-  // TODO: generate a more unique uuid
+  const uniqueId = uuidv4();
+  const filePath = `${uniqueId}_${file.name}`;
 
   const { data, error } = await supabase.storage
     .from('resumes')
     .upload(filePath, file, {
-      cacheControl: '3600',
-      upsert: false
+      cacheControl: '86400', // Increased to 24 hours for better caching
+      upsert: false,
     });
 
   if (error) throw error;

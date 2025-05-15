@@ -16,6 +16,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://yoursite.com'
+  ),
   title: {
     default: 'Broadband Communication Networks Ltd',
     template: '%s | Broadband Communication Networks Ltd',
@@ -53,7 +56,7 @@ export const metadata: Metadata = {
     shortcut: '/images/logo.png',
     apple: '/images/logo.png',
   },
-  manifest: '/site.webmanifest',
+  manifest: '/manifest.json',
 };
 
 export const viewport: Viewport = {
