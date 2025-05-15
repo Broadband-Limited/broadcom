@@ -1,4 +1,4 @@
-import { getJobById } from '@/lib/db/jobs';
+import { getJobById, getJobs } from '@/lib/db/jobs';
 import ApplicationForm from '../components/ApplicationForm';
 import { formatRelativeTime } from '@/lib/utils';
 import {
@@ -10,11 +10,39 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import Link from 'next/link';
+import { generateJobMetadata } from '../metadata';
+import type { Metadata } from 'next';
 
 interface CareerPageProps {
   params: Promise<{
     id: string;
   }>;
+}
+
+// Generate metadata for job page
+export async function generateMetadata({
+  params,
+}: CareerPageProps): Promise<Metadata> {
+  const id = (await params).id;
+  const job = await getJobById(id);
+
+  if (!job) {
+    return {
+      title: 'Job Not Found | Broadcom Careers',
+      description: 'The requested job position could not be found.',
+    };
+  }
+
+  return generateJobMetadata(job.title, job.location);
+}
+
+// Generate static params for all jobs
+export async function generateStaticParams() {
+  const jobs = await getJobs();
+
+  return jobs.map((job) => ({
+    id: job.id,
+  }));
 }
 
 export default async function CareerPage({ params }: CareerPageProps) {
@@ -65,7 +93,8 @@ export default async function CareerPage({ params }: CareerPageProps) {
                 <div className="flex items-center gap-2 text-gray-700">
                   <Briefcase size={18} className="text-light-blue" />
                   <p>
-                    KSH {job.salary_min.toLocaleString()} - KSH {job.salary_max.toLocaleString()}
+                    KSH {job.salary_min.toLocaleString()} - KSH{' '}
+                    {job.salary_max.toLocaleString()}
                   </p>
                 </div>
               )}

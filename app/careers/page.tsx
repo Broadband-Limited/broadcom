@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import JobSearch from './components/JobSearch';
 import { Job } from '@/shared/types/career';
 import JobGrid from './components/JobGrid';
+import { Metadata } from 'next';
 
 export default function CareersPage() {
   const [allJobs, setAllJobs] = useState<Job[]>([]);
@@ -73,3 +74,9 @@ export default function CareersPage() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Careers at Broadband Communication Networks Ltd',
+  description: 'Explore job opportunities and join our team at Broadband Communication Networks Ltd',
+  keywords: ['careers', 'job openings', 'telecommunications', 'broadband'],
+};
