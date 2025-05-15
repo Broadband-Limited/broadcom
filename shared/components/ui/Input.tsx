@@ -1,6 +1,8 @@
 import React, { ChangeEvent, forwardRef, ReactNode } from 'react';
 
 export interface InputProps {
+  /** Specifies the file types the file input should accept */
+  accept?: string;
   type?:
     | 'text'
     | 'number'
@@ -9,6 +11,7 @@ export interface InputProps {
     | 'tel'
     | 'textarea'
     | 'date'
+    | 'file'
     | 'checkbox';
   label: string | ReactNode;
   name: string;
@@ -59,13 +62,13 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     // Default classes that match the existing form styling
     const defaultInputClass =
       type !== 'checkbox'
-        ? 'w-full p-3 border border-background-light focus:outline-none focus:border-foreground-light transition-all duration-300'
+        ? 'w-full p-3 border border-foreground/10 focus:outline-none focus:border-foreground/50 transition-all duration-300'
         : 'h-4 w-4 accent-foreground text-primary focus:ring-primary border-background';
 
     const defaultLabelClass =
       type !== 'checkbox'
-        ? 'block text-sm font-medium text-foreground-light mb-1'
-        : 'ml-2 block text-sm text-foreground-light';
+        ? 'block text-sm font-medium text-foreground/50 mb-1'
+        : 'ml-2 block text-sm text-foreground/50';
 
     const wrapperClass = type === 'checkbox' ? 'flex items-center' : 'mb-4';
 
@@ -93,8 +96,10 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
           type={type}
           id={inputId}
           name={name}
-          value={type === 'checkbox' ? undefined : (value as string | number)}
-          checked={type === 'checkbox' ? checked || false : undefined}
+          {...(type !== 'checkbox' && type !== 'file'
+            ? { value: value as string | number }
+            : {})}
+          {...(type === 'checkbox' ? { checked: checked || false } : {})}
           onChange={onChange}
           placeholder={placeholder}
           disabled={disabled}
