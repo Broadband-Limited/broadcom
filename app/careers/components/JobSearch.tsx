@@ -164,11 +164,11 @@ const JobSearch: FC<JobSearchProps> = ({ jobs, onFilterChange }) => {
   };
 
   return (
-    <div className="w-full bg-background border border-foreground/10 shadow-md p-4">
-      <h2 className="text-xl font-semibold mb-4">Find Your Perfect Role</h2>
+    <div className="w-full max-w-4xl mx-auto bg-background border border-foreground/10 shadow-md p-4">
+      <h3 className="mb-2">Find Your Perfect Role</h3>
 
       {/* Search input */}
-      <div className="w-full flex items-end gap-4 p-2 mb-4">
+      <div className="w-full flex items-end gap-2 p-2 mb-4">
         <Input
           label="Find Jobs"
           name="job-search"

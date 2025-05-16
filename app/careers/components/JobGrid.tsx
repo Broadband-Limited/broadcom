@@ -1,6 +1,6 @@
 import { formatRelativeTime } from '@/lib/utils';
 import { Job } from '@/shared/types/career';
-import { Briefcase, Clock, MapPin, Building, Calendar } from 'lucide-react';
+import { Clock, MapPin, Building, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -21,7 +21,7 @@ const JobGrid: FC<JobGridProps> = ({ jobs }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {jobs.map((job) => (
         <Link
           href={`/careers/${job.id}`}
@@ -44,43 +44,34 @@ const JobGrid: FC<JobGridProps> = ({ jobs }) => {
               )}
             </div>
 
-            <h3 className="text-lg font-semibold mt-2 line-clamp-2">
+            <h3 className="!text-lg font-semibold mt-2 line-clamp-2">
               {job.title}
             </h3>
 
             <div className="flex items-center gap-2 text-gray-600">
               <Building size={16} className="text-light-blue" />
-              <p className="text-sm">{job.department}</p>
+              <p className="!text-sm">{job.department}</p>
             </div>
 
             <div className="flex items-center gap-2 text-gray-600">
               <MapPin size={16} className="text-light-blue" />
-              <p className="text-sm">{job.location}</p>
+              <p className="!text-sm">{job.location}</p>
             </div>
-
-            {job.salary_min && job.salary_max && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Briefcase size={16} className="text-light-blue" />
-                <p className="text-sm">
-                  KSH {job.salary_min.toLocaleString()} - KSH {job.salary_max.toLocaleString()}
-                </p>
-              </div>
-            )}
           </div>
 
           <div className="p-5 flex-grow">
-            <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+            <p className="!text-sm text-gray-600 line-clamp-3 mb-4">
               {job.description}
             </p>
 
             {job.requirements && job.requirements.length > 0 && (
               <div className="mb-4">
-                <h4 className="text-sm font-semibold mb-2">
+                <h4 className="!text-sm font-semibold mb-2">
                   Key Requirements:
                 </h4>
-                <ul className="text-xs text-gray-600 list-disc pl-4 space-y-1">
+                <ul className="!text-xs text-gray-600 list-disc pl-4 space-y-1">
                   {job.requirements.slice(0, 3).map((req, index) => (
-                    <li key={index} className="line-clamp-1">
+                    <li key={index} className="line-clamp-1 !text-sm">
                       {req}
                     </li>
                   ))}
@@ -97,7 +88,7 @@ const JobGrid: FC<JobGridProps> = ({ jobs }) => {
           <div className="border-t border-foreground/10 p-4 flex items-center justify-between">
             <div className="flex items-center gap-1 text-gray-500">
               <Clock size={14} />
-              <p className="text-xs">
+              <p className="!text-xs">
                 Posted {formatRelativeTime(job.posted_at)}
               </p>
             </div>
@@ -105,7 +96,7 @@ const JobGrid: FC<JobGridProps> = ({ jobs }) => {
             {job.application_deadline && (
               <div className="flex items-center gap-1 text-gray-500">
                 <Calendar size={14} />
-                <p className="text-xs">
+                <p className="!text-xs">
                   Apply by{' '}
                   {new Date(job.application_deadline).toLocaleDateString()}
                 </p>

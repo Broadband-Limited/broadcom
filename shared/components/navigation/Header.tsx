@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, ChevronRight, X } from 'lucide-react';
 import { divisions } from '@/shared/data/services';
+import { cn } from '@/lib/utils';
 
 const serviceDivisions = divisions.map((division) => ({
   name: division.name,
@@ -20,7 +21,7 @@ const pages = [
   },
   { name: 'partners', href: '/partners' },
   { name: 'about us', href: '/about' },
-  { name: 'careers', href: '/careers' },  
+  { name: 'careers', href: '/careers' },
   { name: 'contact us', href: '/contact' },
 ];
 
@@ -35,8 +36,8 @@ const Header = () => {
   );
 
   return (
-    <header className="w-full h-[10vh] sticky z-50 top-0 flex-shrink-0 px-4 md:px-12 flex items-center justify-between bg-dark-blue shadow-2xl">
-      <Link href="/" className="logo">
+    <header className="w-full shrink-0 sticky z-50 top-0 py-3 px-4 md:px-12 flex items-center justify-between bg-dark-blue">
+      <Link href="/" className="logo p-0 !m-0">
         <Image
           src="/images/logo.png"
           alt="Broadband Communication Networks Ltd"
@@ -47,9 +48,12 @@ const Header = () => {
       </Link>
 
       <nav
-        className={`absolute top-0 ${
+        className={cn(
+          'absolute top-0 transition-all duration-100 z-10 h-screen w-screen py-6 px-8',
+          'md:static md:h-fit md:w-fit md:p-0 md:flex-row md:items-center md:gap-12 md:bg-transparent md:shadow-none',
+          'flex flex-col bg-background shadow-2xl',
           menuOpen ? 'left-0' : '-left-full'
-        } transition-all duration-300 z-10 md:static h-screen md:h-fit w-screen md:w-fit py-6 px-8 md:p-0 flex flex-col md:flex-row md:items-center md:gap-12 bg-background md:bg-transparent shadow-2xl md:shadow-none`}>
+        )}>
         <div className="w-full flex items-center justify-between md:hidden logo mb-8">
           <Image
             src="/images/logo-black.png"
@@ -74,11 +78,11 @@ const Header = () => {
                 {/* Desktop Dropdown */}
                 <div className="hidden md:block w-full">
                   <button
-                    className={`uppercase md:text-background md:!text-sm opacity-80 ${
-                      isSolutionsActive
-                        ? 'text-light-blue underline underline-offset-4'
-                        : ''
-                    }`}>
+                    className={cn(
+                      'uppercase md:text-background md:!text-sm opacity-80',
+                      isSolutionsActive &&
+                        'text-light-blue underline underline-offset-4'
+                    )}>
                     {page.name}
                   </button>
                   {isSolutionsHovered && (
@@ -91,11 +95,10 @@ const Header = () => {
                             className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100"
                             onClick={() => setMenuOpen(false)}>
                             <p
-                              className={`${
-                                pathname.includes(subItem.href)
-                                  ? 'text-light-blue underline underline-offset-4'
-                                  : ''
-                              }`}>
+                              className={cn(
+                                pathname.includes(subItem.href) &&
+                                  'text-light-blue underline underline-offset-4'
+                              )}>
                               {subItem.name}
                             </p>
                           </Link>
@@ -113,17 +116,18 @@ const Header = () => {
                     }
                     className="flex items-center justify-between w-full border-b border-black border-opacity-25 py-4 hover:pl-8 transition-all duration-300">
                     <p
-                      className={`capitalize ${
-                        isSolutionsActive
-                          ? 'text-light-blue underline underline-offset-4'
-                          : ''
-                      }`}>
+                      className={cn(
+                        'capitalize',
+                        isSolutionsActive &&
+                          'text-light-blue underline underline-offset-4'
+                      )}>
                       {page.name}
                     </p>
                     <ChevronRight
-                      className={`transition-transform ${
-                        isSolutionsSubmenuOpen ? 'rotate-90' : ''
-                      }`}
+                      className={cn(
+                        'transition-transform',
+                        isSolutionsSubmenuOpen && 'rotate-90'
+                      )}
                       size={24}
                     />
                   </button>
@@ -139,11 +143,11 @@ const Header = () => {
                             setIsSolutionsSubmenuOpen(false);
                           }}>
                           <p
-                            className={`${
-                              pathname.includes(subItem.href)
-                                ? 'text-light-blue underline underline-offset-4'
-                                : ''
-                            } text-base`}>
+                            className={cn(
+                              'text-base',
+                              pathname.includes(subItem.href) &&
+                                'text-light-blue underline underline-offset-4'
+                            )}>
                             {subItem.name}
                           </p>
                           <ChevronRight size={16} />
@@ -159,15 +163,20 @@ const Header = () => {
             <Link
               key={index}
               href={page.href}
-              className={`flex items-center justify-between w-full md:w-fit border-b md:border-0 border-black border-opacity-25 py-4 md:py-0 hover:pl-8 md:hover:pl-0 transition-all duration-300`}
+              className={cn(
+                'flex items-center justify-between w-full py-4 transition-all duration-300',
+                'md:w-fit md:py-0 md:border-0',
+                'border-b border-black border-opacity-25',
+                'hover:pl-8 md:hover:pl-0'
+              )}
               onClick={() => setMenuOpen(false)}>
               <p
-                className={`capitalize md:uppercase md:!text-background md:!text-sm ${
-                  (page.href === '/' && pathname === '/') ||
-                  (page.href !== '/' && pathname.includes(page.href))
-                    ? 'underline underline-offset-4'
-                    : ''
-                }`}>
+                className={cn(
+                  'capitalize md:uppercase md:!text-background md:!text-sm',
+                  ((page.href === '/' && pathname === '/') ||
+                    (page.href !== '/' && pathname.includes(page.href))) &&
+                    'underline underline-offset-4'
+                )}>
                 {page.name}
               </p>
               <ChevronRight className="md:hidden" size={24} />
@@ -177,7 +186,7 @@ const Header = () => {
       </nav>
 
       <button
-        className="menu-button flex md:hidden"
+        className="menu-button flex md:hidden !m-0"
         onClick={() => setMenuOpen(!menuOpen)}>
         <Menu size={32} className="text-background" />
       </button>
