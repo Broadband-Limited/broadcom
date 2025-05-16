@@ -1,14 +1,7 @@
 import { getJobById, getJobsForStaticGeneration } from '@/lib/db/jobs';
 import ApplicationForm from '../components/ApplicationForm';
 import { formatRelativeTime } from '@/lib/utils';
-import {
-  Briefcase,
-  Calendar,
-  Clock,
-  MapPin,
-  Building,
-  CheckCircle,
-} from 'lucide-react';
+import { Calendar, Clock, MapPin, Building, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { generateJobMetadata } from '../metadata';
 import type { Metadata } from 'next';
@@ -58,8 +51,8 @@ export default async function CareerPage({ params }: CareerPageProps) {
         &larr; Back to all jobs
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div className="lg:col-span-3">
           <div className="bg-background border border-foreground/10 shadow-md p-8 mb-8">
             <div className="flex flex-wrap gap-2 mb-4">
               {job.is_remote && (
@@ -77,38 +70,30 @@ export default async function CareerPage({ params }: CareerPageProps) {
               )}
             </div>
 
-            <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
+            <h3 className="mb-4">{job.title}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div className="flex items-center gap-2 text-gray-700">
                 <Building size={18} className="text-light-blue" />
-                <p>{job.department}</p>
+                <p className="!text-sm">{job.department}</p>
               </div>
 
               <div className="flex items-center gap-2 text-gray-700">
                 <MapPin size={18} className="text-light-blue" />
-                <p>{job.location}</p>
+                <p className="!text-sm">{job.location}</p>
               </div>
-
-              {job.salary_min && job.salary_max && (
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Briefcase size={18} className="text-light-blue" />
-                  <p>
-                    KSH {job.salary_min.toLocaleString()} - KSH{' '}
-                    {job.salary_max.toLocaleString()}
-                  </p>
-                </div>
-              )}
 
               <div className="flex items-center gap-2 text-gray-700">
                 <Clock size={18} className="text-light-blue" />
-                <p>Posted {formatRelativeTime(job.posted_at)}</p>
+                <p className="!text-sm">
+                  Posted {formatRelativeTime(job.posted_at)}
+                </p>
               </div>
 
               {job.application_deadline && (
                 <div className="flex items-center gap-2 text-gray-700">
                   <Calendar size={18} className="text-light-blue" />
-                  <p>
+                  <p className="!text-sm">
                     Apply by{' '}
                     {new Date(job.application_deadline).toLocaleDateString()}
                   </p>
@@ -117,14 +102,16 @@ export default async function CareerPage({ params }: CareerPageProps) {
             </div>
 
             <div className="prose max-w-none">
-              <h2 className="text-xl font-semibold mb-3">Job Description</h2>
+              <h4 className="font-semibold mb-3">Job Description</h4>
               <div className="mb-6">
-                <p className="whitespace-pre-line">{job.description}</p>
+                <p className="whitespace-pre-line !text-sm">
+                  {job.description}
+                </p>
               </div>
 
               {job.requirements && job.requirements.length > 0 && (
                 <div className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Requirements</h2>
+                  <h4 className="font-semibold mb-3">Requirements</h4>
                   <ul className="list-none space-y-2">
                     {job.requirements.map((req: string, index: number) => (
                       <li key={index} className="flex items-start gap-2">
@@ -132,7 +119,7 @@ export default async function CareerPage({ params }: CareerPageProps) {
                           size={18}
                           className="text-green-500 mt-1 flex-shrink-0"
                         />
-                        <span>{req}</span>
+                        <span className="text-sm">{req}</span>
                       </li>
                     ))}
                   </ul>
@@ -141,7 +128,7 @@ export default async function CareerPage({ params }: CareerPageProps) {
 
               {job.benefits && job.benefits.length > 0 && (
                 <div className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Benefits</h2>
+                  <h4 className="font-semibold mb-3">Benefits</h4>
                   <ul className="list-none space-y-2">
                     {job.benefits.map((benefit: string, index: number) => (
                       <li key={index} className="flex items-start gap-2">
@@ -149,7 +136,7 @@ export default async function CareerPage({ params }: CareerPageProps) {
                           size={18}
                           className="text-blue-500 mt-1 flex-shrink-0"
                         />
-                        <span>{benefit}</span>
+                        <span className="!text-sm">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -159,7 +146,7 @@ export default async function CareerPage({ params }: CareerPageProps) {
           </div>
         </div>
 
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-2">
           <div className="sticky top-36">
             <ApplicationForm jobId={id} job={job} />
           </div>

@@ -81,7 +81,7 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
                 />
               </div>
 
-              <div className="details w-full aspect-[4/1] md:aspect-[1.7] flex flex-col gap-2 justify-between p-2 md:p-4">
+              <div className="details w-full aspect-[4/1] md:aspect-[1.7] flex flex-col gap-6 justify-between p-2 md:p-4">
                 <h4 className="font-semibold">{service.title}</h4>
                 <p
                   className="truncate text-sm border-l-4 border-light-blue pl-2 ml-2"

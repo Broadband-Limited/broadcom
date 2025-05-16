@@ -102,7 +102,7 @@ export default function ApplicationForm({ jobId, job }: ApplicationFormProps) {
   if (success) {
     return (
       <div className="bg-green-50 border border-green-200 p-6 text-center">
-        <h3 className="text-xl font-semibold text-green-700">
+        <h3 className="font-semibold text-green-700">
           Application Submitted!
         </h3>
         <p className="text-green-600 mt-2">
@@ -123,9 +123,9 @@ export default function ApplicationForm({ jobId, job }: ApplicationFormProps) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-4 bg-background p-6 shadow-md border border-foreground/10">
-      <h2 className="text-xl font-semibold mb-6">Apply for {job.title}</h2>
+      <h3 className="font-semibold mb-6">Apply for {job.title}</h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           label="Full Name"
           type="text"
@@ -167,7 +167,7 @@ export default function ApplicationForm({ jobId, job }: ApplicationFormProps) {
         <Input
           label="LinkedIn Profile"
           type="text"
-          placeholder="https://linkedin.com/in/yourprofile"
+          placeholder="linkedin.com/in/yourprofile"
           {...register('linkedin_url')}
           error={errors.linkedin_url?.message}
         />
