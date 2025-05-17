@@ -1,5 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createServiceRoleServer } from '@/lib/supabase/server';
+import emailjs from '@emailjs/nodejs';
+
+// Initialize Email.js with environment variables
+emailjs.init({
+  publicKey: process.env.EMAILJS_PUBLIC_KEY,
+  privateKey: process.env.EMAILJS_PRIVATE_KEY,
+});
 
 export async function POST(request: Request) {
   try {
@@ -80,6 +87,41 @@ export async function POST(request: Request) {
 
     if (appError) {
       return NextResponse.json({ error: appError.message }, { status: 500 });
+    }
+
+    // After successful database insertion, send email notification
+    try {
+      // Get job details for the email
+      const { data: jobData, error: jobError } = await supabase
+        .from('jobs')
+        .select('title, department')
+        .eq('id', job_id)
+        .single();
+
+      if (jobError) {
+        console.error('Error fetching job details for email:', jobError);
+      } else {
+        // Send email notification
+        await emailjs.send(
+          process.env.EMAILJS_SERVICE_ID!,
+          process.env.EMAILJS_TEMPLATE_ID!,
+          {
+            job_title: jobData.title,
+            job_department: jobData.department,
+            applicant_name: name,
+            applicant_email: email,
+            applicant_phone: phone || 'Not provided',
+            application_date: new Date().toLocaleString(),
+            application_id: appData.id,
+            resume_link: publicUrl,
+            skills: Array.isArray(skills) ? skills.join(', ') : 'Not provided',
+          }
+        );
+        console.log('Email notification sent successfully');
+      }
+    } catch (emailError) {
+      // Log error but don't fail the application process
+      console.error('Failed to send email notification:', emailError);
     }
 
     return NextResponse.json(appData);

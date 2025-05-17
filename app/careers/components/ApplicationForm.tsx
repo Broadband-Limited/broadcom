@@ -101,19 +101,14 @@ export default function ApplicationForm({ jobId, job }: ApplicationFormProps) {
 
   if (success) {
     return (
-      <div className="bg-green-50 border border-green-200 p-6 text-center">
-        <h3 className="font-semibold text-green-700">
-          Application Submitted!
-        </h3>
+      <div className="bg-green-50 border border-green-200 p-6 text-center flex flex-col items-center gap-4">
+        <h3 className="font-semibold text-green-700">Application Submitted!</h3>
         <p className="text-green-600 mt-2">
           Thank you for applying for the {job.title} position. We will review
           your application and get back to you soon.
         </p>
-        <Button
-          variant="outline"
-          className="mt-4"
-          onClick={() => setSuccess(false)}>
-          Submit Another Application
+        <Button variant="outline" className="mt-4" href="/careers">
+          Back to Job Board
         </Button>
       </div>
     );
