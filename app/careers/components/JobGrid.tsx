@@ -1,5 +1,5 @@
 import { formatRelativeTime } from '@/lib/utils';
-import { Job } from '@/shared/types/career';
+import { Job } from '@/lib/types/career_types';
 import { Clock, MapPin, Building, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { FC } from 'react';

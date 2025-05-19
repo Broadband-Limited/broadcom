@@ -1,37 +1,25 @@
-import { divisions } from '@/shared/data/services';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ServiceTabs from '../components/ServiceTabs';
+import { getAllServices, getServicesNoAuth } from '@/lib/db/services';
+import { getServiceImageUrl } from '@/lib/storage';
 
 interface ProductPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }
-
-// Get all services across all divisions
-const getAllServices = () => divisions.flatMap((division) => division.services);
-
-// Find service by slug
-const findServiceBySlug = (slug: string) =>
-  getAllServices().find((service) => service.slug === slug);
 
 // Generate static params
 export async function generateStaticParams() {
-  return getAllServices().map((service) => ({
-    slug: service.slug,
-  }));
+  const { data: services = [] } = await getServicesNoAuth();
+  return (services ?? []).map((service) => ({ slug: service.slug }));
 }
 
 // Generate metadata
 export async function generateMetadata({ params }: ProductPageProps) {
   const slug = (await params).slug;
-  const service = findServiceBySlug(slug);
-
-  if (!service) {
-    return { title: 'Product Not Found' };
-  }
-
+  const { data: services = [] } = await getServicesNoAuth();
+  const service = (services ?? []).find((s) => s.slug === slug);
+  if (!service) return { title: 'Product Not Found' };
   return {
     title: `Broadband Communication Networks Ltd | ${service.title}`,
     description: service.description,
@@ -40,17 +28,15 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const slug = (await params).slug;
-  const service = findServiceBySlug(slug);
-
-  if (!service) {
-    notFound();
-  }
+  const { data: services = [] } = await getAllServices();
+  const service = (services ?? []).find((s) => s.slug === slug);
+  if (!service) notFound();
 
   return (
     <section className="!p-0 !pb-16 flex flex-col gap-12">
       <div className="hero w-full p-0 aspect-[1/1] md:aspect-[23/9] grid grid-cols-1 grid-rows-1">
         <Image
-          src={service.image}
+          src={getServiceImageUrl(service.image)}
           alt={`Broadband Communication Networks Ltd ${service.title}`}
           width={1000}
           height={1000}

@@ -104,6 +104,23 @@ img {
   object-position: center;
 }
 
+table {
+  thead {
+    width: 100%;
+
+    tr {
+      width: 100%;
+    }
+  }
+  tbody {
+    width: 100%;
+
+    tr {
+      width: 100%;
+    }
+  }
+}
+
 .alata {
   font-family: var(--font-alata);
 }

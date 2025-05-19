@@ -1,4 +1,4 @@
-import { Application, ApplicationStatus } from '@/shared/types/career';
+import { Application, ApplicationStatus } from '@/lib/types/career_types';
 import { createServer, createServiceRoleServer } from '../supabase/server';
 
 export const submitApplication = async (

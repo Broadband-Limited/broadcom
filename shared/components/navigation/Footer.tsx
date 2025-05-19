@@ -1,50 +1,51 @@
-import { divisions } from '@/shared/data/services';
-import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import { getDivisions } from '@/lib/db/divisions';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { Facebook, Linkedin, Twitter } from 'lucide-react';
 
-const linkGroups = [
-  {
-    title: 'Corporate',
-    links: [
-      { title: 'About Us', href: '/about' },
-      { title: 'Partners', href: '/partners' },
-      { title: 'Investor Relations', href: '/partners' },
-    ],
-  },
-  {
-    title: 'Areas of Expertise',
-    links: divisions.map((division) => ({
-      title: division.name,
-      href: `/division/${division.slug}/`,
-    })),
-  },
-  {
-    title: 'Support',
-    links: [{ title: 'FAQs', href: '/contact' }],
-  },
-];
+export default async function Footer() {
+  const { data: divisions = [] } = await getDivisions();
 
-const socialAccounts = [
-  {
-    title: 'Facebook',
-    link: 'https://www.facebook.com/broadcom.co.ke',
-    icon: Facebook,
-  },
-  {
-    title: 'Twitter / X',
-    link: 'https://twitter.com/Broadband_Kenya',
-    icon: Twitter,
-  },
-  {
-    title: 'LinkedIn',
-    link: 'https://www.linkedin.com/company/broadband-communication-networks-ltd/',
-    icon: Linkedin,
-  },
-];
+  const linkGroups = [
+    {
+      title: 'Corporate',
+      links: [
+        { title: 'About Us', href: '/about' },
+        { title: 'Partners', href: '/partners' },
+        { title: 'Investor Relations', href: '/partners' },
+      ],
+    },
+    {
+      title: 'Areas of Expertise',
+      links: (divisions ?? []).map((d) => ({
+        title: d.name,
+        href: `/division/${d.slug}/`,
+      })),
+    },
+    {
+      title: 'Support',
+      links: [{ title: 'FAQs', href: '/contact' }],
+    },
+  ];
 
-const Footer = () => {
+  const socialAccounts = [
+    {
+      title: 'Facebook',
+      link: 'https://www.facebook.com/broadcom.co.ke',
+      icon: Facebook,
+    },
+    {
+      title: 'Twitter / X',
+      link: 'https://twitter.com/Broadband_Kenya',
+      icon: Twitter,
+    },
+    {
+      title: 'LinkedIn',
+      link: 'https://www.linkedin.com/company/broadband-communication-networks-ltd/',
+      icon: Linkedin,
+    },
+  ];
+
   return (
     <footer className="w-full flex flex-col">
       <div className="footer-top w-full px-8 md:px-12 py-12 md:py-24 bg-gray grid grid-cols-1 md:grid-cols-4 gap-6 bg-foreground/90">
@@ -93,12 +94,12 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom bg-foreground flex flex-col md:flex-row justify-between px-8 md:px-12 py-6">
-        <Link href={'/'} className="text-center hover:underline !text-background">
+        <Link
+          href={'/'}
+          className="text-center hover:underline !text-background">
           © {new Date().getFullYear()} Broadband Communication Networks Ltd.
         </Link>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

@@ -6,7 +6,7 @@ import Input from '@/shared/components/ui/Input';
 import Button from '@/shared/components/ui/Button';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Job } from '@/shared/types/career';
+import { Job } from '@/lib/types/career_types';
 
 type FormData = {
   name: string;

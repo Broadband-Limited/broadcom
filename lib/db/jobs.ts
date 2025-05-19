@@ -1,4 +1,4 @@
-import { Job } from '@/shared/types/career';
+import { Job } from '@/lib/types/career_types';
 import { createServer, createServiceRoleServer } from '../supabase/server';
 import { supabase } from '../supabase/client';
 

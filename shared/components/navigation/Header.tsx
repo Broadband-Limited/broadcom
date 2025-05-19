@@ -2,22 +2,31 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, ChevronRight, X } from 'lucide-react';
-import { divisions } from '@/shared/data/services';
 import { cn } from '@/lib/utils';
 
-const serviceDivisions = divisions.map((division) => ({
-  name: division.name,
-  href: `/division/${division.slug}/`,
-}));
-
-const Header = () => {
+export default function Header() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [divisions, setDivisions] = useState<{ name: string; slug: string }[]>(
+    []
+  );
   const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
   const [isSolutionsSubmenuOpen, setIsSolutionsSubmenuOpen] = useState(false);
-  const pathname = usePathname();
+
+  // fetch divisions from our API
+  useEffect(() => {
+    fetch('/api/divisions')
+      .then((res) => res.json())
+      .then((data) => setDivisions(data || []));
+  }, []);
+
+  const serviceDivisions = divisions.map((d) => ({
+    name: d.name,
+    href: `/division/${d.slug}/`,
+  }));
 
   const pages = [
     ...(pathname.startsWith('/admin')
@@ -37,7 +46,6 @@ const Header = () => {
           { name: 'careers', href: '/careers' },
           { name: 'contact us', href: '/contact' },
         ]),
-    ,
   ];
 
   const isSolutionsActive = serviceDivisions.some((subItem) =>
@@ -201,6 +209,4 @@ const Header = () => {
       </button>
     </header>
   );
-};
-
-export default Header;
+}

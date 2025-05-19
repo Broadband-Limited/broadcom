@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import JobSearch from './components/JobSearch';
-import { Job } from '@/shared/types/career';
+import { Job } from '@/lib/types/career_types';
 import JobGrid from './components/JobGrid';
 
 export default function CareersPage() {

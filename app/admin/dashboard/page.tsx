@@ -70,13 +70,28 @@ export default async function AdminDashboard() {
 
   const dashboardItems: DashboardCardProps[] = [
     {
-      title: 'Blog Posts',
-      description:
-        'Manage blog posts, create new content and edit existing articles.',
-      icon: <Newspaper className="w-6 h-6" />,
-      href: '/admin/blog',
+      title: 'Divisions',
+      description: 'Manage company divisions and their descriptions.',
+      icon: <Network className="w-6 h-6" />,
+      href: '/admin/divisions',
+      count: 4,
+      color: 'bg-amber-600',
+    },
+    {
+      title: 'Services',
+      description: 'Manage service offerings provided by each division.',
+      icon: <Network className="w-6 h-6" />,
+      href: '/admin/services',
       count: 12,
-      color: 'bg-purple-600',
+      color: 'bg-emerald-600',
+    },
+    {
+      title: 'Partners',
+      description: 'Manage partnership information and collaboration details.',
+      icon: <Handshake className="w-6 h-6" />,
+      href: '/admin/partners',
+      count: 6,
+      color: 'bg-red-600',
     },
     {
       title: 'Job Listings',
@@ -96,21 +111,13 @@ export default async function AdminDashboard() {
       color: 'bg-green-600',
     },
     {
-      title: 'Divisions & Services',
+      title: 'Blog Posts',
       description:
-        'Update company divisions and service offerings information.',
-      icon: <Network className="w-6 h-6" />,
-      href: '/admin/divisions',
-      count: 4,
-      color: 'bg-amber-600',
-    },
-    {
-      title: 'Partners',
-      description: 'Manage partnership information and collaboration details.',
-      icon: <Handshake className="w-6 h-6" />,
-      href: '/admin/partners',
-      count: 6,
-      color: 'bg-red-600',
+        'Manage blog posts, create new content and edit existing articles.',
+      icon: <Newspaper className="w-6 h-6" />,
+      href: '/admin/blog',
+      count: 12,
+      color: 'bg-purple-600',
     },
     {
       title: 'Users',
@@ -132,9 +139,7 @@ export default async function AdminDashboard() {
   return (
     <section className="">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Dashboard
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Dashboard</h2>
         <p className="text-gray-600">
           Manage website content and monitor activity
         </p>

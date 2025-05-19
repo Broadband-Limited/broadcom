@@ -2,7 +2,7 @@
 
 import Button from '@/shared/components/ui/Button';
 import Input from '@/shared/components/ui/Input';
-import { EmploymentType, ExperienceLevel, Job } from '@/shared/types/career';
+import { EmploymentType, ExperienceLevel, Job } from '@/lib/types/career_types';
 import { Search, ChevronDown, X } from 'lucide-react';
 import { FC, useState, useRef, useEffect, useMemo } from 'react';
 

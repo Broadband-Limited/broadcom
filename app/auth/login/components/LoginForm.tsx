@@ -76,7 +76,7 @@ export const LoginForm = () => {
           variant="primary"
           className="w-full py-3 mt-8 transition-all duration-300"
           disabled={loading}>
-          {loading ? <Loader2 size={16} className="animate-spin" /> : ''}
+          {loading ? <Loader2 size={16} className="animate-spin mr-2" /> : ''}
           {loading ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>
