@@ -1,0 +1,26 @@
+import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
+import { redirect } from 'next/navigation';
+
+export default async function JobPage() {
+  const authenticated = await isAuthenticated();
+
+  if (!authenticated) {
+    redirect('/auth/login');
+  }
+
+  const requiredRoles = ['admin', 'editor'];
+
+  const authorised = await isAuthorised(requiredRoles);
+
+  if (!authorised) {
+    redirect('/auth/login');
+  }
+
+  return (
+    <>
+      <section>
+        <h2>Job Listings</h2>
+      </section>
+    </>
+  );
+}

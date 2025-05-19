@@ -117,7 +117,7 @@ export async function POST(request: Request) {
             skills: Array.isArray(skills) ? skills.join(', ') : 'Not provided',
           }
         );
-        console.log('Email notification sent successfully');
+        console.log('>>>> Email notification sent successfully');
       }
     } catch (emailError) {
       // Log error but don't fail the application process

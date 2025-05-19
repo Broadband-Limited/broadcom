@@ -25,7 +25,9 @@ const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -74,7 +76,7 @@ const ContactForm = () => {
         // Submit form
         setIsSubmitted(true);
         // Here you would typically send the data to your backend
-        console.log('Form submitted:', formData);
+        console.log('>>>> Form submitted:', formData);
       }
     }
   };
@@ -136,7 +138,7 @@ const ContactForm = () => {
         Contact Broadband Communication Networks Ltd
       </h4>
 
-      <hr className='mb-3 opacity-30' />
+      <hr className="mb-3 opacity-30" />
 
       {renderProgressBar()}
 

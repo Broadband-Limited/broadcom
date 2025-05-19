@@ -1,4 +1,4 @@
-import { createServerClient } from '@supabase/ssr'
+import { CookieOptions, createServerClient } from '@supabase/ssr'
 
 export const createServer = async () => {
   // Dynamically import cookies to ensure this runs only in server context
@@ -12,6 +12,12 @@ export const createServer = async () => {
       cookies: {
         get(name: string) {
           return cookieStore.get(name)?.value
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          cookieStore.set({ name, value, ...options })
+        },
+        remove(name: string, options: CookieOptions) {
+          cookieStore.set({ name, value: '', ...options })
         },
       },
     }

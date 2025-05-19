@@ -13,23 +13,32 @@ const serviceDivisions = divisions.map((division) => ({
   href: `/division/${division.slug}/`,
 }));
 
-const pages = [
-  { name: 'home', href: '/' },
-  {
-    name: 'solutions & services',
-    submenu: serviceDivisions,
-  },
-  { name: 'partners', href: '/partners' },
-  { name: 'about us', href: '/about' },
-  { name: 'careers', href: '/careers' },
-  { name: 'contact us', href: '/contact' },
-];
-
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
   const [isSolutionsSubmenuOpen, setIsSolutionsSubmenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const pages = [
+    ...(pathname.startsWith('/admin')
+      ? [
+          { name: 'dashboard', href: '/admin/dashboard' },
+          { name: 'jobs', href: '/admin/jobs' },
+          { name: 'blog', href: '/admin/blog' },
+        ]
+      : [
+          { name: 'home', href: '/' },
+          {
+            name: 'solutions & services',
+            submenu: serviceDivisions,
+          },
+          { name: 'partners', href: '/partners' },
+          { name: 'about us', href: '/about' },
+          { name: 'careers', href: '/careers' },
+          { name: 'contact us', href: '/contact' },
+        ]),
+    ,
+  ];
 
   const isSolutionsActive = serviceDivisions.some((subItem) =>
     pathname.includes(subItem.href)
@@ -68,7 +77,7 @@ const Header = () => {
         </div>
 
         {pages.map((page, index) => {
-          if (page.submenu) {
+          if (page?.submenu) {
             return (
               <div
                 key={index}
@@ -162,7 +171,7 @@ const Header = () => {
           return (
             <Link
               key={index}
-              href={page.href}
+              href={page!.href}
               className={cn(
                 'flex items-center justify-between w-full py-4 transition-all duration-300',
                 'md:w-fit md:py-0 md:border-0',
@@ -173,11 +182,11 @@ const Header = () => {
               <p
                 className={cn(
                   'capitalize md:uppercase md:!text-background md:!text-sm',
-                  ((page.href === '/' && pathname === '/') ||
-                    (page.href !== '/' && pathname.includes(page.href))) &&
+                  ((page?.href === '/' && pathname === '/') ||
+                    (page?.href !== '/' && pathname.includes(page!.href))) &&
                     'underline underline-offset-4'
                 )}>
-                {page.name}
+                {page?.name}
               </p>
               <ChevronRight className="md:hidden" size={24} />
             </Link>
