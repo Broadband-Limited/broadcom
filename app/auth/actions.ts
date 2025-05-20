@@ -23,20 +23,23 @@ export async function signIn(formData: FormData) {
 
 export async function signup(formData: FormData) {
   const supabase = await createServer();
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  };
+  if (!email || !password) {
+    console.error('>>>> missing email or password');
+    redirect('/auth/check-email?status=error');
+  }
 
-  const { error } = await supabase.auth.signUp(data);
+  const { error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
     console.error('>>>> could not sign up user: ', error.message);
-    redirect('/error');
+    redirect('/auth/check-email?status=error');
   }
 
-  redirect('/admin');
+  // On success, send them to a “check your email” page
+  redirect('/auth/check-email?status=success');
 }
 
 export async function signOut() {
