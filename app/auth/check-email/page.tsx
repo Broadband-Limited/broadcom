@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 
-export default function CheckEmailPage() {
+function EmailContent() {
   const params = useSearchParams();
   const status = params.get('status');
 
@@ -37,5 +37,13 @@ export default function CheckEmailPage() {
         )}
       </section>
     </main>
+  );
+}
+
+export default function CheckEmailPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <EmailContent />
+    </Suspense>
   );
 }
