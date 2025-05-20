@@ -30,6 +30,7 @@ export interface InputProps {
   error?: string;
   checked?: boolean;
   rightElement?: React.ReactNode;
+  readonly?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
@@ -53,6 +54,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       error,
       checked,
       rightElement,
+      readonly = false,
       ...rest
     },
     ref
@@ -87,7 +89,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
           rows={rows}
           className={`${defaultInputClass} ${
             error ? 'border-red-500' : ''
-          } ${inputClassName}`}
+            } ${inputClassName}`}
+          readOnly={readonly}
           {...rest}
         />
       ) : (
@@ -108,7 +111,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
           max={max}
           className={`${defaultInputClass} ${
             error ? 'border-red-500' : ''
-          } ${inputClassName}`}
+              } ${inputClassName}`}
+          readOnly={readonly}
           {...rest}
         />
       );

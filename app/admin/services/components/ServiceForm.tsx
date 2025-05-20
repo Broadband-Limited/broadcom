@@ -6,7 +6,7 @@ import { uploadServiceImage, getServiceImageUrl } from '@/lib/storage';
 import Image from 'next/image';
 import Input from '@/shared/components/ui/Input';
 import Button from '@/shared/components/ui/Button';
-import { Trash2 } from 'lucide-react';
+import { InfoIcon, Trash2 } from 'lucide-react';
 
 interface ServiceFormProps {
   service?: Service;
@@ -189,14 +189,18 @@ export default function ServiceForm({
           label="Slug"
           name="slug"
           id="slug"
-          required
           value={formData.slug}
           onChange={handleChange}
-          placeholder="e.g., network-installation"
+          placeholder=""
+          className='opacity-60'
+          readonly
         />{' '}
-        <p className="mt-1 text-xs text-foreground/50">
-          Used in URLs. Auto-generated from title, but you can edit it.
-        </p>
+        <div className="flex items-center gap-2">
+          <InfoIcon size={12} />
+          <p className="!text-xs">
+            The slug is used in URLs. Auto-generated from title.
+          </p>
+        </div>
       </div>
       <Input
         type="textarea"
