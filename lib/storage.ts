@@ -26,20 +26,23 @@ export const downloadResume = async (path: string) => {
 };
 
 // Service image handling
-export const uploadServiceImage = async (file: File) => {
-  const uniqueId = uuidv4();
-  const filePath = `${uniqueId}_${file.name}`;
+export const uploadServiceImage = async (file: File): Promise<string> => {
+  const formData = new FormData()
+  formData.append('file', file)
 
-  const { data, error } = await supabase.storage
-    .from('services')
-    .upload(filePath, file, {
-      cacheControl: '86400',
-      upsert: false,
-    });
+  const res = await fetch('/api/upload-service-image', {
+    method: 'POST',
+    body: formData,
+  })
 
-  if (error) throw error;
-  return data.path;
-};
+  if (!res.ok) {
+    const { error } = await res.json()
+    throw new Error(error || 'Upload failed')
+  }
+
+  const { path } = await res.json()
+  return path
+}
 
 export const getServiceImageUrl = (path: string) => {
   return supabase.storage.from('services').getPublicUrl(path).data.publicUrl;
