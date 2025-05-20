@@ -11,6 +11,9 @@ import {
 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
+import { getServicesCount } from '@/lib/db/services';
+import { getDivisionsCount } from '@/lib/db/divisions';
+import { getPartnersCount } from '@/lib/db/partners';
 
 interface DashboardCardProps {
   title: string;
@@ -68,13 +71,17 @@ export default async function AdminDashboard() {
     redirect('/auth/login');
   }
 
+  const divisionsCount = await getDivisionsCount();
+  const servicesCount = await getServicesCount();
+  const partnersCount = await getPartnersCount();
+
   const dashboardItems: DashboardCardProps[] = [
     {
       title: 'Divisions',
       description: 'Manage company divisions and their descriptions.',
       icon: <Network className="w-6 h-6" />,
       href: '/admin/divisions',
-      count: 4,
+      count: divisionsCount || 0,
       color: 'bg-amber-600',
     },
     {
@@ -82,7 +89,7 @@ export default async function AdminDashboard() {
       description: 'Manage service offerings provided by each division.',
       icon: <Network className="w-6 h-6" />,
       href: '/admin/services',
-      count: 12,
+      count: servicesCount || 0,
       color: 'bg-emerald-600',
     },
     {
@@ -90,7 +97,7 @@ export default async function AdminDashboard() {
       description: 'Manage partnership information and collaboration details.',
       icon: <Handshake className="w-6 h-6" />,
       href: '/admin/partners',
-      count: 6,
+      count: partnersCount || 0,
       color: 'bg-red-600',
     },
     {

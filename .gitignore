@@ -38,3 +38,7 @@ next-env.d.ts
 
 # project specific
 TODO.md
+rough.md
+
+/scripts
+/app/api/migrate-partners

@@ -3,6 +3,16 @@ import { Service } from '@/lib/types/divisions_types';
 import { isAuthorised } from './auth';
 import { createClient } from '@supabase/supabase-js';
 
+export const getServicesCount = async () => {
+  const supabase = await createServer();
+  const { count, error } = await supabase
+    .from('services')
+    .select('*', { count: 'exact', head: true });
+  
+  if (error) throw error;
+  return count;
+};
+
 export const getAllServices = async () => {
   const supabase = await createServer();
   return supabase.from('services').select('*');
