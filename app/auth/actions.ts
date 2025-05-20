@@ -1,7 +1,8 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { createServer } from '@/lib/supabase/server';
+import { createServer, createServiceRoleServer } from '@/lib/supabase/server';
+import { addUserRole } from '@/lib/db/user';
 
 export async function signIn(formData: FormData) {
   const email = formData.get('email') as string;
@@ -22,23 +23,36 @@ export async function signIn(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-  const supabase = await createServer();
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+  const email = formData.get('email')?.toString();
+  const password = formData.get('password')?.toString();
 
   if (!email || !password) {
     console.error('>>>> missing email or password');
     redirect('/auth/check-email?status=error');
   }
 
-  const { error } = await supabase.auth.signUp({ email, password });
+  // 1) sign up the user
+  const supabase = await createServer();
+  const { data, error: signUpError } = await supabase.auth.signUp({
+    email,
+    password,
+  });
 
-  if (error) {
-    console.error('>>>> could not sign up user: ', error.message);
+  if (signUpError || !data?.user?.id) {
+    console.error('>>>> signup failed:', signUpError);
     redirect('/auth/check-email?status=error');
   }
 
-  // On success, send them to a “check your email” page
+  // 2) assign the “user” role
+  try {
+    await addUserRole((await createServiceRoleServer()), data.user.id, 'user');
+  } catch (assignError) {
+    // optionally: delete the user you just created to avoid orphans
+    console.error('>>>> role assignment failed:', assignError);
+    redirect('/auth/check-email?status=error');
+  }
+
+  // 3) on success, point them to “check your email”
   redirect('/auth/check-email?status=success');
 }
 

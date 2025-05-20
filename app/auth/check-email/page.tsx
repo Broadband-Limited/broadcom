@@ -12,7 +12,7 @@ function EmailContent() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <section className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
+      <div className="max-w-3xl w-full bg-white shadow-md rounded-lg px-6 py-12 flex flex-col items-center">
         <h1 className="text-2xl font-semibold mb-4 text-center">
           {isError ? 'Signup Error' : 'Check Your Email'}
         </h1>
@@ -21,21 +21,21 @@ function EmailContent() {
             Something went wrong. Please try signing up again.
           </p>
         ) : (
-          <>
-            <p className="mb-4">
+          <div className='max-w-md flex flex-col items-center justify-center gap-4'>
+            <p className="mb-4 text-center">
               We’ve sent a confirmation link to your email address. Please open
               it to verify your account.
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 text-center">
               Didn’t receive it? Check your spam folder or{' '}
               <Link href="/auth/signup" className="text-blue-600 hover:underline">
                 try again
               </Link>
               .
             </p>
-          </>
+          </div>
         )}
-      </section>
+      </div>
     </main>
   );
 }
