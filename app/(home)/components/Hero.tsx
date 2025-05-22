@@ -22,6 +22,10 @@ const Hero = () => {
     );
   }, []);
 
+  const goToSlide = useCallback((index: number) => {
+    setCurrentSlide(index);
+  }, []);
+
   useEffect(() => {
     if (!isPaused) {
       const timer = setInterval(nextSlide, 5000);
@@ -55,7 +59,7 @@ const Hero = () => {
   return (
     <section className="flex flex-col items-center landing gap-0 !p-6 md:!p-16 md:justify-center">
       <div
-        className="relative w-full min-h-161 md:min-h-100 md:h-100 p-0 bg-background shadow-2xl overflow-hidden"
+        className="relative w-full min-h-161 md:min-h-100 md:h-100 p-4 pb-8 bg-background shadow-2xl overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -96,43 +100,21 @@ const Hero = () => {
           </motion.div>
         </AnimatePresence>
 
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-background/50 hover:bg-background transition-colors shadow-lg"
-          aria-label="Previous slide">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-dark-blue">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
+        {/* Dots Navigation */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          {CarouselHighlights.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide
+                  ? 'bg-dark-blue scale-110'
+                  : 'bg-dark-blue/50 hover:bg-dark-blue/75'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
-          </svg>
-        </button>
-        
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-background/50 hover:bg-background transition-colors shadow-lg"
-          aria-label="Next slide">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-dark-blue">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </button>
+          ))}
+        </div>
       </div>
     </section>
   );
