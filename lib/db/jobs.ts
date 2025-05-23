@@ -82,3 +82,13 @@ export async function getJobsForStaticGeneration() {
     return [];
   }
 }
+
+export const getJobsCount = async () => {
+  const supabase = await createServer();
+  const { count, error } = await supabase
+    .from('jobs')
+    .select('*', { count: 'exact', head: true });
+
+  if (error) throw error;
+  return count;
+};

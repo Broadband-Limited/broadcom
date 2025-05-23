@@ -36,7 +36,7 @@ export interface Application {
   email: string;
   phone?: string;
   resume: string; // URL to the resume file
-  cover_letter: string; // URL to the cover letter file
+  cover_letter: string; // Cover letter text
   linkedin_url?: string;
   portfolio_url?: string;
   referral_source?: string;

@@ -14,6 +14,8 @@ import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
 import { getServicesCount } from '@/lib/db/services';
 import { getDivisionsCount } from '@/lib/db/divisions';
 import { getPartnersCount } from '@/lib/db/partners';
+import { getJobsCount } from '@/lib/db/jobs';
+import { getApplicationsCount } from '@/lib/db/applications';
 
 interface DashboardCardProps {
   title: string;
@@ -70,10 +72,19 @@ export default async function AdminDashboard() {
   if (!authorised) {
     redirect('/auth/login');
   }
-
-  const divisionsCount = await getDivisionsCount();
-  const servicesCount = await getServicesCount();
-  const partnersCount = await getPartnersCount();
+  const [
+    divisionsCount,
+    servicesCount,
+    partnersCount,
+    jobsCount,
+    applicationsCount,
+  ] = await Promise.all([
+    getDivisionsCount(),
+    getServicesCount(),
+    getPartnersCount(),
+    getJobsCount(),
+    getApplicationsCount(),
+  ]);
 
   const dashboardItems: DashboardCardProps[] = [
     {
@@ -105,7 +116,7 @@ export default async function AdminDashboard() {
       description: 'Add, edit, and remove job positions available at Broadcom.',
       icon: <Briefcase className="w-6 h-6" />,
       href: '/admin/jobs',
-      count: 8,
+      count: jobsCount || 0,
       color: 'bg-blue-600',
     },
     {
@@ -114,7 +125,7 @@ export default async function AdminDashboard() {
         'Review and manage job applications submitted by candidates.',
       icon: <FileText className="w-6 h-6" />,
       href: '/admin/applications',
-      count: 24,
+      count: applicationsCount || 0,
       color: 'bg-green-600',
     },
     {

@@ -8,7 +8,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'default' | 'sm' | 'lg';
   className?: string;
   type?: 'button' | 'submit' | 'reset';
-  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,7 +17,6 @@ const Button: React.FC<ButtonProps> = ({
   size = 'default',
   className = '',
   type = 'button',
-  onClick,
   ...props
 }) => {
   // Define base styles
@@ -50,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type={type}
           className={buttonStyles}
-          onClick={onClick}
+          
           {...props}>
           {children}
         </button>
@@ -60,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({
 
   // Otherwise, render as button
   return (
-    <button type={type} className={buttonStyles} onClick={onClick} {...props}>
+    <button type={type} className={buttonStyles}  {...props}>
       {children}
     </button>
   );

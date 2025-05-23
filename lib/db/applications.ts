@@ -23,11 +23,21 @@ export const updateApplicationStatus = async (
   id: string,
   status: ApplicationStatus
 ) => {
-  const supabase = createServiceRoleServer();
+  const supabase = await createServiceRoleServer();
   return supabase
     .from('applications')
     .update({ status })
     .eq('id', id)
     .select()
     .single();
+};
+
+export const getApplicationsCount = async () => {
+  const supabase = await createServiceRoleServer();
+  const { count, error } = await supabase
+    .from('applications')
+    .select('*', { count: 'exact', head: true });
+
+  if (error) throw error;
+  return count;
 };
