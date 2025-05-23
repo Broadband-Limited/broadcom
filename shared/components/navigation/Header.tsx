@@ -33,7 +33,7 @@ export default function Header() {
       ? [
           { name: 'dashboard', href: '/admin/dashboard' },
           { name: 'jobs', href: '/admin/jobs' },
-          { name: 'blog', href: '/admin/blog' },
+          { name: 'media', href: '/admin/media' },
         ]
       : [
           { name: 'home', href: '/' },
@@ -44,6 +44,7 @@ export default function Header() {
           { name: 'partners', href: '/partners' },
           { name: 'about us', href: '/about' },
           { name: 'careers', href: '/careers' },
+          { name: 'blog', href: '/media' },
           { name: 'contact us', href: '/contact' },
         ]),
   ];
