@@ -51,15 +51,15 @@ const Hero = () => {
   };
 
   const slideVariants = {
-    enter: { opacity: 0, x: 1000 },
-    center: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -1000 },
+    enter: { opacity: 0 },
+    center: { opacity: 1 },
+    exit: { opacity: 0 },
   };
 
   return (
     <section className="flex flex-col items-center landing gap-0 !p-6 md:!p-16 md:justify-center">
       <div
-        className="relative w-full min-h-161 md:min-h-100 md:h-100 p-4 pb-8 bg-background shadow-2xl overflow-hidden"
+        className="relative w-full min-h-[80vh] md:min-h-[65vh] p-6 pb-12 bg-background shadow-2xl overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -75,7 +75,7 @@ const Hero = () => {
             transition={{ duration: 0.3 }}
             className="w-full h-full">
             <div className="w-full h-full flex flex-col md:flex-row items-center gap-6">
-              <div className="w-full aspect-[4/3] md:w-1/2 md:h-full md:aspect-auto">
+              <div className="w-full aspect-[4/3] md:w-1/2">
                 <Image
                   src={`/images/${CarouselHighlights[currentSlide].image}.webp`}
                   alt="broadcom"
@@ -85,7 +85,7 @@ const Hero = () => {
                 />
               </div>
 
-              <div className="w-full md:w-1/2 p-4 flex flex-col items-center md:items-start gap-6 md:gap-12">
+              <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-12 md:gap-12">
                 <h2 className="text-center md:text-left">
                   {CarouselHighlights[currentSlide].title}
                 </h2>
@@ -106,7 +106,7 @@ const Hero = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide
                   ? 'bg-dark-blue scale-110'
                   : 'bg-dark-blue/50 hover:bg-dark-blue/75'

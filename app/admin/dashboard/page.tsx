@@ -131,7 +131,7 @@ export default async function AdminDashboard() {
       description:
         'Manage media content, create new content and edit existing articles.',
       icon: <Newspaper className="w-6 h-6" />,
-      href: '/admin/blog',
+      href: '/admin/media',
       count: 12,
       color: 'bg-purple-600',
     }
