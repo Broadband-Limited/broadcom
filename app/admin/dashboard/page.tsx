@@ -3,10 +3,8 @@ import {
   Newspaper,
   Briefcase,
   Network,
-  Users,
   FileText,
   Handshake,
-  Settings,
   ArrowRight,
 } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -136,22 +134,7 @@ export default async function AdminDashboard() {
       href: '/admin/blog',
       count: 12,
       color: 'bg-purple-600',
-    },
-    {
-      title: 'Users',
-      description: 'Manage administrator accounts and permissions.',
-      icon: <Users className="w-6 h-6" />,
-      href: '/admin/users',
-      count: 4,
-      color: 'bg-indigo-600',
-    },
-    {
-      title: 'Settings',
-      description: 'Configure website settings and global preferences.',
-      icon: <Settings className="w-6 h-6" />,
-      href: '/admin/settings',
-      color: 'bg-gray-600',
-    },
+    }
   ];
 
   return (
