@@ -14,6 +14,7 @@ import { getDivisionsCount } from '@/lib/db/divisions';
 import { getPartnersCount } from '@/lib/db/partners';
 import { getJobsCount } from '@/lib/db/jobs';
 import { getApplicationsCount } from '@/lib/db/applications';
+import { getMediaCount } from '@/lib/db/media';
 
 interface DashboardCardProps {
   title: string;
@@ -76,12 +77,14 @@ export default async function AdminDashboard() {
     partnersCount,
     jobsCount,
     applicationsCount,
+    mediaCount,
   ] = await Promise.all([
     getDivisionsCount(),
     getServicesCount(),
     getPartnersCount(),
     getJobsCount(),
     getApplicationsCount(),
+    getMediaCount(),
   ]);
 
   const dashboardItems: DashboardCardProps[] = [
@@ -132,7 +135,7 @@ export default async function AdminDashboard() {
         'Manage media content, create new content and edit existing articles.',
       icon: <Newspaper className="w-6 h-6" />,
       href: '/admin/media',
-      count: 12,
+      count: mediaCount || 0,
       color: 'bg-purple-600',
     }
   ];

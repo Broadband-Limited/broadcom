@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -14,7 +15,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --font-ratio: 1.15;
+    --font-ratio: 1.125;
     --font-size: 1rem;
   }
 }
@@ -28,6 +29,7 @@
 
   --font-alata: var(--font-alata);
   --font-montserrat: var(--font-montserrat);
+  --font-roboto: var(--font-roboto);
 }
 
 * {
@@ -49,7 +51,7 @@ html {
     width: 100vw;
     height: 100dvh;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     transition: height 0.3s ease-in-out;
 
     section {
@@ -104,7 +106,7 @@ img {
   object-position: center;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
@@ -259,4 +261,58 @@ table {
   width: 100%;
   height: 100%;
   will-change: transform;
+}
+
+.tiptap.ProseMirror,
+.tiptap.ProseMirror.ProseMirror-focused {
+  border: none !important;
+  outline: none !important;
+  min-height: 300px !important;
+  width: 100%;
+  font-family: var(--font-roboto) !important;
+
+  *{
+    font-family: var(--font-roboto) !important;
+  }
+
+  ol,
+  ul {
+    padding-left: 2rem;
+  }
+
+  ol {
+    list-style-position: outside !important;
+    li {
+      list-style-type: decimal !important;
+      counter-increment: list-counter !important;
+      width: fit-content !important;
+    }
+  }
+
+  ul {
+    list-style: outside !important;
+    li {
+      list-style-type: disc !important;
+      counter-increment: list-counter !important;
+      width: fit-content !important;
+    }
+  }
+
+  pre {
+    background: #e8f0f8cc !important;
+    padding: .5rem !important;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  a{
+    color: var(--color-dark-blue) !important;
+    text-decoration: underline !important;
+
+    &:hover {
+      color: var(--color-light-blue) !important;
+    }
+  }
 }
