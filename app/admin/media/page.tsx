@@ -44,32 +44,49 @@ export default async function AdminMediaPage() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100 text-left">
-                <th className="p-3 border">Title</th>
-                <th className="p-3 border">Status</th>
-                <th className="p-3 border">Last Updated</th>
-                <th className="p-3 border">Actions</th>
+                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                  Title
+                </th>
+                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                  Status
+                </th>
+                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                  Last Updated
+                </th>
+                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {mediaItems.map((item) => (
                 <tr key={item.id} className="border-b hover:bg-gray-50">
-                  <td className="p-3 border">{item.title}</td>
-                  <td className="p-3 border">
+                  <td className="p-3 border border-dark-blue/20">
+                    {item.title}
+                  </td>
+                  <td className="p-3 border border-dark-blue/20">
                     <MediaStatusBadge published={item.published} />
                   </td>
-                  <td className="p-3 border">{formatDate(item.updated_at)}</td>
-                  <td className="p-3 border">
+
+                  <td className="p-3 border border-dark-blue/20 text-sm">
+                    {formatDate(item.updated_at)}
+                  </td>
+
+                  <td className="p-3 border border-dark-blue/20">
                     <div className="flex gap-2">
-                      <Link href={`/admin/media/edit/${item.id}`}>
-                        <Button variant="outline" size="sm">
-                          Edit
-                        </Button>
-                      </Link>
-                      <Link href={`/media/${item.slug}`} target="_blank">
-                        <Button variant="outline" size="sm">
-                          View
-                        </Button>
-                      </Link>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        href={`/admin/media/edit/${item.id}`}>
+                        Edit
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        href={`/media/${item.slug}`}
+                        target="_blank">
+                        View
+                      </Button>
                     </div>
                   </td>
                 </tr>

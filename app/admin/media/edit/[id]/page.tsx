@@ -107,10 +107,10 @@ export default function EditMediaPage({ params }: EditMediaPageProps) {
   }
 
   return (
-    <div className="container px-4 py-8 mx-auto">
+    <section className="">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Edit Article</h1>
-        <p className="text-gray-600">Make changes to your article</p>
+        <p className="text-gray-600">Make changes to this article</p>
       </div>
 
       <MediaForm
@@ -118,6 +118,6 @@ export default function EditMediaPage({ params }: EditMediaPageProps) {
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}
       />
-    </div>
+    </section>
   );
 }
