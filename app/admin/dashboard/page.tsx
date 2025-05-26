@@ -42,7 +42,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       <div className="flex items-start">
         <div className={`p-3 ${color} rounded-lg text-white mb-4`}>{icon}</div>
         {count !== undefined && (
-          <div className="ml-auto text-2xl font-bold text-gray-800">
+          <div className="ml-auto text-2xl font-bold text-gray-800 !font-roboto">
             {count}
           </div>
         )}

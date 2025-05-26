@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getMediaById, updateMedia } from '@/lib/db/media';
+import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
+import { deleteMedia, getMediaById, updateMedia } from '@/lib/db/media';
 import { Media } from '@/lib/types/media_types';
 import { handleApiResponse } from '@/lib/cache';
+import { NextRequest, NextResponse } from 'next/server';
 
 // GET handler for retrieving a single media item
 export async function GET(
@@ -60,6 +61,42 @@ export async function PUT(
             ? error.message
             : 'Failed to update media item',
       },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE handler for deleting a media item
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const authenticated = await isAuthenticated();
+
+    if (!authenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const requiredRoles = ['admin', 'editor'];
+    const authorised = await isAuthorised(requiredRoles);
+    if (!authorised) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    const { id } = await params;
+
+    const { error } = await deleteMedia(id);
+
+    if (error) {
+      return NextResponse.json({ error: error }, { status: 400 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting media:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

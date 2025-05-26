@@ -1,5 +1,5 @@
 import { getMediaNoAuth } from '@/lib/db/media';
-import ArticleCard from '@/shared/components/ArticleCard';
+import ArticleCard from '@/shared/components/ui/ArticleCard';
 
 export default async function MediaPage() {
   const { data: mediaItems, error } = await getMediaNoAuth();

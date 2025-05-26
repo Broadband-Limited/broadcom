@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import ArticleCard from '../ArticleCard';
+import ArticleCard from '../ui/ArticleCard';
 import { Media } from '@/lib/types/media_types';
 import { usePathname } from 'next/navigation';
 
@@ -38,6 +38,5 @@ const ArticlesPreview = ({ articles }: ArticlePreviewProps) => {
     </div>
   );
 };
-
 
 export default ArticlesPreview;

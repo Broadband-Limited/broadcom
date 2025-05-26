@@ -2,6 +2,7 @@ import { createServer } from '@/lib/supabase/server';
 import { Media } from '@/lib/types/media_types';
 import { isAuthorised } from './auth';
 import { createClient } from '@supabase/supabase-js';
+import { deleteMultipleMediaImages } from '@/lib/media-storage';
 
 export const getMediaCount = async () => {
   const supabase = await createServer();
@@ -107,13 +108,108 @@ export const updateMedia = async (
     .single();
 };
 
-export const deleteMedia = async (id: string) => {
-  // Authorization check
-  const authorised = await isAuthorised(['admin']);
-  if (!authorised) {
-    throw new Error('Not authorized to delete media');
-  }
+export async function deleteMedia(id: string) {
+  try {
+    // Authorization check
+    const authorised = await isAuthorised(['admin']);
+    if (!authorised) {
+      throw new Error('Not authorized to delete media');
+    }
 
-  const supabase = await createServer();
-  return supabase.from('media').delete().eq('id', id);
-};
+    const supabase = await createServer();
+
+    // Get the media record first to retrieve image URLs
+    const { data: media, error: fetchError } = await supabase
+      .from('media')
+      .select('featured_image, content')
+      .eq('id', id)
+      .single();
+
+    if (fetchError) {
+      console.error('Error fetching media:', fetchError);
+      return { error: fetchError };
+    }
+
+    // Extract image URLs from content
+    const extractImageUrls = (content: string): string[] => {
+      if (!content) return [];
+
+      const imageUrls: string[] = [];
+
+      // Extract from HTML img tags
+      const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+      let match;
+      while ((match = imgRegex.exec(content)) !== null) {
+        imageUrls.push(match[1]);
+      }
+
+      // Extract from Markdown image syntax
+      const mdImageRegex = /!\[[^\]]*\]\(([^)]+)\)/g;
+      while ((match = mdImageRegex.exec(content)) !== null) {
+        imageUrls.push(match[1]);
+      }
+
+      return imageUrls;
+    };
+
+    // Collect all images to delete
+    const imagesToDelete: string[] = [];
+
+    if (media?.featured_image) {
+      imagesToDelete.push(media.featured_image);
+    }
+
+    if (media?.content) {
+      const contentImages = extractImageUrls(media.content);
+      imagesToDelete.push(...contentImages);
+    }
+
+    // Delete all images
+    try {
+      await deleteMultipleMediaImages(imagesToDelete)
+    } catch (error) {
+      console.error('Error deleting media images:', error);
+    }
+
+    const { error } = await supabase.from('media').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting media:', error);
+      return { error };
+    }
+
+    return { error: null };
+  } catch (error) {
+    console.error('Error deleting media:', error);
+    return { error };
+  }
+}
+
+export async function updateMediaPublishStatus(
+  mediaId: string,
+  published: boolean
+) {
+  try {
+    const supabase = await createServer();
+
+    const { data, error } = await supabase
+      .from('media')
+      .update({
+        published: published,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', mediaId)
+      .select('*')
+      .single();
+
+    if (error) {
+      console.error('Database error updating media publish status:', error);
+      return { data: null, error };
+    }
+
+    return { data, error: null };
+  } catch (error) {
+    console.error('Error updating media publish status:', error);
+    return { data: null, error };
+  }
+}

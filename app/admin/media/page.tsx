@@ -6,6 +6,7 @@ import { MediaStatusBadge } from './components/MediaStatusBadge';
 import Button from '@/shared/components/ui/Button';
 import { PlusIcon } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import MediaContextMenu from '@/shared/components/ui/MediaContextMenu';
 
 export default async function AdminMediaPage() {
   const authenticated = await isAuthenticated();
@@ -40,60 +41,48 @@ export default async function AdminMediaPage() {
           Failed to load media items: {error.message}
         </div>
       ) : mediaItems && mediaItems.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
-                  Title
-                </th>
-                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
-                  Status
-                </th>
-                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
-                  Last Updated
-                </th>
-                <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {mediaItems.map((item) => (
-                <tr key={item.id} className="border-b hover:bg-gray-50">
-                  <td className="p-3 border border-dark-blue/20">
-                    {item.title}
-                  </td>
-                  <td className="p-3 border border-dark-blue/20">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-100 text-left">
+              <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                Title
+              </th>
+              <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                Last Updated
+              </th>
+              <th className="p-3 border border-dark-blue/20 font-medium text-dark-blue">
+                Status
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {mediaItems.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b border-dark-blue/20 hover:bg-gray-50 group">
+                <td className="p-3 border border-dark-blue/20 font-medium">
+                  {item.title}
+                </td>
+
+                <td className="p-3 border border-dark-blue/20 text-sm text-gray-600">
+                  {formatDate(item.updated_at)}
+                </td>
+
+                <td className="p-3 border border-dark-blue/20 relative">
+                  <div className="flex items-center justify-between">
                     <MediaStatusBadge published={item.published} />
-                  </td>
-
-                  <td className="p-3 border border-dark-blue/20 text-sm">
-                    {formatDate(item.updated_at)}
-                  </td>
-
-                  <td className="p-3 border border-dark-blue/20">
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        href={`/admin/media/edit/${item.id}`}>
-                        Edit
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        href={`/media/${item.slug}`}
-                        target="_blank">
-                        View
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    <MediaContextMenu
+                      itemId={item.id}
+                      itemSlug={item.slug}
+                      published={item.published}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <div className="text-center p-8 bg-gray-50 rounded-md">
           <p className="text-gray-500 mb-4">No media items found</p>

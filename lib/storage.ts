@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
+import { createServer } from './supabase/server';
 
 // Resume handling for job applications
 export const uploadResume = async (file: File) => {
@@ -49,6 +50,7 @@ export const getServiceImageUrl = (path: string) => {
 };
 
 export const deleteServiceImage = async (path: string) => {
+  const supabase = await createServer()
   const { error } = await supabase.storage.from('services').remove([path]);
   if (error) throw error;
   return true;
@@ -83,4 +85,13 @@ export function getPartnerImageUrl(path: string): string {
 
   // Otherwise, construct the URL from Supabase storage
   return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/partners/${path}`;
+}
+
+export async function deletePartnerImage(path: string): Promise<void> {
+  if (!path) return;
+
+  const supabase = await createServer();
+  
+  const { error } = await supabase.storage.from('partners').remove([path]);
+  if (error) throw error;
 }

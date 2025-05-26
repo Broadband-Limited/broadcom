@@ -35,6 +35,7 @@ export default function Header() {
           { name: 'divisions & services', href: '/admin/divisions' },
           { name: 'media', href: '/admin/media' },
           { name: 'jobs', href: '/admin/jobs' },
+          { name: 'partners', href: '/admin/partners' },
         ]
       : [
           { name: 'home', href: '/' },

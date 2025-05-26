@@ -3,6 +3,7 @@ import { Alata, Montserrat, Roboto } from 'next/font/google';
 import './globals.css';
 import Header from '@/shared/components/navigation/Header';
 import Footer from '@/shared/components/navigation/Footer';
+import { Toaster } from 'react-hot-toast';
 
 const alata = Alata({
   variable: '--font-alata',
@@ -81,6 +82,17 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#fff',
+              color: '#333',
+              border: '1px solid #e5e7eb',
+            },
+          }}
+        />
       </body>
     </html>
   );

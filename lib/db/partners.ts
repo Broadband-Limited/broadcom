@@ -2,6 +2,7 @@ import { createServer } from '@/lib/supabase/server';
 import { Partner } from '@/lib/types/partner_types';
 import { isAuthorised } from './auth';
 import { createClient } from '@supabase/supabase-js';
+import { deletePartnerImage } from '@/lib/storage';
 
 export const getPartnersCount = async () => {
   const supabase = await createServer();
@@ -73,5 +74,27 @@ export const deletePartner = async (id: string) => {
   }
 
   const supabase = await createServer();
+
+  // Get the partner record first to retrieve the image path
+  const { data: partner, error: fetchError } = await supabase
+    .from('partners')
+    .select('image')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    throw fetchError;
+  }
+
+  // Delete the partner image if it exists
+  if (partner?.image) {
+    try {
+      await deletePartnerImage(partner.image);
+    } catch (imageError) {
+      console.error('Error deleting partner image:', imageError);
+      // Continue with deletion even if image deletion fails
+    }
+  }
+
   return supabase.from('partners').delete().eq('id', id);
 };
