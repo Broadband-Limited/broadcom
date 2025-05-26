@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next';
-import { Alata, Montserrat } from 'next/font/google';
+import { Alata, Montserrat, Roboto } from 'next/font/google';
 import './globals.css';
 import Header from '@/shared/components/navigation/Header';
 import Footer from '@/shared/components/navigation/Footer';
+import { Toaster } from 'react-hot-toast';
 
 const alata = Alata({
   variable: '--font-alata',
@@ -13,6 +14,12 @@ const alata = Alata({
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
+});
+
+const roboto = Roboto({
+  variable: '--font-roboto',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -71,10 +78,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="hide-scrollbar">
       <body
-        className={`${alata.variable} ${montserrat.variable} hide-scrollbar antialiased relative`}>
+        className={`${alata.variable} ${montserrat.variable} ${roboto.variable} hide-scrollbar antialiased relative`}>
         <Header />
         {children}
         <Footer />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#fff',
+              color: '#333',
+              border: '1px solid #e5e7eb',
+            },
+          }}
+        />
       </body>
     </html>
   );

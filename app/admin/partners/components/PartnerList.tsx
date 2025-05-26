@@ -61,16 +61,15 @@ export default function PartnerList({
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-0">
                 <div className="flex items-center min-w-0 space-x-3 mb-3 sm:mb-0">
                   {partner.image && (
-                    <div className="relative flex-shrink-0 h-12 w-16 overflow-hidden rounded border border-foreground/10">
-                      <Image
-                        src={getPartnerImageUrl(partner.image)}
-                        alt={partner.name}
-                        fill
-                        sizes="64px"
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
+                    <Image
+                      src={getPartnerImageUrl(partner.image)}
+                      alt={partner.name}
+                      width={1000}
+                      height={1000}
+                      className='shrink-0 w-24 aspect-[4/3]'
+                    />
                   )}
+
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-dark-blue truncate">
                       {partner.name}
@@ -84,6 +83,7 @@ export default function PartnerList({
                     </Link>
                   </div>
                 </div>
+
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                   {confirmDelete === partner.id ? (
                     <div className="flex space-x-2">
@@ -93,6 +93,7 @@ export default function PartnerList({
                         size="sm">
                         Confirm
                       </Button>
+
                       <Button
                         onClick={handleCancelDelete}
                         variant="outline"
@@ -116,22 +117,6 @@ export default function PartnerList({
                       </Button>
                     </>
                   )}
-                </div>
-              </div>
-              <div className="mt-2 sm:flex sm:justify-between sm:items-center">
-                <div className="sm:flex sm:max-w-2xl">
-                  <p className="text-sm text-foreground/70 line-clamp-2">
-                    {partner.description.length > 100
-                      ? partner.description.substring(0, 100) + '...'
-                      : partner.description}
-                  </p>
-                </div>
-                <div className="mt-2 flex items-center text-sm text-foreground/50 sm:mt-0 sm:ml-4 whitespace-nowrap">
-                  <p>
-                    <span className="font-medium">
-                      Order: {partner.rank || 0}
-                    </span>
-                  </p>
                 </div>
               </div>
             </div>

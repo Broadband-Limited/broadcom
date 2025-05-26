@@ -32,8 +32,10 @@ export default function Header() {
     ...(pathname.startsWith('/admin')
       ? [
           { name: 'dashboard', href: '/admin/dashboard' },
-          { name: 'jobs', href: '/admin/jobs' },
+          { name: 'divisions & services', href: '/admin/divisions' },
           { name: 'media', href: '/admin/media' },
+          { name: 'jobs', href: '/admin/jobs' },
+          { name: 'partners', href: '/admin/partners' },
         ]
       : [
           { name: 'home', href: '/' },
@@ -44,7 +46,7 @@ export default function Header() {
           { name: 'partners', href: '/partners' },
           { name: 'about us', href: '/about' },
           { name: 'careers', href: '/careers' },
-          { name: 'blog', href: '/media' },
+          { name: 'media', href: '/media' },
           { name: 'contact us', href: '/contact' },
         ]),
   ];

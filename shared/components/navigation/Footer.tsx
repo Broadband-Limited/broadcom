@@ -1,10 +1,16 @@
 import { getDivisions } from '@/lib/db/divisions';
+import { getMediaNoAuth } from '@/lib/db/media';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import ArticlesPreview from './ArticlesPreview';
 
 export default async function Footer() {
   const { data: divisions = [] } = await getDivisions();
+  const { data: recentMedia = [] } = await getMediaNoAuth();
+
+  // Get the 3 most recent media items
+  const featuredMedia = recentMedia.slice(0, 3);
 
   const linkGroups = [
     {
@@ -48,6 +54,11 @@ export default async function Footer() {
 
   return (
     <footer className="w-full flex flex-col">
+      {/* News and Media Section */}
+      {featuredMedia.length > 0 && (
+        <ArticlesPreview articles={featuredMedia} />
+      )}
+
       <div className="footer-top w-full px-8 md:px-12 py-12 md:py-24 bg-gray grid grid-cols-1 md:grid-cols-4 gap-6 bg-foreground/90">
         {linkGroups.map((group, index) => (
           <div key={index} className="w-full">

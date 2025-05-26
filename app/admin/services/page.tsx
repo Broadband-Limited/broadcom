@@ -31,8 +31,7 @@ export default async function AdminServicesPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {' '}
+    <section className="">
       <div className="mb-8 border-b border-foreground/10 pb-4">
         <h1 className="text-3xl font-bold text-dark-blue">Manage Services</h1>
         <p className="text-foreground/50 mt-2">
@@ -43,6 +42,6 @@ export default async function AdminServicesPage() {
         initialServices={services || []}
         divisions={divisions || []}
       />
-    </div>
+    </section>
   );
 }

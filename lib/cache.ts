@@ -33,6 +33,11 @@ export const CACHE_CONFIGS = {
     staleWhileRevalidate: 1800, // 30 minutes
     isPublic: true,
   },
+  media: {
+    maxAge: 1800, // 30 minutes
+    staleWhileRevalidate: 3600, // 1 hour
+    isPublic: true,
+  },
 };
 
 export function applyCacheHeaders(
