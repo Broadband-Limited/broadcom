@@ -18,9 +18,10 @@ const What = () => {
     <section className="overflow-x-hidden bg-background flex flex-col gap-6">
       <h1 className="w-fit mx-auto lines-header">Core Solutions & Services</h1>
       <p className="md:text-center">
-        We specialize in providing comprehensive quality Telecommunication and
-        IT Solutions and Services that drive connectivity, enhance network
-        performance and drive enterprise operations efficiency.
+      We specialize in providing
+      comprehensive  quality Telecommunication and IT Solutions and Services that drive connectivity geared towards improving Quality of Service, 
+      enhancing network performance and driving telecom and enterprise operations efficiency.
+      Our solutions cover the following thematic areas:
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:mt-6">
