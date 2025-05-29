@@ -87,7 +87,7 @@ const ServiceTabs = ({ title, description, details }: ServiceTabsProps) => {
 
         <div className="w-full border-t mt-12 py-4 flex flex-col gap-6">
           <h3 className="text-foreground text-lg font-semibold">
-            Ready to get started with {title}?
+            For more information on {title}, contact us today!
           </h3>
 
           <p className="text-sm">
