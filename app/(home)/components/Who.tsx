@@ -8,11 +8,11 @@ const Who = () => {
       </h1>
       <p className="md:text-center">
         For over two decades, Broadband Communication Network has been at the
-        forefront of the African telecommunications industry, providing
-        innovative solutions to mobile network operators, ISPs, and large
-        enterprises. Our commitment to excellence, sustainability, and
+        forefront developing the African telecommunications industry, with
+        innovative solutions for Mobile Network Operators, ISPs, and Large
+        Enterprises. Our commitment to excellence, sustainability, and
         cutting-edge technology ensures that we deliver reliable, scalable, and
-        cost-effective solutions and services to our clients.
+        cost-effective Solutions and Services to our clients meeting the dynamic ICT requirements.
       </p>
     </section>
   );

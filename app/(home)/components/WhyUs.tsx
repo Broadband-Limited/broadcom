@@ -2,14 +2,14 @@ import React from 'react'
 
 const points = [
   {
-    title: '20+ years',
+    title: '24+ years',
     description:
-      'With over 20 years in the telecom industry, we’ve built a reputation for delivering high-quality solutions across Africa.',
+      'With over 24 years in the telecom industry, we have built a reputation for delivering high-quality solutions across Africa.',
   },
   {
     title: 'Trusted Partnerships',
     description:
-      'Our partnerships with leading companies like Nokia and Redknee allow us to provide top-tier services with cutting-edge technology.',
+      'Our partnerships with technology global leaders like Nokia, Ericcson, Vertiv, Rohde & Schwarz allows us to provide top-tier Products & Services with cutting-edge technology.',
   },
   {
     title: 'Sustainable Solutions',
