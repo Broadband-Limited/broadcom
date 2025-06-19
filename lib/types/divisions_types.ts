@@ -12,5 +12,5 @@ export interface Service {
   slug: string;
   description: string;
   details: string[];
-  image: string;
+  images: string[]; // Changed from image: string to images: string[]
 }

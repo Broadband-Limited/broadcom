@@ -2,7 +2,7 @@ import { createServer } from '@/lib/supabase/server';
 import { Service } from '@/lib/types/divisions_types';
 import { isAuthorised } from './auth';
 import { createClient } from '@supabase/supabase-js';
-import { deleteServiceImage } from '@/lib/storage';
+import { deleteMultipleServiceImages } from '@/lib/storage';
 
 export const getServicesCount = async () => {
   const supabase = await createServer();
@@ -88,10 +88,10 @@ export const deleteService = async (id: string) => {
 
   const supabase = await createServer();
 
-  // Get the service record first to retrieve the image path
+  // Get the service record first to retrieve the image paths
   const { data: service, error: fetchError } = await supabase
     .from('services')
-    .select('image')
+    .select('images')
     .eq('id', id)
     .single();
 
@@ -99,12 +99,12 @@ export const deleteService = async (id: string) => {
     throw fetchError;
   }
 
-  // Delete the service image if it exists
-  if (service?.image) {
+  // Delete the service images if they exist
+  if (service?.images && service.images.length > 0) {
     try {
-      await deleteServiceImage(service.image);
+      await deleteMultipleServiceImages(service.images);
     } catch (imageError) {
-      console.error('Error deleting service image:', imageError);
+      console.error('Error deleting service images:', imageError);
       // Continue with deletion even if image deletion fails
     }
   }
