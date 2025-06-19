@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  getDivisionBySlug,
-  getDivisionsNoAuth,
-} from '@/lib/db/divisions';
+import { getDivisionBySlug, getDivisionsNoAuth } from '@/lib/db/divisions';
 import { getServicesByDivisionId } from '@/lib/db/services';
 import Button from '@/shared/components/ui/Button';
 import { getServiceImageUrl } from '@/lib/storage';
@@ -75,14 +72,27 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
           <div
             key={service.id}
             className="w-full aspect-square md:aspect-[3/4] border border-slate-200 shadow-lg hover:shadow transition-all duration-300">
-            <div className="img w-full aspect-[4/3]">
-              <Image
-                src={getServiceImageUrl(service.image)}
-                alt={`${service.title} | Broadband Communication Networks Ltd`}
-                width={1000}
-                height={1000}
-                className="w-full h-full"
-              />
+            <div className="img w-full aspect-[4/3] relative">
+              {service.images && service.images.length > 0 ? (
+                <>
+                  <Image
+                    src={getServiceImageUrl(service.images[0])}
+                    alt={`${service.title} | Broadband Communication Networks Ltd`}
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full object-cover"
+                  />
+                  {service.images.length > 1 && (
+                    <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                      +{service.images.length - 1} more
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <p className="text-gray-500 text-sm">No image</p>
+                </div>
+              )}
             </div>
 
             <div className="details w-full aspect-[4/1] md:aspect-[1.7] flex flex-col gap-6 justify-between p-2 md:p-4">

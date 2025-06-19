@@ -2,7 +2,10 @@ import { supabase } from '@/lib/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 import { createServer } from './supabase/server';
 
-// Resume handling for job applications
+/**
+ * Resume handling for job applications
+ */
+
 export const uploadResume = async (file: File) => {
   const uniqueId = uuidv4();
   const filePath = `${uniqueId}_${file.name}`;
@@ -26,7 +29,9 @@ export const downloadResume = async (path: string) => {
   return supabase.storage.from('resumes').download(path);
 };
 
-// Service image handling
+/**
+ * Service image handling
+ */
 export const uploadServiceImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
@@ -45,18 +50,42 @@ export const uploadServiceImage = async (file: File): Promise<string> => {
   return path;
 };
 
+// Upload multiple service images
+export const uploadMultipleServiceImages = async (
+  files: File[]
+): Promise<string[]> => {
+  const uploadPromises = files.map((file) => uploadServiceImage(file));
+  return Promise.all(uploadPromises);
+};
+
 export const getServiceImageUrl = (path: string) => {
   return supabase.storage.from('services').getPublicUrl(path).data.publicUrl;
 };
 
+// Get multiple service image URLs
+export const getServiceImageUrls = (paths: string[]): string[] => {
+  return paths.map((path) => getServiceImageUrl(path));
+};
+
 export const deleteServiceImage = async (path: string) => {
-  const supabase = await createServer()
+  const supabase = await createServer();
   const { error } = await supabase.storage.from('services').remove([path]);
   if (error) throw error;
   return true;
 };
 
-// Partner image handling
+// Delete multiple service images
+export const deleteMultipleServiceImages = async (
+  paths: string[]
+): Promise<void> => {
+  const supabase = await createServer();
+  const { error } = await supabase.storage.from('services').remove(paths);
+  if (error) throw error;
+};
+
+/**
+ * Partner image handling
+ */
 export async function uploadPartnerImage(file: File): Promise<string> {
   const formData = new FormData();
   formData.append('file', file);
@@ -91,7 +120,7 @@ export async function deletePartnerImage(path: string): Promise<void> {
   if (!path) return;
 
   const supabase = await createServer();
-  
+
   const { error } = await supabase.storage.from('partners').remove([path]);
   if (error) throw error;
 }

@@ -49,12 +49,12 @@ export async function POST(request: NextRequest) {
       !body.slug ||
       !body.description ||
       !Array.isArray(body.details) ||
-      !body.image
+      !body.images
     ) {
       return NextResponse.json(
         {
           message:
-            'All fields are required (division_id, title, slug, description, details, image)',
+            'All fields are required (division_id, title, slug, description, details, images)',
         },
         { status: 400 }
       );
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       slug: body.slug,
       description: body.description,
       details: body.details,
-      image: body.image,
+      images: body.images,
     };
 
     const { data, error } = await createService(service);
