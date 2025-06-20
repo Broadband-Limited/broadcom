@@ -132,7 +132,7 @@ export default function PartnerForm({ partner, onSubmit }: PartnerFormProps) {
           required
           value={formData.name}
           onChange={handleChange}
-          placeholder="e.g., VIAVI"
+          placeholder="Partner Name"
         />
 
         <Input
@@ -143,7 +143,7 @@ export default function PartnerForm({ partner, onSubmit }: PartnerFormProps) {
           required
           value={formData.link}
           onChange={handleChange}
-          placeholder="e.g., https://viavisolutions.com"
+          placeholder="e.g., https://partner-website.com"
         />
       </div>
 
@@ -159,7 +159,7 @@ export default function PartnerForm({ partner, onSubmit }: PartnerFormProps) {
           className="opacity-60"
           readonly
         />
-        <div className="flex items-center gap-2">
+        <div className="-mt-3 flex items-center gap-2">
           <InfoIcon size={12} />
           <p className="!text-xs">
             The slug is used in URLs. Auto-generated from name.

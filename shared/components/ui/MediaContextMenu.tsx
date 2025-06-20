@@ -200,7 +200,7 @@ export default function MediaContextMenu({
           {/* Menu */}
           <div
             ref={menuRef}
-            className="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1"
+            className="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
             role="menu"
             aria-orientation="vertical">
             {menuItems.map((item, index) => {
@@ -211,11 +211,11 @@ export default function MediaContextMenu({
                   onClick={item.onClick}
                   disabled={item.disabled}
                   className={`
-                    w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 transition-colors duration-150
+                    w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 transition-all duration-200
                     ${
                       item.destructive
-                        ? 'text-red-600 hover:bg-red-50 hover:text-red-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                        ? 'text-red-600 hover:bg-red-200 hover:text-red-700'
+                        : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                     }
                     ${
                       item.disabled
