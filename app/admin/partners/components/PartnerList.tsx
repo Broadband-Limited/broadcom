@@ -4,9 +4,14 @@ import { useState } from 'react';
 import { Partner } from '@/lib/types/partner_types';
 import { getPartnerImageUrl } from '@/lib/storage';
 import Image from 'next/image';
-import Button from '@/shared/components/ui/Button';
 import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
+import { Edit, Trash2, ExternalLink } from 'lucide-react';
+import AdminContextMenu, {
+  AdminContextMenuAction,
+} from '@/shared/components/ui/AdminContextMenu';
+import { useConfirmation } from '@/shared/hooks/useConfirmation';
+import ConfirmationModal from '@/shared/components/ui/ConfirmationModal';
+import { cn } from '@/lib/utils';
 
 interface PartnerListProps {
   partners: Partner[];
@@ -19,28 +24,48 @@ export default function PartnerList({
   onEdit,
   onDelete,
 }: PartnerListProps) {
-  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const { confirm, confirmationProps } = useConfirmation();
 
   // Sort partners by rank
   const sortedPartners = [...partners].sort(
     (a, b) => (a.rank || 0) - (b.rank || 0)
   );
 
-  // Function to handle delete confirmation
-  const handleDeleteClick = (id: string) => {
-    setConfirmDelete(id);
+  const handleDelete = async (id: string, name: string) => {
+    const confirmed = await confirm({
+      title: 'Delete Partner',
+      message: `Are you sure you want to delete "${name}"? This action cannot be undone.`,
+      confirmText: 'Delete',
+      variant: 'danger',
+    });
+
+    if (!confirmed) {
+      return;
+    }
+
+    setIsDeleting(id);
+    try {
+      await onDelete(id);
+    } finally {
+      setIsDeleting(null);
+    }
   };
 
-  // Function to cancel delete
-  const handleCancelDelete = () => {
-    setConfirmDelete(null);
-  };
-
-  // Function to confirm delete
-  const handleConfirmDelete = (id: string) => {
-    onDelete(id);
-    setConfirmDelete(null);
-  };
+  const createActions = (partner: Partner): AdminContextMenuAction[] => [
+    {
+      label: 'Edit',
+      icon: Edit,
+      onClick: () => onEdit(partner),
+    },
+    {
+      label: 'Delete',
+      icon: Trash2,
+      onClick: () => handleDelete(partner.id!, partner.name),
+      destructive: true,
+      disabled: isDeleting === partner.id,
+    },
+  ];
 
   if (partners.length === 0) {
     return (
@@ -53,76 +78,51 @@ export default function PartnerList({
   }
 
   return (
-    <div className="overflow-hidden bg-white shadow border border-foreground/10">
-      <ul role="list" className="divide-y divide-foreground/10">
+    <>
+      <div className="overflow-hidden bg-white shadow border border-foreground/10">
         {sortedPartners.map((partner) => (
-          <li key={partner.id} className="relative">
-            <div className="px-4 py-4 sm:px-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-0">
-                <div className="flex items-center min-w-0 space-x-3 mb-3 sm:mb-0">
-                  {partner.image && (
-                    <Image
-                      src={getPartnerImageUrl(partner.image)}
-                      alt={partner.name}
-                      width={1000}
-                      height={1000}
-                      className='shrink-0 w-24 aspect-[4/3]'
-                    />
-                  )}
+          <div
+            key={partner.id}
+            className={cn(
+              'relative',
+              'px-4 py-4 sm:px-6',
+              'flex items-center justify-between',
+              'border-b border-foreground/10'
+            )}>
+            <div className="flex items-center min-w-0 space-x-3">
+              {partner.image && (
+                <Image
+                  src={getPartnerImageUrl(partner.image)}
+                  alt={partner.name}
+                  width={1000}
+                  height={1000}
+                  className="shrink-0 w-24 aspect-[4/3]"
+                />
+              )}
 
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-dark-blue truncate">
-                      {partner.name}
-                    </p>
-                    <Link
-                      href={partner.link}
-                      target="_blank"
-                      className="text-xs text-foreground/50 flex items-center hover:text-foreground">
-                      {partner.link.replace(/^https?:\/\//i, '')}
-                      <ExternalLink size={12} className="ml-1" />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                  {confirmDelete === partner.id ? (
-                    <div className="flex space-x-2">
-                      <Button
-                        onClick={() => handleConfirmDelete(partner.id!)}
-                        variant="danger"
-                        size="sm">
-                        Confirm
-                      </Button>
-
-                      <Button
-                        onClick={handleCancelDelete}
-                        variant="outline"
-                        size="sm">
-                        Cancel
-                      </Button>
-                    </div>
-                  ) : (
-                    <>
-                      <Button
-                        onClick={() => onEdit(partner)}
-                        variant="outline"
-                        size="sm">
-                        Edit
-                      </Button>
-                      <Button
-                        onClick={() => handleDeleteClick(partner.id!)}
-                        variant="danger"
-                        size="sm">
-                        Delete
-                      </Button>
-                    </>
-                  )}
-                </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-dark-blue truncate">
+                  {partner.name}
+                </p>
+                <Link
+                  href={partner.link}
+                  target="_blank"
+                  className="text-xs text-foreground/50 flex items-center hover:text-foreground">
+                  {partner.link.replace(/^https?:\/\//i, '')}
+                  <ExternalLink size={12} className="ml-1" />
+                </Link>
               </div>
             </div>
-          </li>
+
+            <AdminContextMenu actions={createActions(partner)} />
+          </div>
         ))}
-      </ul>
-    </div>
+      </div>
+
+      <ConfirmationModal
+        {...confirmationProps}
+        isLoading={isDeleting !== null}
+      />
+    </>
   );
 }

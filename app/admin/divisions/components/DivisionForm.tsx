@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import { Division } from '@/lib/types/divisions_types';
 import Input from '@/shared/components/ui/Input';
 import Button from '@/shared/components/ui/Button';
+import { Info } from 'lucide-react';
 
 interface DivisionFormProps {
   division?: Division;
@@ -99,13 +100,16 @@ export default function DivisionForm({
           name="slug"
           id="slug"
           required
+          readonly
           value={formData.slug}
           onChange={handleChange}
-          placeholder="e.g., network-solutions"
-        />{' '}
-        <p className="mt-1 text-xs text-foreground/50">
-          Used in URLs. Auto-generated from name, but you can edit it.
-        </p>
+        />
+        <div className="mb-1 -mt-3 flex items-center gap-1">
+          <Info size={12} className='' />
+          <p className="!text-xs !text-foreground/60">
+            Used in URLs. Auto-generated from name.
+          </p>
+        </div>
       </div>
       <Input
         type="textarea"

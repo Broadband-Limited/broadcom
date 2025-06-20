@@ -201,7 +201,7 @@ export default function ServiceForm({
             required
             value={formData.division_id}
             onChange={handleChange}
-            className="w-full p-3 border border-foreground/10 focus:outline-none focus:border-foreground/50 transition-all duration-300">
+            className="w-full p-3 border border-foreground/10 rounded-xs focus:outline-none focus:border-foreground/50 transition-all duration-300">
             {divisions.map((division) => (
               <option key={division.id} value={division.id}>
                 {division.name}
@@ -234,7 +234,7 @@ export default function ServiceForm({
           className="opacity-60"
           readonly
         />
-        <div className="flex items-center gap-2">
+        <div className="-mt-3 flex items-center gap-2">
           <InfoIcon size={12} />
           <p className="!text-xs">
             The slug is used in URLs. Auto-generated from title.

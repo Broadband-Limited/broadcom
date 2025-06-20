@@ -64,7 +64,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     // Default classes that match the existing form styling
     const defaultInputClass =
       type !== 'checkbox'
-        ? 'w-full p-3 border border-foreground/10 focus:outline-none focus:border-foreground/50 transition-all duration-300'
+        ? 'w-full p-3 border border-foreground/10 rounded-xs focus:outline-none focus:border-foreground/50 transition-all duration-300'
         : 'h-4 w-4 accent-foreground text-primary focus:ring-primary border-background';
 
     const defaultLabelClass =
