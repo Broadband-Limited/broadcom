@@ -42,6 +42,7 @@ html {
   height: 100dvh;
   overflow-x: hidden;
   transition: height 0.3s ease-in-out;
+  scroll-behavior: smooth;
   padding: 0;
 
   color: var(--color-foreground);
