@@ -8,6 +8,10 @@ type OfficeLocation = {
   country: string;
   address: string;
   coordinates: { lat: number; lng: number };
+  phones: {
+    office?: string[];
+    mobile?: string[];
+  };
 };
 
 const officeLocations: OfficeLocation[] = [
@@ -15,36 +19,53 @@ const officeLocations: OfficeLocation[] = [
     country: 'Kenya',
     address: 'Kalson Towers, 2nd Floor, Crescent Lane',
     coordinates: { lat: -1.2921, lng: 36.8219 },
+    phones: {
+      office: ['+254-20-3746897', '+254-20-3746669'],
+      mobile: ['+254-734026409', '+254-718896167', '+254-724562063'],
+    },
   },
   {
     country: 'Ethiopia',
     address:
       '1st Floor, Lideya Plaza, Wollo Sefer, Ethio-China Road, Off Bole Road',
     coordinates: { lat: 9.0054, lng: 38.7636 },
+    phones: {
+      office: ['+251 97 807 7800'],
+    },
   },
   {
     country: 'Tanzania',
     address: 'Salasala, Dar es Salaam. P.O BOX 34624',
     coordinates: { lat: -6.7924, lng: 39.2083 },
+    phones: {},
   },
 ];
 
 const Accordion = ({
   country,
   address,
+  phones,
   isOpen,
   onClick,
 }: {
   country: string;
   address: string;
+  phones: {
+    office?: string[];
+    mobile?: string[];
+  };
   isOpen: boolean;
   onClick: () => void;
 }) => {
+  const hasPhones =
+    (phones.office && phones.office.length > 0) ||
+    (phones.mobile && phones.mobile.length > 0);
+
   return (
     <div
       className={`border ${
         isOpen ? 'border-indigo-500' : 'border-gray-300'
-      } mb-2 overflow-hidden`}>
+      } mb-2 overflow-hidden rounded-lg`}>
       <button
         onClick={onClick}
         className="w-full px-4 py-3 flex justify-between items-center hover:bg-slate-100 transition-colors">
@@ -57,9 +78,34 @@ const Accordion = ({
       </button>
       <div
         className={`px-4 text-gray-700 overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-24 py-3' : 'max-h-0 py-0'
+          isOpen ? 'max-h-96 py-3' : 'max-h-0 py-0'
         }`}>
-        {address}
+        <p className="mb-3">{address}</p>
+
+        {hasPhones && (
+          <div className="mt-2 space-y-2">
+            {phones.office && phones.office.length > 0 && (
+              <div>
+                <p className="text-sm font-medium text-gray-600">Office:</p>
+                {phones.office.map((phone, idx) => (
+                  <p key={idx} className="text-sm">
+                    {phone}
+                  </p>
+                ))}
+              </div>
+            )}
+            {phones.mobile && phones.mobile.length > 0 && (
+              <div>
+                <p className="text-sm font-medium text-gray-600">Mobile:</p>
+                {phones.mobile.map((phone, idx) => (
+                  <p key={idx} className="text-sm">
+                    {phone}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -170,59 +216,47 @@ const Offices = () => {
       {/* Desktop View */}
       <div className="hidden md:flex gap-8">
         <div className="w-1/3 space-y-4">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Our Offices</h2>
-          <div>
-            {officeLocations.map((office) => (
-              <Accordion
-                key={office.country}
-                country={office.country}
-                address={office.address}
-                isOpen={openAccordion === office.country}
-                onClick={() => handleAccordionClick(office)}
-              />
-            ))}
-          </div>
+          {officeLocations.map((office) => (
+            <Accordion
+              key={office.country}
+              country={office.country}
+              address={office.address}
+              phones={office.phones}
+              isOpen={openAccordion === office.country}
+              onClick={() => handleAccordionClick(office)}
+            />
+          ))}
         </div>
-
-        <div className="w-2/3 aspect-square relative border border-indigo-300 shadow-2xl overflow-hidden">
-          {/* No LoadScript needed for react-map-gl */}
+        <div className="w-2/3 h-[400px] rounded-lg overflow-hidden border border-gray-300">
           <MapComponent selectedOffice={selectedOffice} />
         </div>
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden relative">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
-          Our Offices
-        </h2>
-        <div className="relative aspect-[3/4] overflow-hidden border border-pink-300 border-opacity-75 shadow-2xl">
-          {/* No LoadScript needed for react-map-gl */}
+      <div className="md:hidden">
+        <div className="relative mb-4 h-[300px] rounded-lg overflow-hidden border border-gray-300">
           <MapComponent selectedOffice={selectedOffice} />
-          {/* Mobile Carousel */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white bg-opacity-95 w-[90%] p-4 shadow-2xl border border-gray-200">
-            <div className="relative">
-              <button
-                onClick={handlePrevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg border border-indigo-400 hover:bg-indigo-50 transition-colors">
-                <ChevronLeft className="w-5 h-5 text-indigo-600" />
-              </button>
-
-              <div className="px-10 text-center">
-                <h3 className="font-bold text-lg mb-1 text-gray-800">
-                  {officeLocations[currentSlide].country}
-                </h3>
-                <p className="!text-xs text-gray-600 leading-tight">
-                  {officeLocations[currentSlide].address}
-                </p>
-              </div>
-
-              <button
-                onClick={handleNextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg border border-indigo-400 hover:bg-indigo-50 transition-colors">
-                <ChevronRight className="w-5 h-5 text-indigo-600" />
-              </button>
-            </div>
-          </div>
+        </div>
+        <div className="relative px-8">
+          <button
+            onClick={handlePrevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full shadow-md"
+            aria-label="Previous office">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <Accordion
+            country={selectedOffice.country}
+            address={selectedOffice.address}
+            phones={selectedOffice.phones}
+            isOpen={true}
+            onClick={() => {}}
+          />
+          <button
+            onClick={handleNextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full shadow-md"
+            aria-label="Next office">
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
