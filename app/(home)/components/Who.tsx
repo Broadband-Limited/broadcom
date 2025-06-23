@@ -21,7 +21,7 @@ const Who = () => {
         Leading the Way in Communication Technologies
       </motion.h1>
       <motion.p
-        className="md:text-center md:mx-auto max-w-2xl"
+        className="md:mx-auto max-w-2xl text-justify"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

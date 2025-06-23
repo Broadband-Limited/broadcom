@@ -25,7 +25,7 @@ const RegionalPresence = () => {
       </motion.h1>
 
       <motion.p
-        className="text-center max-w-2xl md:mx-auto"
+        className="text-justify max-w-2xl md:mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

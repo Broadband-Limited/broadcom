@@ -44,7 +44,7 @@ const Point: React.FC<PointProps> = ({ title, description }) => {
         {title}
       </motion.h2>
       <motion.p
-        className="text-center opacity-75"
+        className="text-center md:text-left opacity-75"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         viewport={{ once: true }}
