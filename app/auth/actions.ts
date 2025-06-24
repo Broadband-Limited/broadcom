@@ -45,7 +45,7 @@ export async function signup(formData: FormData) {
 
   // 2) assign the “user” role
   try {
-    await addUserRole((await createServiceRoleServer()), data.user.id, 'user');
+    await addUserRole(await createServiceRoleServer(), data.user.id, 'user');
   } catch (assignError) {
     // optionally: delete the user you just created to avoid orphans
     console.error('>>>> role assignment failed:', assignError);
@@ -56,8 +56,63 @@ export async function signup(formData: FormData) {
   redirect('/auth/check-email?status=success');
 }
 
-export async function signOut() {
+export async function signOut(): Promise<void> {
+  try {
+    const supabase = await createServer();
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error('>>>> sign out failed:', error.message);
+      // Still redirect even if there's an error to clear client state
+    }
+  } catch (error) {
+    console.error('>>>> unexpected error during sign out:', error);
+  } finally {
+    redirect('/');
+  }
+}
+
+export async function requestPasswordReset(formData: FormData) {
+  const email = formData.get('email')?.toString();
+
+  if (!email) {
+    console.error('>>>> missing email for password reset');
+    redirect('/auth/forgot-password?status=error');
+  }
+
   const supabase = await createServer();
-  await supabase.auth.signOut();
-  redirect('/');
+  const { error } = await supabase.auth.resetPasswordForEmail(
+    email
+    // {
+    //   redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
+    // }
+  );
+
+  if (error) {
+    console.error('>>>> password reset request failed:', error.message);
+    redirect('/auth/forgot-password?status=error');
+  }
+
+  redirect('/auth/forgot-password?status=success');
+}
+
+export async function resetPassword(formData: FormData) {
+  const password = formData.get('password')?.toString();
+
+  if (!password) {
+    console.error('>>>> missing password for reset');
+    redirect('/auth/reset-password?status=error');
+  }
+
+  const supabase = await createServer();
+  const { error } = await supabase.auth.updateUser({
+    password: password,
+  });
+
+  if (error) {
+    console.error('>>>> password reset failed:', error.message);
+    redirect('/auth/reset-password?status=error');
+  }
+
+  redirect('/auth/login?status=password-reset-success');
 }

@@ -69,6 +69,11 @@ export const LoginForm = () => {
             />
             <span className="ml-2 text-sm text-foreground/70">Remember me</span>
           </label>
+          <Link
+            href="/auth/forgot-password"
+            className="text-sm text-light-blue hover:underline">
+            Forgot password?
+          </Link>
         </div>
 
         <Button
