@@ -16,22 +16,13 @@ const RegionalPresence = () => {
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}>
       <motion.h1
-        className="w-fit mx-auto lines-header text-center"
+        className="w-fit mx-auto lines-header"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}>
-        Strengthening Networks Across Diverse African Markets
-      </motion.h1>
-
-      <motion.p
-        className="text-center max-w-2xl md:mx-auto !text-sm !text-light-blue py-2 px-4 bg-light-blue/10 border border-light-blue/70 rounded-full -my-6"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}>
         Our Regional Presence
-      </motion.p>
+      </motion.h1>
 
       <motion.p
         className="text-justify max-w-2xl md:mx-auto"

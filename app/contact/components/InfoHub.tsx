@@ -1,21 +1,18 @@
 import React from 'react';
-import { Phone, Mail, Facebook, Twitter, Linkedin } from 'lucide-react';
+import {
+  Phone,
+  Smartphone,
+  Mail,
+  Facebook,
+  Twitter,
+  Linkedin,
+} from 'lucide-react';
 import Link from 'next/link';
 
 const InfoHub = () => {
   const phones = {
-    Kenya: {
-      mobile: ['+254-734026409', '+254-718896167', '+254-724562063'],
-      tel: ['+254-20-3746897', '+254-20-3746669'],
-    },
-    Ethiopia: {
-      mobile: [],
-      tel: ['+251 97 807 7800'],
-    },
-    Tanzania: {
-      mobile: [],
-      tel: [],
-    },
+    mobile: ['+254-734026409', '+254-718896167', '+254-724562063'],
+    tel: ['+254-20-3746897', '+254-20-3746669', '+251 97 807 7800'],
   };
 
   const emails = [
@@ -45,40 +42,33 @@ const InfoHub = () => {
     <div className="w-full bg-[#ffffff] text-[#202020]">
       {/* Phone Numbers Section */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 text-light-blue mb-2">
-          <Phone className="w-5 h-5 stroke-dark-blue" />
-          <h3 className="font-light">Contact Numbers</h3>
+        <div className="mb-4">
+          <div className="flex items-center gap-2 text-light-blue mb-2">
+            <Smartphone className="w-5 h-5 stroke-dark-blue" />
+            <h3 className="font-light">Mobile</h3>
+          </div>
+          {phones.mobile.map((phone, index) => (
+            <p
+              key={index}
+              className="ml-7 mb-1 hover:text-[#6610f2] cursor-pointer text-sm">
+              {phone}
+            </p>
+          ))}
         </div>
 
-        {Object.entries(phones).map(([country, numbers]) => (
-          <div key={country} className="ml-7 mb-4">
-            <h4 className="font-medium text-dark-blue mb-2">{country}</h4>
-            {numbers.tel.length > 0 && (
-              <div className="mb-2">
-                <p className="text-sm text-gray-600">Office:</p>
-                {numbers.tel.map((phone, index) => (
-                  <p
-                    key={index}
-                    className="hover:text-[#6610f2] cursor-pointer text-sm">
-                    {phone}
-                  </p>
-                ))}
-              </div>
-            )}
-            {numbers.mobile.length > 0 && (
-              <div>
-                <p className="text-sm text-gray-600">Mobile:</p>
-                {numbers.mobile.map((phone, index) => (
-                  <p
-                    key={index}
-                    className="hover:text-[#6610f2] cursor-pointer text-sm">
-                    {phone}
-                  </p>
-                ))}
-              </div>
-            )}
+        <div>
+          <div className="flex items-center gap-2 text-light-blue mb-2">
+            <Phone className="w-5 h-5 stroke-dark-blue" />
+            <h3 className="font-light">Telephone</h3>
           </div>
-        ))}
+          {phones.tel.map((phone, index) => (
+            <p
+              key={index}
+              className="ml-7 mb-1 hover:text-[#6610f2] cursor-pointer text-sm">
+              {phone}
+            </p>
+          ))}
+        </div>
       </div>
 
       {/* Email Section */}
