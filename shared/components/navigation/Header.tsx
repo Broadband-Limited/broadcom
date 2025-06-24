@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, ChevronRight, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -15,8 +15,6 @@ export default function Header() {
   );
   const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
   const [isSolutionsSubmenuOpen, setIsSolutionsSubmenuOpen] = useState(false);
-  const [isHeroVisible, setIsHeroVisible] = useState(true);
-  const heroObserverRef = useRef<HTMLElement | null>(null);
 
   // fetch divisions from our API
   useEffect(() => {
@@ -24,38 +22,6 @@ export default function Header() {
       .then((res) => res.json())
       .then((data) => setDivisions(data || []));
   }, []);
-
-  // Intersection Observer for hero section
-  useEffect(() => {
-    if (pathname !== '/') {
-      setIsHeroVisible(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Hero is visible if more than 20% is in view
-        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio > 0.1);
-      },
-      {
-        threshold: [0, 0.2, 0.5, 1],
-        rootMargin: '-0% 0px -0% 0px', // Adjust these values to fine-tune when the transition occurs
-      }
-    );
-
-    // Find the hero section (first section element on the page)
-    const heroElement = document.getElementById('home-hero-section');
-    if (heroElement) {
-      heroObserverRef.current = heroElement as HTMLElement;
-      observer.observe(heroElement);
-    }
-
-    return () => {
-      if (heroObserverRef.current) {
-        observer.unobserve(heroObserverRef.current);
-      }
-    };
-  }, [pathname]);
 
   const serviceDivisions = divisions.map((d) => ({
     name: d.name,
@@ -89,15 +55,8 @@ export default function Header() {
     pathname.includes(subItem.href)
   );
 
-  // Determine if we should show transparent header
-  const isTransparent = pathname === '/' && isHeroVisible;
-
   return (
-    <header
-      className={cn(
-        'w-full shrink-0 sticky z-50 top-0 py-3 px-4 md:px-12 flex items-center justify-between transition-all duration-500 ease-in-out',
-        isTransparent ? 'bg-transparent' : 'bg-dark-blue'
-      )}>
+    <header className="w-full shrink-0 sticky z-50 top-0 py-3 px-4 md:px-12 flex items-center justify-between bg-dark-blue">
       <Link href="/" className="logo p-0 !m-0">
         <Image
           src="/images/logo.png"
@@ -111,11 +70,11 @@ export default function Header() {
       <nav
         className={cn(
           'absolute top-0 transition-all duration-100 z-10 h-screen w-screen py-6 px-8',
-          'lg:static lg:h-fit lg:w-fit lg:p-0 lg:flex-row lg:items-center lg:gap-12 lg:bg-transparent lg:shadow-none',
+          'md:static md:h-fit md:w-fit md:p-0 md:flex-row md:items-center md:gap-12 md:bg-transparent md:shadow-none',
           'flex flex-col bg-background shadow-2xl',
           menuOpen ? 'left-0' : '-left-full'
         )}>
-        <div className="w-full flex items-center justify-between lg:hidden logo mb-8">
+        <div className="w-full flex items-center justify-between md:hidden logo mb-8">
           <Image
             src="/images/logo-black.png"
             alt="Broadband Communication Networks Ltd"
@@ -133,14 +92,14 @@ export default function Header() {
             return (
               <div
                 key={index}
-                className="relative group w-full lg:w-auto"
+                className="relative group w-full md:w-auto"
                 onMouseEnter={() => setIsSolutionsHovered(true)}
                 onMouseLeave={() => setIsSolutionsHovered(false)}>
                 {/* Desktop Dropdown */}
-                <div className="hidden lg:block w-full">
+                <div className="hidden md:block w-full">
                   <button
                     className={cn(
-                      'uppercase lg:text-background lg:!text-sm opacity-80',
+                      'uppercase md:text-background md:!text-sm opacity-80',
                       isSolutionsActive &&
                         'text-light-blue underline underline-offset-4'
                     )}>
@@ -148,26 +107,17 @@ export default function Header() {
                   </button>
                   {isSolutionsHovered && (
                     <div className="absolute top-full left-0 shadow-2xl w-[45vw] pt-6">
-                      <div
-                        className={cn(
-                          'pt-2 pb-6',
-                          isTransparent
-                            ? 'bg-transparent backdrop-blur-2xl border border-background/20 rounded-sm'
-                            : 'bg-background',
-                          'transition-all duration-150'
-                        )}>
+                      <div className="bg-background pt-2 pb-6">
                         {page.submenu.map((subItem, subIndex) => (
                           <Link
                             key={subIndex}
                             href={subItem.href}
-                            className={cn(
-                              'flex items-center gap-2 px-4 py-2',
-                              isTransparent ? 'hover:bg-slate-100/20' : 'hover:bg-slate-100'
-                            )}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100"
                             onClick={() => setMenuOpen(false)}>
                             <p
                               className={cn(
-                                isTransparent ? '!text-background' : '!text-foreground'
+                                pathname.includes(subItem.href) &&
+                                  'text-light-blue underline underline-offset-4'
                               )}>
                               {subItem.name}
                             </p>
@@ -179,7 +129,7 @@ export default function Header() {
                 </div>
 
                 {/* Mobile Dropdown */}
-                <div className="lg:hidden w-full">
+                <div className="md:hidden w-full">
                   <button
                     onClick={() =>
                       setIsSolutionsSubmenuOpen(!isSolutionsSubmenuOpen)
@@ -235,28 +185,28 @@ export default function Header() {
               href={page!.href}
               className={cn(
                 'flex items-center justify-between w-full py-4 transition-all duration-300',
-                'lg:w-fit lg:py-0 lg:border-0',
+                'md:w-fit md:py-0 md:border-0',
                 'border-b border-black border-opacity-25',
-                'hover:pl-8 lg:hover:pl-0'
+                'hover:pl-8 md:hover:pl-0'
               )}
               onClick={() => setMenuOpen(false)}>
               <p
                 className={cn(
-                  'capitalize lg:uppercase lg:!text-background lg:!text-sm',
+                  'capitalize md:uppercase md:!text-background md:!text-sm',
                   ((page?.href === '/' && pathname === '/') ||
                     (page?.href !== '/' && pathname.includes(page!.href))) &&
                     'underline underline-offset-4'
                 )}>
                 {page?.name}
               </p>
-              <ChevronRight className="lg:hidden" size={24} />
+              <ChevronRight className="md:hidden" size={24} />
             </Link>
           );
         })}
       </nav>
 
       <button
-        className="menu-button flex lg:hidden !m-0"
+        className="menu-button flex md:hidden !m-0"
         onClick={() => setMenuOpen(!menuOpen)}>
         <Menu size={32} className="text-background" />
       </button>

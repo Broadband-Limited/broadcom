@@ -29,7 +29,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'flex items-center justify-center font-medium rounded-xs transition-colors outline-none focus:outline-none cursor-pointer';
 
     const variantStyles: Record<string, string> = {
-      primary: 'bg-dark-blue text-background hover:bg-dark-blue/85',
+      primary: 'bg-dark-blue text-background hover:bg-dark-blue/90',
       outline:
         'bg-transparent border border-dark-blue text-foreground hover:bg-dark-blue/20',
       danger: 'bg-red-500 text-background hover:bg-red-600',

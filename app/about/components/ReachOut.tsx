@@ -1,8 +1,5 @@
-'use client';
-
 import Button from '@/shared/components/ui/Button';
 import React from 'react';
-import { motion } from 'framer-motion';
 
 export default function ReachOut() {
   return (
@@ -16,45 +13,26 @@ export default function ReachOut() {
         <source src="/videos/tower.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="col-start-1 row-start-1 z-[3] w-full h-full bg-black/50"></div>{' '}
-      <motion.div
-        className="col-start-1 row-start-1 z-[4] flex flex-col items-center justify-center gap-8 p-4"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}>
-        <motion.h1
-          className="!text-background text-4xl font-bold hidden md:flex"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}>
-          Reach out to us
-        </motion.h1>
 
-        <motion.p
-          className="!text-background text-center opacity-100"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}>
+      <div className="col-start-1 row-start-1 z-[3] w-full h-full bg-black/50"></div>
+
+      <div className="col-start-1 row-start-1 z-[4] flex flex-col items-center justify-center gap-8 p-4">
+        <h1 className="!text-background text-4xl font-bold hidden md:flex">
+          Reach out to us
+        </h1>
+
+        <p className="!text-background text-center opacity-100">
           Get in touch with us to learn more about how we can transform your
           network.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}>
-          <Button
-            href={'/contact'}
-            variant="outline"
-            className={'bg-transparent !text-background !border-background'}>
-            Contact us
-          </Button>
-        </motion.div>
-      </motion.div>
+        <Button
+          href={'/contact'}
+          variant="outline"
+          className={'bg-transparent !text-background !border-background'}>
+          Contact us
+        </Button>
+      </div>
     </section>
   );
 }
