@@ -13,9 +13,9 @@ export const ForgotPasswordForm = () => {
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const status = searchParams.get('status');
-
   const isSuccess = status === 'success';
   const isError = status === 'error';
+  const isSessionExpired = status === 'session-expired';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,12 +69,14 @@ export const ForgotPasswordForm = () => {
       <p className="text-sm text-foreground/60 mb-6 text-center">
         Enter your email address and we&apos;ll send you a link to reset your
         password.
-      </p>
-
-      {(error || isError) && (
+      </p>      {(error || isError || isSessionExpired) && (
         <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm">
           <p className="font-medium">Error</p>
-          <p>{error || 'Something went wrong. Please try again.'}</p>
+          <p>
+            {error || 
+             (isSessionExpired ? 'Your password reset session has expired. Please request a new reset link.' : 
+              'Something went wrong. Please try again.')}
+          </p>
         </div>
       )}
 

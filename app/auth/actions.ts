@@ -82,10 +82,10 @@ export async function requestPasswordReset(formData: FormData) {
 
   const supabase = await createServer();
   const { error } = await supabase.auth.resetPasswordForEmail(
-    email
-    // {
-    //   redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
-    // }
+    email,
+    {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/auth/reset-password`,
+    }
   );
 
   if (error) {
@@ -105,6 +105,15 @@ export async function resetPassword(formData: FormData) {
   }
 
   const supabase = await createServer();
+  
+  // Check if user has a valid session (from email link)
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  
+  if (userError || !user) {
+    console.error('>>>> no valid session for password reset:', userError?.message);
+    redirect('/auth/forgot-password?status=session-expired');
+  }
+
   const { error } = await supabase.auth.updateUser({
     password: password,
   });
