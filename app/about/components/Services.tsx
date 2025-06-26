@@ -17,7 +17,7 @@ const Services = () => {
   return (
     <section className="overflow-x-hidden !py-12 bg-background flex flex-col gap-6">
       <h1 className="w-fit mx-auto lines-header">what we do</h1>
-      <p className="md:text-center">
+      <p className="w-full text-left">
         We specialize in providing comprehensive quality Telecommunication and
         IT Solutions and Services that drive connectivity, enhance network
         performance and drive enterprise operations efficiency.

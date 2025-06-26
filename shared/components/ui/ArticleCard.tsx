@@ -23,7 +23,7 @@ export default function ArticleCard({
 }: ArticleCardProps) {
   return (
     <article
-      className={`flex flex-col overflow-hidden shadow hover:shadow-2xl transition-all group ${
+      className={`flex flex-col overflow-hidden shadow hover:shadow-2xl rounded-xs transition-all group ${
         compact ? 'shadow-sm' : ''
       }`}>
       <Link href={`/media/${item.slug}`} className="">

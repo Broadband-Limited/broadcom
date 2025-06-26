@@ -15,7 +15,7 @@ export default function History() {
           className="w-full md:w-1/2 aspect-[4/3] border border-cyan shadow-2xl"
         />
 
-        <p className="w-full md:w-1/2 !text-sm md:!text-base">
+        <p className="w-full md:w-1/2">
           Founded in 2001, Broadband Communication Networks Ltd began as a small
           telecommunications provider. Over the years, we’ve grown into a leader
           in the IT and telecommunications sector, partnering with industry

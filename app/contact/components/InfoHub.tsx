@@ -9,11 +9,23 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-const InfoHub = () => {
-  const phones = {
-    mobile: ['+254-734026409', '+254-718896167', '+254-724562063'],
-    tel: ['+254-20-3746897', '+254-20-3746669', '+251 97 807 7800'],
+const InfoHub = ({ selectedCountry = 'Kenya' }: { selectedCountry?: string }) => {
+  const phonesByCountry = {
+    Kenya: {
+      mobile: ['+254-734026409', '+254-718896167'],
+      tel: ['+254-20-3746897', '+254-20-3746669'],
+    },
+    Ethiopia: {
+      mobile: ['+251-97-807-7800'],
+      tel: [],
+    },
+    Tanzania: {
+      mobile: [],
+      tel: [],
+    },
   };
+
+  const phones = phonesByCountry[selectedCountry as keyof typeof phonesByCountry] || phonesByCountry.Kenya;
 
   const emails = [
     { email: 'info@broadcom.co.ke', description: 'For General Enquiries' },
@@ -42,10 +54,10 @@ const InfoHub = () => {
     <div className="w-full bg-[#ffffff] text-[#202020]">
       {/* Phone Numbers Section */}
       <div className="mb-8">
-        <div className="mb-4">
+        {phones.mobile.length > 0 && <div className="mb-4">
           <div className="flex items-center gap-2 text-light-blue mb-2">
             <Smartphone className="w-5 h-5 stroke-dark-blue" />
-            <h3 className="font-light">Mobile</h3>
+            <h3 className="">Mobile</h3>
           </div>
           {phones.mobile.map((phone, index) => (
             <p
@@ -54,12 +66,12 @@ const InfoHub = () => {
               {phone}
             </p>
           ))}
-        </div>
+        </div>}
 
-        <div>
+        {phones.tel.length > 0 && <div>
           <div className="flex items-center gap-2 text-light-blue mb-2">
             <Phone className="w-5 h-5 stroke-dark-blue" />
-            <h3 className="font-light">Telephone</h3>
+            <h3 className="">Telephone</h3>
           </div>
           {phones.tel.map((phone, index) => (
             <p
@@ -68,7 +80,7 @@ const InfoHub = () => {
               {phone}
             </p>
           ))}
-        </div>
+        </div>}
       </div>
 
       {/* Email Section */}
