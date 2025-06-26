@@ -35,7 +35,7 @@ const PartnerCard = ({ partner, index, total }: PartnerCardProps) => {
           <ExternalLink size={24} />
         </Link>
 
-        <p className="whitespace-pre-wrap !text-sm md:text-base">
+        <p className="whitespace-pre-wrap ">
           {partner.description}
         </p>
       </div>

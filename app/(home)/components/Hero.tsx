@@ -89,7 +89,7 @@ const Hero = () => {
                 <h2 className="text-center md:text-left">
                   {CarouselHighlights[currentSlide].title}
                 </h2>
-                <p className="text-center md:text-left text-sm md:text-base">
+                <p className="text-justify text-sm md:text-base">
                   {CarouselHighlights[currentSlide].desc}
                 </p>
                 <Button href={CarouselHighlights[currentSlide].href}>

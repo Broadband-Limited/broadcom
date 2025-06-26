@@ -17,7 +17,7 @@ const What = () => {
   return (
     <section className="overflow-x-hidden bg-background flex flex-col gap-6">
       <h1 className="w-fit mx-auto lines-header">Core Solutions & Services</h1>
-      <p className="md:text-center">
+      <p className="w-full text-left">
       We specialize in providing
       comprehensive  quality Telecommunication and IT Solutions and Services that drive connectivity geared towards improving Quality of Service, 
       enhancing network performance and driving telecom and enterprise operations efficiency.

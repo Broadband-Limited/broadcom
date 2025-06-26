@@ -61,7 +61,7 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
         {division.name}
       </h3>
 
-      <p className="text-sm md:text-base md:text-center">
+      <p className="w-full text-left">
         {division.description}
       </p>
 
@@ -102,7 +102,7 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
                 title={service.description}>
                 {service.description}
               </p>
-              <Button href={`/products/${service.slug}`}>Learn More</Button>
+              <Button href={`/products/${service.slug}`} target='_blank'>Learn More</Button>
             </div>
           </div>
         ))}

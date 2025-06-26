@@ -6,7 +6,7 @@ const Who = () => {
       <h1 className="md:text-center">
         Leading the Way in Communication Technologies
       </h1>
-      <p className="md:text-center">
+      <p className="w-full text-left">
         For over two decades, Broadband Communication Network has been at the
         forefront developing the African telecommunications industry, with
         innovative solutions for Mobile Network Operators, ISPs, and Large
