@@ -134,7 +134,7 @@ export default function Team() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: SLIDE_TRANSITION }}
-                className="text-center px-4">
+                className="px-4">
                 <p className="text-foreground/80 leading-relaxed">
                   {members[currentIndex].description}
                 </p>

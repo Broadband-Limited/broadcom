@@ -64,8 +64,8 @@ const ServiceTabs = ({ title, description, details }: ServiceTabsProps) => {
           <div
             className={`${
               activeTab === 'description' && 'fade-in'
-            } w-full md:pr-64`}>
-            <p className="whitespace-pre-wrap">{description}</p>
+            } w-full`}>
+            <p className="w-full text-left">{description}</p>
           </div>
         )}
 
@@ -73,7 +73,7 @@ const ServiceTabs = ({ title, description, details }: ServiceTabsProps) => {
           <div
             className={`${
               activeTab === 'details' && 'fade-in'
-            } w-full md:pr-64`}>
+            } w-full`}>
             <ul className="space-y-6 md:space-y-8">
               {details.map((detail, index) => (
                 <li key={index} className="flex gap-2 animated-link-wrapper">

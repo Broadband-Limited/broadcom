@@ -40,7 +40,7 @@ export default function CareersPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="text-center mb-10">
         <h1 className="mb-4">Join Our Team</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto !text-sm md:!text-base">
+        <p className="max-w-2xl mx-auto">
           Discover exciting career opportunities and be part of our mission to
           deliver innovative solutions in telecommunications and broadband
           technology.

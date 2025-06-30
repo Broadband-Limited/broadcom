@@ -45,7 +45,7 @@ const Value = ({ icon, title, description }: ValueProps) => {
 
       <div className="h-4 md:h-12 w-0 border border-dashed border-indigo"></div>
 
-      <p className="!text-xs md:text-sm text-center">{description}</p>
+      <p className="!text-xs md:!text-sm text-center">{description}</p>
     </div>
   );
 };

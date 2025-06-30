@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -120,21 +120,29 @@ const MapComponent = ({
   );
 };
 
-const Offices = () => {
+const Offices = ({
+  onCountryChange,
+}: {
+  onCountryChange?: (country: string) => void;
+}) => {
   const [selectedOffice, setSelectedOffice] = useState(officeLocations[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>(
     officeLocations[0].country
   );
 
-  const handleSelectOffice = (office: OfficeLocation) => {
-    setSelectedOffice(office);
-    // For desktop, also ensure the accordion is open for the selected office
-    if (window.innerWidth >= 768) {
-      // md breakpoint
-      setOpenAccordion(office.country);
-    }
-  };
+  const handleSelectOffice = useCallback(
+    (office: OfficeLocation) => {
+      setSelectedOffice(office);
+      onCountryChange?.(office.country);
+      // For desktop, also ensure the accordion is open for the selected office
+      if (window.innerWidth >= 768) {
+        // md breakpoint
+        setOpenAccordion(office.country);
+      }
+    },
+    [onCountryChange]
+  );
 
   const handlePrevSlide = () => {
     const newIndex =
@@ -163,14 +171,19 @@ const Offices = () => {
 
   useEffect(() => {
     handleSelectOffice(officeLocations[currentSlide]);
-  }, [currentSlide]);
+  }, [currentSlide, onCountryChange, handleSelectOffice]);
+
+  // Call onCountryChange initially with Kenya
+  useEffect(() => {
+    onCountryChange?.(officeLocations[0].country);
+  }, [onCountryChange]);
 
   return (
     <div className="w-full max-w-6xl mx-auto py-8 px-4">
       {/* Desktop View */}
       <div className="hidden md:flex gap-8">
         <div className="w-1/3 space-y-4">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Our Offices</h2>
+          <h3 className="mb-6">Our Offices</h3>
           <div>
             {officeLocations.map((office) => (
               <Accordion
@@ -192,9 +205,7 @@ const Offices = () => {
 
       {/* Mobile View */}
       <div className="md:hidden relative">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
-          Our Offices
-        </h2>
+        <h3 className="mb-4 text-center">Our Offices</h3>
         <div className="relative aspect-[3/4] overflow-hidden border border-pink-300 border-opacity-75 shadow-2xl">
           {/* No LoadScript needed for react-map-gl */}
           <MapComponent selectedOffice={selectedOffice} />
