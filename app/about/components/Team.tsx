@@ -40,7 +40,7 @@ export default function Team() {
 
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Desktop Layout */}
-          <div className="hidden md:grid grid-cols-4 gap-8 mb-12">
+          <div className="hidden md:grid grid-cols-5 gap-4 mb-12">
             {members.map((member, index) => (
               <motion.div
                 key={member.name}

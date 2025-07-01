@@ -15,6 +15,8 @@ export default function Header() {
   );
   const [isSolutionsHovered, setIsSolutionsHovered] = useState(false);
   const [isSolutionsSubmenuOpen, setIsSolutionsSubmenuOpen] = useState(false);
+  const [isAboutHovered, setIsAboutHovered] = useState(false);
+  const [isAboutSubmenuOpen, setIsAboutSubmenuOpen] = useState(false);
 
   // fetch divisions from our API
   useEffect(() => {
@@ -42,7 +44,13 @@ export default function Header() {
             name: 'solutions & services',
             submenu: serviceDivisions,
           },
-          { name: 'about us', href: '/about' },
+          { 
+            name: 'about us',
+            href: '/about',
+            submenu: [
+              { name: 'Our Story', href: '/about/our-story' },
+            ],
+          },
           { name: 'careers', href: '/careers' },
           { name: 'media', href: '/media' },
           { name: 'contact us', href: '/contact' },
@@ -87,23 +95,44 @@ export default function Header() {
 
         {pages.map((page, index) => {
           if (page?.submenu) {
+            const isAboutPage = page.name === 'about us';
+            const isSolutionsPage = page.name === 'solutions & services';
+            
             return (
               <div
                 key={index}
                 className="relative group w-full md:w-auto"
-                onMouseEnter={() => setIsSolutionsHovered(true)}
-                onMouseLeave={() => setIsSolutionsHovered(false)}>
+                onMouseEnter={() => {
+                  if (isSolutionsPage) setIsSolutionsHovered(true);
+                  if (isAboutPage) setIsAboutHovered(true);
+                }}
+                onMouseLeave={() => {
+                  if (isSolutionsPage) setIsSolutionsHovered(false);
+                  if (isAboutPage) setIsAboutHovered(false);
+                }}>
                 {/* Desktop Dropdown */}
                 <div className="hidden md:block w-full">
-                  <button
+                  {page.href ? <Link href={page.href}>
+                    <button
+                      className={cn(
+                        'uppercase md:text-background md:!text-sm opacity-80',
+                        (isSolutionsPage && isSolutionsActive) ||
+                        (isAboutPage && pathname.startsWith('/about')) ?
+                          'text-light-blue underline underline-offset-4' : ''
+                      )}>
+                      {page.name}
+                    </button>
+                  </Link> : <button
                     className={cn(
                       'uppercase md:text-background md:!text-sm opacity-80',
-                      isSolutionsActive &&
-                        'text-light-blue underline underline-offset-4'
+                      (isSolutionsPage && isSolutionsActive) || 
+                      (isAboutPage && pathname.startsWith('/about')) ?
+                        'text-light-blue underline underline-offset-4' : ''
                     )}>
                     {page.name}
-                  </button>
-                  {isSolutionsHovered && (
+                  </button>}
+                  
+                  {((isSolutionsPage && isSolutionsHovered) || (isAboutPage && isAboutHovered)) && (
                     <div className="absolute top-full left-0 shadow-2xl w-[45vw] pt-6">
                       <div className="bg-background pt-2 pb-6">
                         {page.submenu.map((subItem, subIndex) => (
@@ -129,27 +158,30 @@ export default function Header() {
                 {/* Mobile Dropdown */}
                 <div className="md:hidden w-full">
                   <button
-                    onClick={() =>
-                      setIsSolutionsSubmenuOpen(!isSolutionsSubmenuOpen)
-                    }
+                    onClick={() => {
+                      if (isSolutionsPage) setIsSolutionsSubmenuOpen(!isSolutionsSubmenuOpen);
+                      if (isAboutPage) setIsAboutSubmenuOpen(!isAboutSubmenuOpen);
+                    }}
                     className="flex items-center justify-between w-full border-b border-black border-opacity-25 py-4 hover:pl-8 transition-all duration-300">
                     <p
                       className={cn(
                         'capitalize',
-                        isSolutionsActive &&
-                          'text-light-blue underline underline-offset-4'
+                        (isSolutionsPage && isSolutionsActive) || 
+                        (isAboutPage && pathname.startsWith('/about')) ?
+                          'text-light-blue underline underline-offset-4' : ''
                       )}>
                       {page.name}
                     </p>
                     <ChevronRight
                       className={cn(
                         'transition-transform',
-                        isSolutionsSubmenuOpen && 'rotate-90'
+                        (isSolutionsPage && isSolutionsSubmenuOpen) || 
+                        (isAboutPage && isAboutSubmenuOpen) ? 'rotate-90' : ''
                       )}
                       size={24}
                     />
                   </button>
-                  {isSolutionsSubmenuOpen && (
+                  {((isSolutionsPage && isSolutionsSubmenuOpen) || (isAboutPage && isAboutSubmenuOpen)) && (
                     <div className="pl-4">
                       {page.submenu.map((subItem, subIndex) => (
                         <Link
@@ -158,7 +190,8 @@ export default function Header() {
                           className="flex items-center justify-between w-full border-b border-black border-opacity-25 py-4 pr-4 hover:pl-8 transition-all duration-300"
                           onClick={() => {
                             setMenuOpen(false);
-                            setIsSolutionsSubmenuOpen(false);
+                            if (isSolutionsPage) setIsSolutionsSubmenuOpen(false);
+                            if (isAboutPage) setIsAboutSubmenuOpen(false);
                           }}>
                           <p
                             className={cn(
