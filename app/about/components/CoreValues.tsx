@@ -1,4 +1,4 @@
-import { CircleCheckBig, Headset, Lightbulb, Users } from 'lucide-react';
+import { CircleCheckBig, Headset, Lightbulb, Users, ShieldCheck, AlertTriangle } from 'lucide-react';
 import React from 'react';
 
 const values = [
@@ -9,13 +9,19 @@ const values = [
     icon: Lightbulb,
   },
   {
-    title: 'Quality',
+    title: 'Integrity',
+    description:
+      'We uphold strong moral and ethical principles, ensuring honesty, transparency, and trust in every aspect of our business and partnerships',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Superior Quality',
     description:
       'We strive to deliver the highest quality products and services.',
     icon: CircleCheckBig,
   },
   {
-    title: 'Customer Service',
+    title: 'Customer Satisfaction',
     description:
       'We are committed to providing the best customer service possible.',
     icon: Headset,
@@ -25,6 +31,12 @@ const values = [
     description:
       'We believe that great things are achieved through collaboration.',
     icon: Users,
+  },
+  {
+    title: 'Health, Safety and Environment',
+    description:
+      'We maintain a strict commitment to health, safety, environmental sustainability, and quality across all operations, with zero tolerance for non-compliance. ',
+    icon: AlertTriangle,
   },
 ];
 

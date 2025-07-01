@@ -7,9 +7,9 @@ interface CarouselHighlight {
 
 export const CarouselHighlights: CarouselHighlight[] = [
   {
-    image: 'broadcom',
+    image: 'carousel1',
     title: 'Broadband Communication Network.',
-    desc: "We are a technology solution provider, utilizing advanced technologies to address requirements for Communication Network Operators, ISPs, Communication Regulators and Enterprise ICT Solutions and Services in Africa. Our engineers have implemented successful telecom and data center projects across Africa. This includes: Zimbabwe, Angola, Malawi, Cameroon, Nigeria, Mali, Tanzania, Congo B, Gabon, Sudan, South Sudan, Ethiopia, Madagascar, Seychelles, Somalia, Somaliland, Zambia, Burundi, Rwanda besides many in Kenya.",
+    desc: "We are a technology solution provider, utilizing advanced technologies to address requirements for Communication Network Operators, ISPs, Communication Regulators and Enterprise ICT Solutions and Services in Africa. ",
     href: '/about',
   },
   {
