@@ -9,7 +9,7 @@ export const members: TeamMember[] = [
   {
     role: 'CEO',
     name: 'Bernard G. Wahome',
-    image: '/images/team/bernard.webp',
+    image: '/images/team/PHOTO B G.webp',
     description:
       'Bernard is the Founder, CEO, and Managing Director of Broadband Group with 28 years of experience in Telecommunications. He has driven mobile network deployments across East Africa. Bernard holds an MBA (JKUAT), Mini Telecom MBA (UK), BSc IT (JKUAT), and a Telecom Engineering Diploma. He is a member of the Kenya Institute of Management (KIM) and is committed to ICT transformation and improving customer experience across Africa.',
   },
@@ -29,9 +29,16 @@ export const members: TeamMember[] = [
   },
   {
     role: 'General Manager, Implementation Solutions',
-    name: 'Michael Wambugu',
+    name: 'Wycliffe Mathenge',
     image: '/images/team/michael.webp',
     description:
       'Michael is the GM of Implementation at Broadband Group, leading project rollouts from initiation to closure. He has 14 years of expertise in project and technical schedule management, focusing on high-standard operations and business growth. Michael’s leadership has driven effective in-house teams and project success. He holds an MBA in Strategic Management from Moi University and a Civil Engineering degree from the University of Nairobi.',
+  },
+  {
+    role: 'Business Development Manager, Power Solutions',
+    name: 'Jullias Ambeko',
+    image: '/images/team/michael.webp',
+    description:
+      'Jullias is a vibrant and result-oriented Business Development Manager and Technical Project Management with over 13 years of verifiable year after year successful experience in the Sales and Management cycle by working in conjunction with sales teams and implementation engineers to deliver value to our Customers . Experienced and trained in Power and Data Center infrastructure solutions design and implementation.He holds a Bachelor of Technology in Electrical & Communication Engineering from Masinde Muliro University of Science & Technology.',
   },
 ]

@@ -7,22 +7,14 @@ export default function Mission() {
     <section className="bg-background !py-32">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 md:aspect-[4/3] flex flex-col gap-8 md:justify-evenly">
-          <h1 className="w-fit mx-auto mb-6 lines-header">our mission</h1>
-
+          <h1 className="w-fit mx-auto mb-6 lines-header">Mission & Vision</h1>
           <p>
-            At Broadband Communication Networks Ltd, our mission is to enable
-            seamless communication and optimize network performance through
-            innovative solutions.
+            Our mission is to be the preferred provider of innovative and superior technology solutions across Africa. 
           </p>
-
-          <p className="hidden md:flex">
-            We aim to enhance connectivity across diverse sectors, ensuring that
-            our clients — mobile operators, governments, and businesses — have
-            access to the latest technology and tools that enable them to serve
-            their customers more effectively.
+          <p>
+             Our vision is to be the model of excellence in delivering superior technology solutions and services in Africa. 
           </p>
         </div>
-
         <div className="w-full md:w-1/2 border border-cyan shadow-2xl z-[2]">
           <Image
             src="/images/net.webp"
