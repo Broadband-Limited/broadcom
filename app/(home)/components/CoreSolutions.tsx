@@ -13,15 +13,18 @@ const ServiceLink: FC<FeaturedService> = ({ name, href, icon }) => {
   );
 };
 
-const What = () => {
+const CoreSolutions = () => {
   return (
     <section className="overflow-x-hidden bg-background flex flex-col gap-6">
       <h1 className="w-fit mx-auto lines-header">Core Solutions & Services</h1>
       <p className="w-full text-left">
-      We specialize in providing
-      comprehensive  quality Telecommunication and IT Solutions and Services that drive connectivity geared towards improving Quality of Service, 
-      enhancing network performance and driving telecom and enterprise operations efficiency.
-      Our solutions cover the following thematic areas:
+        We deliver end-to-end ICT solutions and services that support network
+        operators and enterprises across Africa. Our expertise covers every
+        layer of telecom and IT infrastructure, from mobile broadband and
+        transmission networks to data centers, power systems, and quality of
+        service optimization. Designed to enhance performance, reliability, and
+        operational efficiency, our solutions are tailored to meet the evolving
+        needs of Africa&apos;s digital landscape. Our key solution areas include:
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:mt-6">
@@ -33,4 +36,4 @@ const What = () => {
   );
 };
 
-export default What;
+export default CoreSolutions;

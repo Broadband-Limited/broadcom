@@ -7,7 +7,7 @@ import { getPartnerImageUrl } from '@/lib/storage';
 import { Partner } from '@/lib/types/partner_types';
 import Link from 'next/link';
 
-export default function Collaborations() {
+export default function Partners() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,9 +44,9 @@ export default function Collaborations() {
         {/* Marquee content */}
         <div className="flex w-max animate-marquee">
           {/* First set of partners */}
-          {[...partners, ...partners].map((partner) => (
+          {[...partners, ...partners].map((partner, index) => (
             <Link
-              key={`first-${partner.id}`}
+              key={`first-${partner.id}-${index}`}
               href={partner.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -95,10 +95,6 @@ export default function Collaborations() {
           variant="outline"
           className={'w-full md:w-fit justify-center'}>
           Become a partner
-        </Button>
-
-        <Button href={'/partners'} className={'w-full md:w-fit justify-center'}>
-          Learn more
         </Button>
       </div>
     </section>

@@ -17,8 +17,6 @@ export default async function Footer() {
       title: 'Corporate',
       links: [
         { title: 'About Us', href: '/about' },
-        { title: 'Partners', href: '/partners' },
-        { title: 'Investor Relations', href: '/partners' },
       ],
     },
     {

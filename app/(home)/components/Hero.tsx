@@ -57,7 +57,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="flex flex-col items-center landing gap-0 !p-6 md:!p-16 md:justify-center">
+    <section className="min-h-[95vh] flex flex-col items-center landing gap-0 !p-6 md:!p-16 md:justify-center">
       <div
         className="relative w-full min-h-[80vh] md:min-h-[65vh] p-6 pb-12 bg-background shadow-2xl overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}

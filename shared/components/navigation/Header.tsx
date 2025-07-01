@@ -35,7 +35,6 @@ export default function Header() {
           { name: 'divisions & services', href: '/admin/divisions' },
           { name: 'media', href: '/admin/media' },
           { name: 'jobs', href: '/admin/jobs' },
-          { name: 'partners', href: '/admin/partners' },
         ]
       : [
           { name: 'home', href: '/' },
@@ -43,7 +42,6 @@ export default function Header() {
             name: 'solutions & services',
             submenu: serviceDivisions,
           },
-          { name: 'partners', href: '/partners' },
           { name: 'about us', href: '/about' },
           { name: 'careers', href: '/careers' },
           { name: 'media', href: '/media' },

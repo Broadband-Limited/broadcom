@@ -9,8 +9,7 @@
 
   --purple: #b32af3;
 
-
--font-size: 1.2rem;
+  --font-size: 1.2rem;
 
   --font-ratio: 1.4;
 }
@@ -272,7 +271,7 @@ table {
   animation-play-state: paused;
 }
 
-@media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
   }
