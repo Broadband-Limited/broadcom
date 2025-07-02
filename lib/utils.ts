@@ -58,3 +58,11 @@ export function slugify(text: string): string {
     .replace(/[^\w\-]+/g, '') // Remove all non-word characters
     .replace(/\-\-+/g, '-'); // Replace multiple - with single -
 }
+
+/**
+ * Generate a URL-friendly slug from a name and role for team members
+ */
+export function generateTeamMemberSlug(name: string, role: string): string {
+  const combined = `${name} ${role}`;
+  return slugify(combined);
+}

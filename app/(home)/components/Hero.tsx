@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CarouselHighlights } from '@/shared/data/highlights';
 import Image from 'next/image';
-import Button from '@/shared/components/ui/Button';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,7 +27,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (!isPaused) {
-      const timer = setInterval(nextSlide, 5000);
+      const timer = setInterval(nextSlide, 4500);
       return () => clearInterval(timer);
     }
   }, [nextSlide, isPaused]);
@@ -57,9 +56,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-[95vh] flex flex-col items-center landing gap-0 !p-6 md:!p-16 md:justify-center">
+    <section className="flex flex-col items-center landing !p-0 md:justify-center">
       <div
-        className="relative w-full min-h-[80vh] md:min-h-[65vh] p-6 pb-12 bg-background shadow-2xl overflow-hidden"
+        className="relative w-full aspect-[3/4] md:aspect-[2.5/1]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -73,29 +72,22 @@ const Hero = () => {
             animate="center"
             exit="exit"
             transition={{ duration: 0.3 }}
-            className="w-full h-full">
-            <div className="w-full h-full flex flex-col md:flex-row items-center gap-6">
-              <div className="w-full aspect-[4/3] md:w-1/2">
-                <Image
-                  src={`/images/${CarouselHighlights[currentSlide].image}.webp`}
-                  alt="broadcom"
-                  width={1000}
-                  height={1000}
-                  className="w-full h-full"
-                />
-              </div>
+            className="w-full h-full grid grid-cols-1">
+            <Image
+              src={`/images/${CarouselHighlights[currentSlide].image}.webp`}
+              alt="broadcom"
+              width={1000}
+              height={1000}
+              className="w-full aspect-[3/4] md:aspect-[2.5/1] col-start-1 row-start-1"
+            />
 
-              <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-12 md:gap-12">
-                <h2 className="text-center md:text-left">
-                  {CarouselHighlights[currentSlide].title}
-                </h2>
-                <p className="text-justify text-sm md:text-base">
-                  {CarouselHighlights[currentSlide].desc}
-                </p>
-                <Button href={CarouselHighlights[currentSlide].href}>
-                  <span>Learn More</span>
-                </Button>
-              </div>
+            <div className="col-start-1 row-start-1 flex flex-col items-center md:items-start justify-end gap-12 md:gap-12 p-6 md:p-32 bg-gradient-to-b from-transparent via-black/50 to-black/75 md:to-black/50">
+              <h1 className="!text-background">
+                {CarouselHighlights[currentSlide].title}
+              </h1>
+              <p className="text-justify text-sm md:text-base !text-background">
+                {CarouselHighlights[currentSlide].desc}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -106,13 +98,15 @@ const Hero = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`w-12 h-2 rounded-full overflow-hidden bg-background/50 transition-all duration-300 ${
                 index === currentSlide
-                  ? 'bg-dark-blue scale-110'
-                  : 'bg-dark-blue/50 hover:bg-dark-blue/75'
+                  ? 'scale-110'
+                  : 'hover:bg-background/75'
               }`}
               aria-label={`Go to slide ${index + 1}`}
-            />
+            >
+              <div className={`rounded-full ${index === currentSlide ? 'opacity-100 progress-bar-5' : 'opacity-0'}`}></div>
+            </button>
           ))}
         </div>
       </div>
