@@ -10,7 +10,7 @@
 
   --font-size: 1.2rem;
 
-  --font-ratio: 1.4;
+  --font-ratio: 1.3;
 }
 
 @media (max-width: 768px) {
@@ -196,6 +196,7 @@ table {
   position: relative;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .lines-header::before,
@@ -274,6 +275,20 @@ table {
   .animate-marquee {
     animation: none;
   }
+}
+
+.marquee-30 {
+  animation: marquee 30s linear infinite;
+}
+
+.md\:marquee-30 {
+  @media (width >= 48rem /* 768px */) {
+    animation: marquee 30s linear infinite;
+  }
+}
+
+.marquee-20 {
+  animation: marquee 20s linear infinite;
 }
 
 .carousel-container {

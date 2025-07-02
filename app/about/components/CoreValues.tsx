@@ -1,4 +1,12 @@
-import { CircleCheckBig, Headset, Lightbulb, Users, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import {
+  CircleCheckBig,
+  Headset,
+  Lightbulb,
+  Users,
+  ShieldCheck,
+  AlertTriangle,
+} from 'lucide-react';
 import React from 'react';
 
 const values = [
@@ -48,29 +56,59 @@ interface ValueProps {
 
 const Value = ({ icon, title, description }: ValueProps) => {
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="w-full aspect-[9/10] p-6 border flex flex-col items-center justify-center gap-4 text-background     hexagon-clip moving-gradient  hover:scale-105 transition-scale duration-500">
+    <div
+      className={cn(
+        'w-48 md:w-64 aspect-[9/10] shrink-0 p-4 md:p-6 border',
+        'flex flex-col items-center justify-center gap-3 md:gap-4',
+        'text-background hexagon-clip moving-gradient *:cursor-default',
+        'group overflow-hidden'
+      )}>
+      <div
+        className={cn(
+          'w-full flex flex-col items-center gap-3 md:gap-4',
+          'opacity-100 group-hover:opacity-0 transition-all duration-300'
+        )}>
         {React.createElement(icon, { className: '', size: 36 })}
-
-        <h4 className="text-center text-base !text-background leading-4">{title}</h4>
+        <h4 className="text-center text-sm md:text-base !text-background leading-tight px-2">
+          {title}
+        </h4>
       </div>
 
-      <div className="h-4 md:h-12 w-0 border border-dashed border-indigo"></div>
-
-      <p className="!text-xs md:!text-sm text-center">{description}</p>
+      <p
+        className={cn(
+          'absolute max-w-44 md:max-w-48 px-2',
+          '!text-xs md:!text-sm text-center !text-background',
+          '!opacity-0 group-hover:!opacity-100 transition-all duration-300'
+        )}>
+        {description}
+      </p>
     </div>
   );
 };
 
 export default function CoreValues() {
   return (
-    <section className="py overflow-x-hidden">
-      <h1 className="w-fit mx-auto mb-12 lines-header">our core values</h1>
+    <section className="overflow-x-hidden">
+      <h1 className="w-fit mx-auto mb-8 md:mb-12 lines-header">
+        our core values
+      </h1>
 
-      <div className="values grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 px-6 md:px-0">
-        {values.map((value, index) => (
-          <Value key={index} {...value} />
-        ))}
+      <div className="w-max flex gap-3 md:gap-4 animate-marquee marquee-20 md:marquee-30">
+        {/* Fewer repetitions on mobile for better performance */}
+        <div className="flex gap-3 md:gap-4 md:hidden">
+          {[...values, ...values, ...values].map((value, index) => (
+            <Value key={`mobile-${index}`} {...value} />
+          ))}
+        </div>
+
+        {/* Original repetitions for desktop */}
+        <div className="hidden md:flex gap-4">
+          {[...values, ...values, ...values, ...values, ...values].map(
+            (value, index) => (
+              <Value key={`desktop-${index}`} {...value} />
+            )
+          )}
+        </div>
       </div>
     </section>
   );

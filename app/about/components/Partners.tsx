@@ -64,7 +64,7 @@ export default function Partners() {
 
           {/* Duplicate set for seamless loop */}
           {partners.map((partner) => (
-            <a
+            <Link
               key={`second-${partner.id}`}
               href={partner.link}
               target="_blank"
@@ -78,7 +78,7 @@ export default function Partners() {
                 height={1000}
                 className="w-32 md:w-48 h-32 md:h-48 object-contain border border-cyan shadow-2xl group-hover:shadow-3xl transition-all duration-300 group-hover:border-light-blue"
               />
-            </a>
+            </Link>
           ))}
         </div>
       </div>
