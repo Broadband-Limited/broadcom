@@ -6,15 +6,16 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 interface TeamMemberPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function TeamMemberPage({ params }: TeamMemberPageProps) {
+export default async function TeamMemberPage({ params }: TeamMemberPageProps) {
   // Find the team member by matching the slug
+  const slug = (await params).slug;
   const member = members.find(
-    (m) => generateTeamMemberSlug(m.name, m.role) === params.slug
+    (m) => generateTeamMemberSlug(m.name, m.role) === slug
   );
 
   if (!member) {
@@ -47,9 +48,7 @@ export default function TeamMemberPage({ params }: TeamMemberPageProps) {
         {/* Member Info */}
         <div className="md:col-span-2 space-y-6">
           <div>
-            <h1 className="!text-dark-blue mb-2">
-              {member.name}
-            </h1>
+            <h1 className="!text-dark-blue mb-2">{member.name}</h1>
             <p className="!text-dark-blue/80 text-xl font-medium">
               {member.role}
             </p>
@@ -87,9 +86,10 @@ export function generateStaticParams() {
 }
 
 // Generate metadata for each team member
-export function generateMetadata({ params }: TeamMemberPageProps) {
+export async function generateMetadata({ params }: TeamMemberPageProps) {
+  const slug = (await params).slug;
   const member = members.find(
-    (m) => generateTeamMemberSlug(m.name, m.role) === params.slug
+    (m) => generateTeamMemberSlug(m.name, m.role) === slug
   );
 
   if (!member) {
