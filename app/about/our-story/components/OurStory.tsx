@@ -39,7 +39,7 @@ export default function OurStory() {
           market&apos;s need was clear: long telephone waiting lists, scarce
           local contractors, and a lack of scalable, responsive telecom
           solutions. Within our first 18 months, we grew from a startup into a
-          company with KES 39 million in turnover. By staying focused on
+          company with millions in turnover. By staying focused on
           excellence and execution, we doubled our growth year over year until
           stabilizing in 2008 — and we&apos;ve never looked back.
         </p>

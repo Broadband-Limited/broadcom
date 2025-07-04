@@ -6,6 +6,7 @@ import {
   Users,
   ShieldCheck,
   AlertTriangle,
+  Anchor,
 } from 'lucide-react';
 import React from 'react';
 
@@ -15,6 +16,12 @@ const values = [
     description:
       'We are constantly looking for new ways to improve our products and services.',
     icon: Lightbulb,
+  },
+  {
+    title: 'Reliability',
+    description:
+      'Reliability means consistently delivering on our promises, ensuring our clients and partners can depend on us to perform with integrity, precision, and accountability—every time.',
+    icon: Anchor,
   },
   {
     title: 'Integrity',
