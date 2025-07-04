@@ -33,7 +33,7 @@ export default function QualityPolicy() {
         </div>
 
         <Image
-          src={'/images/worksite_collaboration.webp'}
+          src={'/images/quality.jpeg'}
           alt="Quality Assurance - Protocol Analyzer"
           width={500}
           height={500}

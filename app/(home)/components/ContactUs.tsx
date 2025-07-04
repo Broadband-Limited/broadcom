@@ -9,7 +9,7 @@ const ContactUs = () => {
           Ready to Transform Your Network?
         </h2>
         <video muted autoPlay playsInline loop className="shadow-2xl">
-          <source src="/videos/tower.mp4" type="video/mp4" />
+          <source src="/videos/ready.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

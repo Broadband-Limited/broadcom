@@ -11,7 +11,7 @@ const RegionalPresence = () => {
     'Mali',
     'Congo B',
     'Gabon',
-    'Sudan',
+    'South Sudan',
     'Madagascar',
     'Seychelles',
   ];

@@ -16,10 +16,8 @@ export default function History() {
         />
 
         <p className="w-full md:w-1/2">
-          Founded in 2001, Broadband Communication Networks Ltd began as a small
-          telecommunications provider. Over the years, we’ve grown into a leader
-          in the IT and telecommunications sector, partnering with industry
-          leaders and expanding our service offerings across Africa.
+         
+          
         </p>
       </div>
     </section>

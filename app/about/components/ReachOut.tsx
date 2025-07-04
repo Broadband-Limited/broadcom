@@ -10,7 +10,7 @@ export default function ReachOut() {
         playsInline
         loop
         className="col-start-1 row-start-1 w-full h-full aspect-[16/9] md:aspect-[3/1] object-cover">
-        <source src="/videos/tower.mp4" type="video/mp4" />
+        <source src="/videos/ready.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
