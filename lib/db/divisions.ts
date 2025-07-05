@@ -77,5 +77,23 @@ export const deleteDivision = async (id: string) => {
   }
 
   const supabase = await createServer();
+
+  // Check if division has associated services
+  const { data: services, error: servicesError } = await supabase
+    .from('services')
+    .select('id')
+    .eq('division_id', id)
+    .limit(1);
+
+  if (servicesError) {
+    throw servicesError;
+  }
+
+  if (services && services.length > 0) {
+    throw new Error(
+      'Cannot delete division: it has associated services. Please delete all services first.'
+    );
+  }
+
   return supabase.from('divisions').delete().eq('id', id);
 };

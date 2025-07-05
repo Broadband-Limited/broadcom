@@ -42,26 +42,39 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Basic validation
+    // Basic validation - category_id is optional
     if (
       !body.division_id ||
       !body.title ||
       !body.slug ||
       !body.description ||
       !Array.isArray(body.details) ||
-      !body.images
+      !Array.isArray(body.images)
     ) {
       return NextResponse.json(
         {
           message:
-            'All fields are required (division_id, title, slug, description, details, images)',
+            'Required fields: division_id, title, slug, description, details (array), images (array)',
         },
+        { status: 400 }
+      );
+    }
+
+    // Validate category_id if provided
+    if (
+      body.category_id !== undefined &&
+      body.category_id !== null &&
+      typeof body.category_id !== 'string'
+    ) {
+      return NextResponse.json(
+        { message: 'category_id must be a string or null' },
         { status: 400 }
       );
     }
 
     const service: Service = {
       division_id: body.division_id,
+      category_id: body.category_id || undefined, // Convert empty string to undefined
       title: body.title,
       slug: body.slug,
       description: body.description,

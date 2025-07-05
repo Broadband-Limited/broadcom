@@ -16,7 +16,11 @@ export const getServicesCount = async () => {
 
 export const getAllServices = async () => {
   const supabase = await createServer();
-  return supabase.from('services').select('*');
+  return supabase.from('services').select(`
+      *,
+      divisions(*),
+      categories(*)
+    `);
 };
 
 export async function getServicesNoAuth() {
@@ -24,21 +28,54 @@ export async function getServicesNoAuth() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-  const { data, error } = await supabase.from('services').select('*');
+  const { data, error } = await supabase.from('services').select(`
+      *,
+      divisions(*),
+      categories(*)
+    `);
   if (error) throw error;
   return { data, error };
 }
 
 export const getServicesByDivisionId = async (divisionId: string) => {
   const supabase = await createServer();
-  return supabase.from('services').select('*').eq('division_id', divisionId);
+  return supabase
+    .from('services')
+    .select(
+      `
+      *,
+      categories(*)
+    `
+    )
+    .eq('division_id', divisionId)
+    .order('title');
+};
+
+export const getServicesByCategoryId = async (categoryId: string) => {
+  const supabase = await createServer();
+  return supabase
+    .from('services')
+    .select(
+      `
+      *,
+      divisions(*),
+      categories(*)
+    `
+    )
+    .eq('category_id', categoryId);
 };
 
 export const getServiceBySlug = async (slug: string) => {
   const supabase = await createServer();
   return supabase
     .from('services')
-    .select('*, divisions(*)')
+    .select(
+      `
+      *,
+      divisions(*),
+      categories(*)
+    `
+    )
     .eq('slug', slug)
     .single();
 };
@@ -47,7 +84,13 @@ export const getServiceById = async (id: string) => {
   const supabase = await createServer();
   return supabase
     .from('services')
-    .select('*, divisions(*)')
+    .select(
+      `
+      *,
+      divisions(*),
+      categories(*)
+    `
+    )
     .eq('id', id)
     .single();
 };
@@ -60,7 +103,17 @@ export const createService = async (service: Service) => {
   }
 
   const supabase = await createServer();
-  return supabase.from('services').insert(service).select('*').single();
+  return supabase
+    .from('services')
+    .insert(service)
+    .select(
+      `
+    *,
+    divisions(*),
+    categories(*)
+  `
+    )
+    .single();
 };
 
 export const updateService = async (id: string, service: Partial<Service>) => {
@@ -75,7 +128,13 @@ export const updateService = async (id: string, service: Partial<Service>) => {
     .from('services')
     .update(service)
     .eq('id', id)
-    .select('*')
+    .select(
+      `
+      *,
+      divisions(*),
+      categories(*)
+    `
+    )
     .single();
 };
 

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getDivisionBySlug, getDivisionsNoAuth } from '@/lib/db/divisions';
 import { getServicesByDivisionId } from '@/lib/db/services';
-import Button from '@/shared/components/ui/Button';
-import { getServiceImageUrl } from '@/lib/storage';
+import { getCategoriesNoAuth } from '@/lib/db/categories';
+import DivisionServicesFilter from './components/DivisionServicesFilter';
+import type { Category, ServiceWithRelations } from '@/lib/types/divisions_types';
 
 interface DivisionPageProps {
   params: Promise<{ slug: string }>;
@@ -30,6 +30,7 @@ export async function generateStaticParams() {
 export default async function DivisionPage({ params }: DivisionPageProps) {
   const slug = (await params).slug;
   const { data: division } = await getDivisionBySlug(slug);
+
   if (!division) {
     return (
       <div className="min-h-screen flex items-center justify-center text-center">
@@ -49,7 +50,12 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
     );
   }
 
-  const { data: services = [] } = await getServicesByDivisionId(division.id!);
+  // Fetch services and categories for this division
+  const [{ data: services = [] }, { data: categories = [] }] =
+    await Promise.all([
+      getServicesByDivisionId(division.id!),
+      getCategoriesNoAuth(division.id!),
+    ]);
 
   return (
     <section className="flex flex-col gap-6">
@@ -61,52 +67,15 @@ export default async function DivisionPage({ params }: DivisionPageProps) {
         {division.name}
       </h3>
 
-      <p className="w-full text-left">
-        {division.description}
-      </p>
+      <p className="w-full text-left">{division.description}</p>
 
       <hr className="border-slate-300" />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {(services ?? []).map((service) => (
-          <div
-            key={service.id}
-            className="w-full aspect-square md:aspect-[3/4] border border-slate-200 shadow-lg hover:shadow transition-all duration-300">
-            <div className="img w-full aspect-[4/3] relative">
-              {service.images && service.images.length > 0 ? (
-                <>
-                  <Image
-                    src={getServiceImageUrl(service.images[0])}
-                    alt={`${service.title} | Broadband Communication Networks Ltd`}
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full object-cover"
-                  />
-                  {service.images.length > 1 && (
-                    <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                      +{service.images.length - 1} more
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm">No image</p>
-                </div>
-              )}
-            </div>
-
-            <div className="details w-full aspect-[4/1] md:aspect-[1.7] flex flex-col gap-6 justify-between p-2 md:p-4">
-              <h4 className="font-semibold">{service.title}</h4>
-              <p
-                className="truncate text-sm border-l-4 border-light-blue pl-2 ml-2"
-                title={service.description}>
-                {service.description}
-              </p>
-              <Button href={`/products/${service.slug}`} target='_blank'>Learn More</Button>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Services with category filtering */}
+      <DivisionServicesFilter
+        services={services as ServiceWithRelations[]}
+        categories={categories as Category[]}
+      />
     </section>
   );
 }
