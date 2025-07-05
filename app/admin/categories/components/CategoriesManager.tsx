@@ -1,65 +1,60 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Service,
-  Division,
-  ServiceWithRelations,
-} from '@/lib/types/divisions_types';
-import ServiceForm from '@/app/admin/services/components/ServiceForm';
-import ServiceList from '@/app/admin/services/components/ServiceList';
+import { Category, Division } from '@/lib/types/divisions_types';
+import CategoryForm from './CategoryForm';
+import CategoryList from './CategoryList';
 import Button from '@/shared/components/ui/Button';
 
-interface ServicesManagerProps {
-  initialServices: ServiceWithRelations[];
-  divisions: Division[];
+interface CategoriesManagerProps {
+  initialCategories: Category[];
+  division: Division;
 }
 
-export default function ServicesManager({
-  initialServices,
-  divisions,
-}: ServicesManagerProps) {
-  const [services, setServices] =
-    useState<ServiceWithRelations[]>(initialServices);
-  const [selectedService, setSelectedService] = useState<
-    ServiceWithRelations | undefined
+export default function CategoriesManager({
+  initialCategories,
+  division,
+}: CategoriesManagerProps) {
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category | undefined
   >(undefined);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleAdd = () => {
-    setSelectedService(undefined);
+    setSelectedCategory(undefined);
     setIsAdding(true);
     setIsEditing(false);
   };
 
-  const handleEdit = (service: Service) => {
-    setSelectedService(service);
+  const handleEdit = (category: Category) => {
+    setSelectedCategory(category);
     setIsAdding(false);
     setIsEditing(true);
   };
 
   const handleCancel = () => {
-    setSelectedService(undefined);
+    setSelectedCategory(undefined);
     setIsAdding(false);
     setIsEditing(false);
   };
 
-  const handleCreate = async (service: Service) => {
+  const handleCreate = async (category: Category) => {
     try {
-      const response = await fetch('/api/services', {
+      const response = await fetch('/api/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(service),
+        body: JSON.stringify(category),
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || 'Failed to create service');
+        throw new Error(error.message || 'Failed to create category');
       }
 
-      const newService = await response.json();
-      setServices([...services, newService]);
+      const newCategory = await response.json();
+      setCategories([...categories, newCategory]);
       setIsAdding(false);
     } catch (error) {
       if (error instanceof Error) {
@@ -69,29 +64,27 @@ export default function ServicesManager({
     }
   };
 
-  const handleUpdate = async (service: Service) => {
+  const handleUpdate = async (category: Category) => {
     try {
-      if (!service.id) {
-        throw new Error('Service ID is required for updating');
-      }
-
-      const response = await fetch(`/api/services/${service.id}`, {
+      const response = await fetch(`/api/categories/${category.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(service),
+        body: JSON.stringify(category),
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || 'Failed to update service');
+        throw new Error(error.message || 'Failed to update category');
       }
 
-      const updatedService = await response.json();
-      setServices(
-        services.map((s) => (s.id === updatedService.id ? updatedService : s))
+      const updatedCategory = await response.json();
+      setCategories(
+        categories.map((c) =>
+          c.id === updatedCategory.id ? updatedCategory : c
+        )
       );
       setIsEditing(false);
-      setSelectedService(undefined);
+      setSelectedCategory(undefined);
     } catch (error) {
       if (error instanceof Error) {
         throw error;
@@ -102,16 +95,16 @@ export default function ServicesManager({
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`/api/services/${id}`, {
+      const response = await fetch(`/api/categories/${id}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || 'Failed to delete service');
+        throw new Error(error.message || 'Failed to delete category');
       }
 
-      setServices(services.filter((s) => s.id !== id));
+      setCategories(categories.filter((c) => c.id !== id));
     } catch (error) {
       if (error instanceof Error) {
         throw error;
@@ -121,14 +114,14 @@ export default function ServicesManager({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="w-full space-y-8">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-dark-blue">
+        <h3 className="">
           {isAdding
-            ? 'Add New Service'
+            ? 'Add New Category'
             : isEditing
-            ? 'Edit Service'
-            : 'Services'}
+            ? 'Edit Category'
+            : `Categories`}
         </h3>
 
         <div>
@@ -138,24 +131,23 @@ export default function ServicesManager({
             </Button>
           ) : (
             <Button onClick={handleAdd} variant="primary" size="default">
-              Add Service
+              Add Category
             </Button>
           )}
         </div>
       </div>
 
       {(isAdding || isEditing) && (
-        <ServiceForm
-          service={selectedService}
-          divisions={divisions}
+        <CategoryForm
+          category={selectedCategory}
+          divisionId={division.id!}
           onSubmit={isAdding ? handleCreate : handleUpdate}
         />
       )}
 
       {!isAdding && !isEditing && (
-        <ServiceList
-          services={services}
-          divisions={divisions}
+        <CategoryList
+          categories={categories}
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
