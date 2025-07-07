@@ -25,7 +25,7 @@ export default async function AdminPartnersPage() {
   }
 
   return (
-    <section className="">
+    <section className="min-h-screen !pb-48">
       <div className="mb-8 border-b border-foreground/10 pb-4">
         <h1 className="">Manage Partners</h1>
         <p className="mt-2">

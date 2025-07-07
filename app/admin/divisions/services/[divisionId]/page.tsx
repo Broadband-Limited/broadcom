@@ -54,7 +54,7 @@ export default async function AdminDivisionServicesPage({
   }
 
   return (
-    <section className="!pt-12">
+    <section className="!pt-12 !pb-48">
       <div className="mb-8 border-b border-foreground/10 pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
           <h2 className="text-3xl font-bold text-dark-blue mb-2 sm:mb-0">
