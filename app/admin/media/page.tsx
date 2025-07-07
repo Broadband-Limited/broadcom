@@ -25,7 +25,7 @@ export default async function AdminMediaPage() {
   const { data: mediaItems, error } = await getAllMedia(true);
 
   return (
-    <section className="container px-4 py-8 mx-auto">
+    <section className="!pb-48">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Media Management</h1>
         <Link href="/admin/media/new">

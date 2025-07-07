@@ -21,7 +21,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
 
   return (
     <>
-      <div className='fixed top-16 right-4 z-50 bg-white'>
+      <div className='fixed top-18 right-4 z-50'>
         {user ? (
           <UserMenu userEmail={user.email || undefined} />
         ) : (

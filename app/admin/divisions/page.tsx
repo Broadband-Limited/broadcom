@@ -25,8 +25,7 @@ export default async function AdminDivisionsPage() {
   }
 
   return (
-    <section className="">
-      {' '}
+    <section className="!pb-48">
       <div className="mb-8 border-b border-foreground/10 pb-4">
         <h1 className="text-3xl font-bold text-dark-blue">Manage Divisions</h1>
         <p className="text-foreground/50 mt-2">

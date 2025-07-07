@@ -112,7 +112,7 @@ export default function JobsManager({
   return (
     <div className="space-y-6">
       {isAdding || isEditing ? (
-        <div className="bg-white shadow-sm border border-gray-200 p-6">
+        <div className="bg-background shadow-sm border border-gray-200 p-6">
           <div className="flex justify-between items-center mb-6">
             <div>
               <h2 className="font-bold text-gray-900">
@@ -144,20 +144,19 @@ export default function JobsManager({
               <p className="mt-1 text-sm text-gray-500">
                 Manage job postings and their details
               </p>
-              </div>
-              
+            </div>
+
             <Button onClick={handleAdd} size="default">
               <PlusCircle className="w-4 h-4 mr-2" />
               Add New Job
             </Button>
           </div>
-          <div className="overflow-hidden">
-            <JobList
-              jobs={jobs}
-              onEditJob={handleEdit}
-              onDeleteJob={handleDelete}
-            />
-          </div>
+
+          <JobList
+            jobs={jobs}
+            onEditJob={handleEdit}
+            onDeleteJob={handleDelete}
+          />
         </div>
       )}
     </div>

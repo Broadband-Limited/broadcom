@@ -79,7 +79,7 @@ export default function PartnerList({
 
   return (
     <>
-      <div className="overflow-hidden bg-white shadow border border-foreground/10">
+      <div className="bg-background shadow border border-foreground/10">
         {sortedPartners.map((partner) => (
           <div
             key={partner.id}

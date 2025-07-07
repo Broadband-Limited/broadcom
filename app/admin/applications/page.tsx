@@ -32,7 +32,7 @@ export default async function ApplicationsPage() {
   });
 
   return (
-    <section className="container mx-auto px-4 py-8">
+    <section className="!pb-48">
       <ApplicationsManager
         initialApplications={applications || []}
         jobs={jobs || []}
