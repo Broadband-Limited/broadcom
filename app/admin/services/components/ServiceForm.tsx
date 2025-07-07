@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, FormEvent } from 'react';
-import { Service, Division } from '@/lib/types/divisions_types';
+import { Service, Division, Category } from '@/lib/types/divisions_types';
 import {
   uploadMultipleServiceImages,
   getServiceImageUrls,
@@ -24,6 +24,7 @@ export default function ServiceForm({
 }: ServiceFormProps) {
   const [formData, setFormData] = useState<Service>({
     division_id: divisions.length > 0 ? divisions[0].id || '' : '',
+    category_id: undefined,
     title: '',
     slug: '',
     description: '',
@@ -34,6 +35,8 @@ export default function ServiceForm({
   const [error, setError] = useState<string | null>(null);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(false);
 
   useEffect(() => {
     if (service) {
@@ -46,6 +49,32 @@ export default function ServiceForm({
     }
   }, [service]);
 
+  // Load categories when division changes
+  useEffect(() => {
+    if (formData.division_id) {
+      loadCategories(formData.division_id);
+    }
+  }, [formData.division_id]);
+
+  const loadCategories = async (divisionId: string) => {
+    setLoadingCategories(true);
+    try {
+      const response = await fetch(`/api/categories?divisionId=${divisionId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data);
+      } else {
+        console.error('Failed to load categories');
+        setCategories([]);
+      }
+    } catch (error) {
+      console.error('Error loading categories:', error);
+      setCategories([]);
+    } finally {
+      setLoadingCategories(false);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -53,8 +82,15 @@ export default function ServiceForm({
   ) => {
     const { name, value } = e.target;
 
-    // Auto-generate slug from title if it's a new service
-    if (name === 'title' && (!service || !service.id)) {
+    if (name === 'division_id') {
+      // Reset category when division changes
+      setFormData({
+        ...formData,
+        division_id: value,
+        category_id: undefined,
+      });
+    } else if (name === 'title' && (!service || !service.id)) {
+      // Auto-generate slug from title if it's a new service
       setFormData({
         ...formData,
         title: value,
@@ -66,7 +102,7 @@ export default function ServiceForm({
     } else {
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: value === '' ? undefined : value,
       });
     }
   };
@@ -144,6 +180,7 @@ export default function ServiceForm({
     setError(null);
 
     try {
+      // Upload new images if any
       let finalImages = [...formData.images];
 
       // Upload new images if any
@@ -163,6 +200,7 @@ export default function ServiceForm({
       if (!service?.id) {
         setFormData({
           division_id: divisions.length > 0 ? divisions[0].id || '' : '',
+          category_id: undefined,
           title: '',
           slug: '',
           description: '',
@@ -202,6 +240,7 @@ export default function ServiceForm({
             value={formData.division_id}
             onChange={handleChange}
             className="w-full p-3 border border-foreground/10 rounded-xs focus:outline-none focus:border-foreground/50 transition-all duration-300">
+            <option value="">Select a division</option>
             {divisions.map((division) => (
               <option key={division.id} value={division.id}>
                 {division.name}
@@ -210,6 +249,36 @@ export default function ServiceForm({
           </select>
         </div>
 
+        <div className="mb-4">
+          <label
+            htmlFor="category_id"
+            className="block text-sm font-medium text-foreground/50 mb-1">
+            Category
+            <span className="text-foreground/30 text-xs ml-1">(Optional)</span>
+          </label>
+          <select
+            id="category_id"
+            name="category_id"
+            value={formData.category_id || ''}
+            onChange={handleChange}
+            disabled={loadingCategories || !formData.division_id}
+            className="w-full p-3 border border-foreground/10 rounded-xs focus:outline-none focus:border-foreground/50 transition-all duration-300 disabled:opacity-50">
+            <option value="">No category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          {loadingCategories && (
+            <p className="text-xs text-foreground/50 mt-1">
+              Loading categories...
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           type="text"
           label="Service Title"
@@ -220,25 +289,25 @@ export default function ServiceForm({
           onChange={handleChange}
           placeholder="e.g., Network Installation"
         />
-      </div>
 
-      <div className="relative">
-        <Input
-          type="text"
-          label="Slug"
-          name="slug"
-          id="slug"
-          value={formData.slug}
-          onChange={handleChange}
-          placeholder=""
-          className="opacity-60"
-          readonly
-        />
-        <div className="-mt-3 flex items-center gap-2">
-          <InfoIcon size={12} />
-          <p className="!text-xs">
-            The slug is used in URLs. Auto-generated from title.
-          </p>
+        <div className="relative">
+          <Input
+            type="text"
+            label="Slug"
+            name="slug"
+            id="slug"
+            value={formData.slug}
+            onChange={handleChange}
+            placeholder=""
+            className="opacity-60"
+            readonly
+          />
+          <div className="-mt-3 flex items-center gap-2">
+            <InfoIcon size={12} />
+            <p className="!text-xs">
+              The slug is used in URLs. Auto-generated from title.
+            </p>
+          </div>
         </div>
       </div>
 

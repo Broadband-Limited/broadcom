@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
 import {
-  getServiceById,
-  updateService,
-  deleteService,
-} from '@/lib/db/services';
-import { Service } from '@/lib/types/divisions_types';
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+} from '@/lib/db/categories';
+import { Category } from '@/lib/types/divisions_types';
 
-// GET /api/services/[id]
+// GET /api/categories/[id]
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -15,32 +15,25 @@ export async function GET(
   try {
     const { id } = await params;
 
-    if (!id) {
-      return NextResponse.json(
-        { message: 'Service ID is required' },
-        { status: 400 }
-      );
-    }
-
-    const { data, error } = await getServiceById(id);
+    const { data, error } = await getCategoryById(id);
 
     if (error) {
       return NextResponse.json(
-        { message: 'Failed to fetch service', error: error.message },
+        { message: 'Failed to fetch category', error: error.message },
         { status: error.code === 'PGRST116' ? 404 : 500 }
       );
     }
 
     if (!data) {
       return NextResponse.json(
-        { message: 'Service not found' },
+        { message: 'Category not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error(`Error in GET /api/services/${(await params).id}:`, error);
+    console.error(`Error in GET /api/categories/${(await params).id}:`, error);
     return NextResponse.json(
       { message: 'An unexpected error occurred' },
       { status: 500 }
@@ -48,7 +41,7 @@ export async function GET(
   }
 }
 
-// PUT /api/services/[id]
+// PUT /api/categories/[id]
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -66,71 +59,35 @@ export async function PUT(
     }
 
     const { id } = await params;
-
-    if (!id) {
-      return NextResponse.json(
-        { message: 'Service ID is required' },
-        { status: 400 }
-      );
-    }
-
     const body = await request.json();
 
-    // Basic validation - category_id is optional
-    if (
-      !body.division_id ||
-      !body.title ||
-      !body.slug ||
-      !body.description ||
-      !Array.isArray(body.details) ||
-      !Array.isArray(body.images)
-    ) {
+    // Basic validation
+    if (!body.name || !body.slug || !body.division_id) {
       return NextResponse.json(
-        {
-          message:
-            'Required fields: division_id, title, slug, description, details (array), images (array)',
-        },
+        { message: 'Name, slug, and division_id are required' },
         { status: 400 }
       );
     }
 
-    // Validate category_id if provided
-    if (body.category_id !== undefined && body.category_id !== null && typeof body.category_id !== 'string') {
-      return NextResponse.json(
-        { message: 'category_id must be a string or null' },
-        { status: 400 }
-      );
-    }
-
-    const service: Partial<Service> = {
-      division_id: body.division_id,
-      category_id: body.category_id || undefined, // Convert empty string to undefined
-      title: body.title,
+    const category: Partial<Category> = {
+      name: body.name,
       slug: body.slug,
       description: body.description,
-      details: body.details,
-      images: body.images,
+      division_id: body.division_id,
     };
 
-    const { data, error } = await updateService(id, service);
+    const { data, error } = await updateCategory(id, category);
 
     if (error) {
       return NextResponse.json(
-        { message: 'Failed to update service', error: error.message },
+        { message: 'Failed to update category', error: error.message },
         { status: error.code === 'PGRST116' ? 404 : 500 }
-      );
-    }
-
-    if (!data) {
-      return NextResponse.json(
-        { message: 'Service not found' },
-        { status: 404 }
       );
     }
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error(`Error in PUT /api/services/${(await params).id}:`, error);
+    console.error(`Error in PUT /api/categories/${(await params).id}:`, error);
     return NextResponse.json(
       { message: 'An unexpected error occurred' },
       { status: 500 }
@@ -138,7 +95,7 @@ export async function PUT(
   }
 }
 
-// DELETE /api/services/[id]
+// DELETE /api/categories/[id]
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -157,25 +114,21 @@ export async function DELETE(
 
     const { id } = await params;
 
-    if (!id) {
-      return NextResponse.json(
-        { message: 'Service ID is required' },
-        { status: 400 }
-      );
-    }
-
-    const { error } = await deleteService(id);
+    const { error } = await deleteCategory(id);
 
     if (error) {
       return NextResponse.json(
-        { message: 'Failed to delete service', error: error.message },
+        { message: 'Failed to delete category', error: error.message },
         { status: error.code === 'PGRST116' ? 404 : 500 }
       );
     }
 
-    return new NextResponse(null, { status: 204 });
+    return NextResponse.json({ message: 'Category deleted successfully' });
   } catch (error) {
-    console.error(`Error in DELETE /api/services/${(await params).id}:`, error);
+    console.error(
+      `Error in DELETE /api/categories/${(await params).id}:`,
+      error
+    );
     return NextResponse.json(
       { message: 'An unexpected error occurred' },
       { status: 500 }

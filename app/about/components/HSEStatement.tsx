@@ -10,7 +10,16 @@ export default function HSEStatement() {
 
       <div className="w-full flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
 
-        <div className="w-full lg:w-1/2 space-y-4">
+      <div className="w-full flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-12">
+        <Image
+          src={'/images/green_energy.webp'}
+          alt="Green Energy and Environmental Sustainability"
+          width={1000}
+          height={1000}
+          className="w-full lg:w-1/2 aspect-[3/4] border border-cyan shadow-2xl"
+        />
+
+        <div className="w-full lg:w-1/2 space-y-4 *:text-justify">
           <p>
             At Broadband Communication Networks Ltd, the health and safety of
             our employees, partners, and communities is our highest priority. We

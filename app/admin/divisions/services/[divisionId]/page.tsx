@@ -1,8 +1,10 @@
 import { isAuthenticated, isAuthorised } from '@/lib/db/auth';
 import { getServicesByDivisionId } from '@/lib/db/services';
 import { getDivisionById } from '@/lib/db/divisions';
+import { getCategoriesByDivisionId } from '@/lib/db/categories';
 import { redirect } from 'next/navigation';
 import ServicesManager from '@/app/admin/services/components/ServicesManager';
+import CategoriesManager from '@/app/admin/categories/components/CategoriesManager';
 import Link from 'next/link';
 
 export default async function AdminDivisionServicesPage({
@@ -29,6 +31,10 @@ export default async function AdminDivisionServicesPage({
   const { data: services, error: servicesError } =
     await getServicesByDivisionId(divisionId);
 
+  // Fetch categories for this division
+  const { data: categories, error: categoriesError } =
+    await getCategoriesByDivisionId(divisionId);
+
   // Fetch division details
   const { data: division, error: divisionError } = await getDivisionById(
     divisionId
@@ -43,9 +49,12 @@ export default async function AdminDivisionServicesPage({
     console.error('Error fetching services:', servicesError);
   }
 
+  if (categoriesError) {
+    console.error('Error fetching categories:', categoriesError);
+  }
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      {' '}
+    <section className="!pt-12">
       <div className="mb-8 border-b border-foreground/10 pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
           <h2 className="text-3xl font-bold text-dark-blue mb-2 sm:mb-0">
@@ -72,14 +81,25 @@ export default async function AdminDivisionServicesPage({
           </Link>
         </div>
         <p className="text-foreground/50 mt-2">
-          Manage services for this division.
+          Manage categories and services for this division.
         </p>
       </div>
-      
-      <ServicesManager
-        initialServices={services || []}
-        divisions={[division]}
-      />
-    </div>
+
+      {/* Categories Section */}
+      <div className="mb-12">
+        <CategoriesManager
+          initialCategories={categories || []}
+          division={division}
+        />
+      </div>
+
+      {/* Services Section */}
+      <div>
+        <ServicesManager
+          initialServices={services || []}
+          divisions={[division]}
+        />
+      </div>
+    </section>
   );
 }
