@@ -9,13 +9,6 @@ export default function HSEStatement() {
       </h1>
 
       <div className="w-full flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
-        <Image
-          src={'/images/green_energy.webp'}
-          alt="Green Energy and Environmental Sustainability"
-          width={500}
-          height={500}
-          className="w-full lg:w-1/2 aspect-[4/3] border border-cyan shadow-2xl"
-        />
 
         <div className="w-full lg:w-1/2 space-y-4">
           <p>

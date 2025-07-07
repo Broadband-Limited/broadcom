@@ -32,13 +32,6 @@ export default function QualityPolicy() {
           </p>
         </div>
 
-        <Image
-          src={'/images/quality.jpeg'}
-          alt="Quality Assurance - Protocol Analyzer"
-          width={500}
-          height={500}
-          className="w-full lg:w-1/2 aspect-[4/3] border border-cyan shadow-2xl"
-        />
       </div>
     </section>
   );

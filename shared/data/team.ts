@@ -7,7 +7,7 @@ export interface TeamMember {
 
 export const members: TeamMember[] = [
   {
-    role: 'CEO',
+    role: 'Founder & CEO',
     name: 'Bernard G. Wahome',
     image: '/images/team/PHOTO B G.webp',
     description:
@@ -28,14 +28,14 @@ export const members: TeamMember[] = [
       'Susan is the Head of Department, Finance & Admin, directs financial management, ensuring resource optimization to meet the company’s goals. With 27 years in various industries, she has expertise in product costing, project accounting, and statutory regulations. Susan’s aim is to enhance internal and external customer experiences while driving financial growth. She holds a degree from Strathmore University and is a member of ICPAK.',
   },
   {
-    role: 'Head of Department, Implementation Solutions',
+    role: 'Ag. Head of Department, Implementation Solutions',
     name: 'Wycliff Mathenge',
     image: '/images/team/michael.webp',
     description:
       'Wycliff is the Head of Department, Implementation Division at Broadband Group, leading project rollouts from initiation to closure. He has 14 years of expertise in project and technical schedule management, focusing on high-standard operations and business growth. Wycliff’s leadership has driven effective in-house teams and project success. He holds a Civil Engineering degree from Jomo Kenyatta University of Agriculture and Technology.',
   },
   {
-    role: 'Head of Department, Network & Power Solutions',
+    role: 'Ag. Head of Department, Network & Power Solutions',
     name: 'Jullias Ambeko',
     image: '/images/team/jullias.jpg',
     description:
