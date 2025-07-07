@@ -7,7 +7,7 @@ interface CarouselHighlight {
 
 export const CarouselHighlights: CarouselHighlight[] = [
   {
-    image: 'carousel1',
+    image: 'caro1',
     title: '',
     desc: "We are a technology solution provider, utilizing advanced technologies to address requirements for Communication Network Operators, ISPs, Communication Regulators and Enterprise ICT Solutions and Services in Africa. ",
     href: '/about',

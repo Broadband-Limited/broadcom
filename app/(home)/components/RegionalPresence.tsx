@@ -3,14 +3,14 @@ import { Globe } from 'lucide-react';
 
 const RegionalPresence = () => {
   const projectCountries = [
-    'Zimbabwe',
-    'Angola',
-    'Malawi',
-    'Cameroon',
-    'Nigeria',
-    'Mali',
+    'Kenya',
+    'Tanzania',
+    'Rwanda',
+    'Burundi',
+    'Ethiopia',
+    'Somaliland',
     'Congo B',
-    'Gabon',
+    'Somalia',
     'South Sudan',
     'Madagascar',
     'Seychelles',
@@ -35,11 +35,11 @@ const RegionalPresence = () => {
         <div className="grid grid-cols-1 gap-8 lg:gap-12">
           <p className="">
             Our engineers have successfully delivered telecom projects across
-            Africa, including countries such as{' '}
+            Africa, with a strong presence in the greater East African region, including {' '}
             <span className="font-semibold text-light-blue">
-              Zimbabwe, Angola, Malawi, Cameroon, Nigeria, Mali
+              Kenya, Tanzania, Rwanda, Burundi, Somalia, Somaliland, Ethiopia, South Sudan
             </span>
-            , and several others across East, West, and Central Africa.
+            , and several others like Congo Brazzaville, Seychelles and Madagascar.
           </p>
 
           <div>
@@ -67,8 +67,8 @@ const RegionalPresence = () => {
               Broadcom Solutions
             </span>
             , depending on the country. We are currently active in Kenya,
-            Tanzania, South Sudan, and Ethiopia, with registered entities in
-            Uganda and Zambia.
+            Tanzania, South Sudan and Ethiopia, with a registered entity in
+            Zambia.
           </p>
         </div>
       </div>
