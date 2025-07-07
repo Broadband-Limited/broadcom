@@ -8,8 +8,6 @@ export default function HSEStatement() {
         health, safety & environment statement
       </h1>
 
-      <div className="w-full flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
-
       <div className="w-full flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-12">
         <Image
           src={'/images/green_energy.webp'}

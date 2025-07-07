@@ -9,7 +9,7 @@ export const members: TeamMember[] = [
   {
     role: 'Founder & CEO',
     name: 'Bernard G. Wahome',
-    image: '/images/team/PHOTO B G.webp',
+    image: '/images/team/CEO PHOTO.jpeg',
     description:
       'Bernard is the Founder, CEO, and Managing Director of Broadband Group with 28 years of experience in Telecommunications. He has driven mobile network deployments across East Africa. Bernard holds an MBA (JKUAT), Mini Telecom MBA (UK), BSc IT (JKUAT), and a Telecom Engineering Diploma. He is a member of the Kenya Institute of Management (KIM) and is committed to ICT transformation and improving customer experience across Africa.',
   },
@@ -30,7 +30,7 @@ export const members: TeamMember[] = [
   {
     role: 'Ag. Head of Department, Implementation Solutions',
     name: 'Wycliff Mathenge',
-    image: '/images/team/michael.webp',
+    image: '/images/team/wycliff.jpeg',
     description:
       'Wycliff is the Head of Department, Implementation Division at Broadband Group, leading project rollouts from initiation to closure. He has 14 years of expertise in project and technical schedule management, focusing on high-standard operations and business growth. Wycliff’s leadership has driven effective in-house teams and project success. He holds a Civil Engineering degree from Jomo Kenyatta University of Agriculture and Technology.',
   },
