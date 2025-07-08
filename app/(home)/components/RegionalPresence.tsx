@@ -58,8 +58,7 @@ const RegionalPresence = () => {
           </div>
 
           <p>
-            We have a strong presence in the greater East African region, with
-            our headquarters in Nairobi, Kenya. Our operations run under{' '}
+            Our operations run under{' '}
             <span className="text-light-blue font-bold">Broadcom</span>,{' '}
             <span className="text-light-blue font-bold">Broadcom Networks</span>
             , or{' '}
