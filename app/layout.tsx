@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="hide-scrollbar">
       <body
-        className={`${alata.variable} ${montserrat.variable} ${roboto.variable} hide-scrollbar antialiased relative`}>
+        className={`${alata.variable} ${montserrat.variable} ${roboto.variable} antialiased relative custom-scrollbar`}>
         <Header />
         {children}
         <Footer />
