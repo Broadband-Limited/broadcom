@@ -13,7 +13,7 @@ export default function Mission() {
           </div>
 
           <p className='text-justify'>
-            Our <b>vision</b> is to be the model of excellence in delivering
+            Our <b>Vision</b> is to be the model of excellence in delivering
             superior technology solutions and services in Africa.
           </p>
         </div>
@@ -24,8 +24,8 @@ export default function Mission() {
           </div>
 
           <p className='text-justify'>
-            Our <b>mission</b> is to be the preferred provider of innovative
-            and superior technology solutions across Africa.
+            Our <b>Mission</b> is to be the preferred provider of innovative
+            and superior technology solutions across East Africa.
           </p>
         </div>
       </div>
