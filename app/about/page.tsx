@@ -12,9 +12,9 @@ export default function AboutPage() {
     <>
       <Hero />
       <Mission />
+      <CoreValues />
       <QualityPolicy />
       <HSEStatement />
-      <CoreValues />
       <Team />
       <Partners />
       <ReachOut />
