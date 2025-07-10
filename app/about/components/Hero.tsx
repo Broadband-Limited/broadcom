@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className="!p-0 bg-background aspect-square md:aspect-[4/3] lg:aspect-[3/1] grid grid-cols-1 grid-rows-1">
       <Image
-        src={'/images/kalson.webp'}
+        src={'/images/kalson.jpeg'}
         alt="Broadband Communication Networks Ltd"
         width={1000}
         height={1000}
