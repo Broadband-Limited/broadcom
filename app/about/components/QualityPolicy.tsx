@@ -13,14 +13,14 @@ export default function QualityPolicy() {
         </p>
 
         <p>
-          We ensure that compliance with the applicable statutory, regulatory, internal and ISO 9001:2015 requirements, effective communication and continuous improvement in our&apos; processes.
+          We ensure that at all times; compliance with the applicable statutory, regulatory, internal and ISO 9001:2015 requirements, effective communication and continuous improvement in our processes.
         </p>
 
         <p>
-          We encourage participation and promotion of quality responsibilities amongst all employees and third parties through standards, education, training and coaching, supervision and effective communication.
+          Encouraging participation and promotion of quality responsibilities amongst all employees and third parties through standards, education, training and coaching, supervision and effective communication.
         </p>
         <p>
-          At Broadband we establish strategic, measurable, attainable, realistic and time bound quality objectives that we review periodically to ensure that the expected results are delivered to the customer. To achieve the set quality objectives, we are committed to providing the required leadership, management and resources and ensure that the quality policy is reviewed annually and communicated to employees and third parties so that we remain relevant to our customers&apos; dynamic requirements.
+          Establish strategic, measurable, attainable, realistic and time bound quality objectives that we review periodically to ensure that the expected results are delivered to the customer. To achieve the set quality objectives, we are committed to providing the required leadership, management and resources and ensure that the quality policy is reviewed annually and communicated to employees and third parties so that we remain relevant to our customers&apos; dynamic requirements.
         </p>
       </div>
     </section>
