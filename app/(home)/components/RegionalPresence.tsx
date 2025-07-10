@@ -14,6 +14,7 @@ const RegionalPresence = () => {
     'South Sudan',
     'Madagascar',
     'Seychelles',
+    'Ghana',
   ];
 
   return (
@@ -35,11 +36,11 @@ const RegionalPresence = () => {
         <div className="grid grid-cols-1 gap-8 lg:gap-12">
           <p className="">
             Our engineers have successfully delivered telecom projects across
-            Africa, with a strong presence in the greater East African region, including {' '}
+            Africa, with a strong presence in the greater East African region. The footprint includes:  {' '}
             <span className="font-semibold text-light-blue">
               Kenya, Tanzania, Rwanda, Burundi, Somalia, Somaliland, Ethiopia, South Sudan
             </span>
-            , and several others like Congo Brazzaville, Seychelles and Madagascar.
+            , Congo Brazzaville, Seychelles and Madagascar.
           </p>
 
           <div>
@@ -66,8 +67,8 @@ const RegionalPresence = () => {
               Broadcom Solutions
             </span>
             , depending on the country. We are currently active in Kenya,
-            Tanzania, South Sudan and Ethiopia, with a registered entity in
-            Zambia.
+            Tanzania, South Sudan and Ethiopia, with a registered entities in
+            Zambia and Ghana.
           </p>
         </div>
       </div>
