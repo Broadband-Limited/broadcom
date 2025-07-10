@@ -24,7 +24,7 @@ const CoreSolutions = () => {
         transmission networks to data centers, power systems, and quality of
         service optimization. Designed to enhance performance, reliability, and
         operational efficiency, our solutions are tailored to meet the evolving
-        needs of Africa&apos;s digital landscape. Our key solution areas include:
+        needs of Africa&apos;s digital landscape. Our key solution & services include:
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:mt-6">
