@@ -9,7 +9,7 @@ const Who = () => {
       <p className="w-full text-left">
         For over two decades, Broadband Communication Network has been at the
         forefront developing the African telecommunications industry, with
-        innovative solutions for Mobile Network Operators, ISPs, Communication Regulators, Utilities Organzitions and Large
+        innovative solutions for Mobile Network Operators, ISPs, Communication Regulators, Utilities Organizations and Large
         Enterprises. Our commitment to excellence, sustainability, and
         cutting-edge technology ensures that we deliver reliable, scalable, and
         cost-effective Solutions and Services to our clients meeting the dynamic ICT requirements.
