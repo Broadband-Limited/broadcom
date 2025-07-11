@@ -56,13 +56,15 @@ export default function Team() {
             key={member.name}
             className="bg-background rounded-xs overflow-hidden group">
             {/* Member Image */}
-            <Image
-              src={member.image}
-              alt={member.name}
-              width={1000}
-              height={1000}
-              className="w-full aspect-[4/5] transition-transform duration-300 group-hover:scale-105"
-            />
+            <div className="w-full aspect-[4/5] overflow-hidden">
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={350}
+                height={350}
+                className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
 
             {/* Member Info */}
             <div className="py-6">
