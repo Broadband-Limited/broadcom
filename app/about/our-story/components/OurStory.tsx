@@ -10,28 +10,25 @@ export default function OurStory() {
 
       {/* Main story content with image */}
       <div className="flex flex-col gap-8 mb-16">
-        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-          <div className="w-full md:w-1/2">
-            <Image
-              src="/images/news.webp"
-              alt="Broadband Communication Networks Ltd"
-              width={600}
-              height={400}
-              className="w-full aspect-[4/3] object-cover shadow-xl rounded-sm border border-cyan"
-            />
-          </div>
-          <div className="w-full md:w-1/2 space-y-4">
-            <p className="text-base md:text-lg leading-relaxed">
-              Founded in 2001, Broadband Communication Networks Ltd began as a
-              small, determined telecommunications provider with a bold vision:
-              to transform Africa&apos;s connectivity landscape. At a time when
-              South African and European companies dominated the market, our
-              founder and Managing Director, Bernard Wahome, foresaw a new era,
-              one where mobile telecommunication in East Africa would spark
-              massive demand for local engineering expertise and reliable
-              infrastructure.
-            </p>
-          </div>
+        <div className="flex flex-col gap-8 md:gap-12">
+          <Image
+            src="/images/news.webp"
+            alt="Broadband Communication Networks Ltd"
+            width={600}
+            height={400}
+            className="w-full aspect-[4/3] md:aspect-[2.5/1] object-cover shadow-xl rounded-sm border border-cyan"
+          />
+
+          <p className="text-base md:text-lg leading-relaxed">
+            Founded in 2001, Broadband Communication Networks Ltd began as a
+            small, determined telecommunications provider with a bold vision:
+            to transform Africa&apos;s connectivity landscape. At a time when
+            South African and European companies dominated the market, our
+            founder and Managing Director, Bernard Wahome, foresaw a new era,
+            one where mobile telecommunication in East Africa would spark
+            massive demand for local engineering expertise and reliable
+            infrastructure.
+          </p>
         </div>
 
         <p className="text-base md:text-lg leading-relaxed">
@@ -101,47 +98,45 @@ export default function OurStory() {
         </div>
 
         {/* Our specializations */}
-        <div className="my-8">
-          <h2 className="text-2xl font-semibold mb-4 text-dark-blue">
-            Our Specializations
-          </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-6">
-            We specialize in end-to-end network solutions and conformance
-            testing, managed services, enterprise connectivity, and
-            implementation, working with all major telecom vendors globally. Our
-            early partnerships with Kencell and later Safaricom positioned us as
-            one of the first private sector engineering service providers in
-            Kenya&apos;s telecom space. While many of our early competitors have
-            since exited the market, we&apos;ve remained a dominant force,
-            resilient, adaptable, and future-focused.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 bg-slate-50 rounded-sm shadow-md">
-              <h3 className="text-xl font-medium mb-2 text-dark-blue">
-                Network Solutions
-              </h3>
-              <p>End-to-end network solutions and conformance testing</p>
-            </div>
-            <div className="p-5 bg-slate-50 rounded-sm shadow-md">
-              <h3 className="text-xl font-medium mb-2 text-dark-blue">
-                Managed Services
-              </h3>
-              <p>
-                Professional management and optimization of network services
-              </p>
-            </div>
-            <div className="p-5 bg-slate-50 rounded-sm shadow-md">
-              <h3 className="text-xl font-medium mb-2 text-dark-blue">
-                Enterprise Connectivity
-              </h3>
-              <p>Business-focused connectivity solutions across Africa</p>
-            </div>
-            <div className="p-5 bg-slate-50 rounded-sm shadow-md">
-              <h3 className="text-xl font-medium mb-2 text-dark-blue">
-                Implementation
-              </h3>
-              <p>Expert deployment working with all major telecom vendors</p>
-            </div>
+        <h2 className="text-2xl font-semibold mb-4 text-dark-blue">
+          Our Specializations
+        </h2>
+        <p className="text-base md:text-lg leading-relaxed mb-6">
+          We specialize in end-to-end network solutions and conformance
+          testing, managed services, enterprise connectivity, and
+          implementation, working with all major telecom vendors globally. Our
+          early partnerships with Kencell and later Safaricom positioned us as
+          one of the first private sector engineering service providers in
+          Kenya&apos;s telecom space. While many of our early competitors have
+          since exited the market, we&apos;ve remained a dominant force,
+          resilient, adaptable, and future-focused.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="p-5 bg-slate-50 rounded-sm shadow-md">
+            <h3 className="text-xl font-medium mb-2 text-dark-blue">
+              Network Solutions
+            </h3>
+            <p>End-to-end network solutions and conformance testing</p>
+          </div>
+          <div className="p-5 bg-slate-50 rounded-sm shadow-md">
+            <h3 className="text-xl font-medium mb-2 text-dark-blue">
+              Managed Services
+            </h3>
+            <p>
+              Professional management and optimization of network services
+            </p>
+          </div>
+          <div className="p-5 bg-slate-50 rounded-sm shadow-md">
+            <h3 className="text-xl font-medium mb-2 text-dark-blue">
+              Enterprise Connectivity
+            </h3>
+            <p>Business-focused connectivity solutions across Africa</p>
+          </div>
+          <div className="p-5 bg-slate-50 rounded-sm shadow-md">
+            <h3 className="text-xl font-medium mb-2 text-dark-blue">
+              Implementation
+            </h3>
+            <p>Expert deployment working with all major telecom vendors</p>
           </div>
         </div>
 
@@ -174,6 +169,7 @@ export default function OurStory() {
               className="w-full aspect-[4/3] object-cover shadow-xl rounded-sm border border-cyan"
             />
           </div>
+
           <div className="w-full md:w-1/2 space-y-4">
             <h2 className="text-2xl font-semibold mb-4 text-dark-blue">
               Sustainability Focus
