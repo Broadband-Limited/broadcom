@@ -23,7 +23,7 @@ export const members: TeamMember[] = [
   {
     role: 'Head of Department, Finance and Administration',
     name: 'Susan Gichia',
-    image: '/images/team/susan.webp',
+    image: '/images/team/susan.jpeg',
     description:
       'Susan is the Head of Department, Finance and Administration at Broadband, a position she has held since 2007. A seasoned finance executive with decades of experience. She offers oversight of the Finance, Supply chain, Human Resource and Administration Functions. She has a wide range of expertise spanning across Manufacturing & Trading, Non-Governmental Organizations, Banking and ICT Sectors. Throughout her career, Susan has consistently offered strategic corporate oversight, leadership competence, compliance, good communication and smooth change management. She has built high-performing teams, driven business expansions and turn arounds, enhanced operational performance and led various teams across East Africa. She is a graduate of Strathmore University and a Certified Public Accountant from the Institute of Certified Accountants of Kenya (ICPAK). She is a member of the Institute of Certified Public Accountants of Kenya (ICPAK). Prior to joining Broadband, Susan spearheaded the opening of various KWFT Bank branches across Kenya while serving as Regional Accountant and eventually as the Head Office Accountant. Earlier, she was Projects / Funds Accountant at NGOS, FPAK, WFP. Her career started from Manufacturing & Trade of paints / Resins at Twiga Paints Group, where she rose through the ranks. Susan serves on the boards of Broadcom Kenya and Reallite Energy Kenya.',
   },
