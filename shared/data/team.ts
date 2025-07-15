@@ -44,7 +44,7 @@ export const members: TeamMember[] = [
   {
     role: 'Head of Department, Enterprise Network',
     name: 'Charles Kiithya',
-    image: '/images/team/charles.jpeg',
+    image: '/images/team/charles.jpg',
     description:
       'Charles Nyamai Kiithya is a highly experienced telecommunications professional with over 25 years of expertise, including 15+ years in operations management across networking and ICT. He holds a Higher Diploma in Electrical & Electronics Engineering (Telecommunications) and an MBA from the University of Liverpool. Trained by leading telecom OEMs, he brings deep technical and leadership insights. A member of the Institute of Directors (IoD) Kenya, he has worked in both public and private sectors, demonstrating strong governance and strategic acumen. His career reflects a blend of engineering excellence and executive management.',
   },
