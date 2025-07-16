@@ -11,11 +11,11 @@ export default function AboutPage() {
   return (
     <>
       <Hero />
+      <Team />
       <Mission />
       <CoreValues />
       <QualityPolicy />
       <HSEStatement />
-      <Team />
       <Partners />
       <ReachOut />
     </>
