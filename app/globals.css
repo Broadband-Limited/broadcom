@@ -56,7 +56,7 @@ html {
 
     section {
       flex-shrink: 0;
-      padding: 1rem 8rem;
+      padding: 2rem 8rem;
     }
     @media (max-width: 768px) {
       section {
