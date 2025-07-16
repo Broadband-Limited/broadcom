@@ -12,7 +12,7 @@ export default function OurStory() {
       <div className="flex flex-col gap-8 mb-16">
         <div className="flex flex-col gap-8 md:gap-12">
           <Image
-            src="/images/news.webp"
+            src="/images/OS.jpeg"
             alt="Broadband Communication Networks Ltd"
             width={600}
             height={400}
