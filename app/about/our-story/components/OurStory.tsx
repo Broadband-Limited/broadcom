@@ -14,9 +14,9 @@ export default function OurStory() {
           <Image
             src="/images/OS.jpeg"
             alt="Broadband Communication Networks Ltd"
-            width={600}
-            height={400}
-            className="w-full aspect-[4/3] md:aspect-[2.5/1] object-cover shadow-xl rounded-sm border border-cyan"
+            width={1000}
+            height={1000}
+            className="w-full aspect-[4/3] md:aspect-[1.95/1] object-cover shadow-xl rounded-sm border border-cyan"
           />
 
           <p className="text-base md:text-lg leading-relaxed">
