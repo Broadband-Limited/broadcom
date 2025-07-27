@@ -6,7 +6,6 @@ import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Youtube from '@tiptap/extension-youtube';
 import { useCallback, useEffect, useState } from 'react';
-import { uploadMediaImage } from '@/lib/media-storage';
 import Button from '@/shared/components/ui/Button';
 import Input from '@/shared/components/ui/Input';
 import {
@@ -97,8 +96,23 @@ export function RichTextEditor({
       if (input.files && input.files.length > 0) {
         try {
           const file = input.files[0];
-          const imageUrl = await uploadMediaImage(file);
-          editor.chain().focus().setImage({ src: imageUrl }).run();
+          
+          // Upload via API
+          const formData = new FormData();
+          formData.append('file', file);
+
+          const response = await fetch('/api/media/upload-image', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Upload failed');
+          }
+
+          const result = await response.json();
+          editor.chain().focus().setImage({ src: result.data.url }).run();
         } catch (error) {
           console.error('Failed to upload image:', error);
           alert('Failed to upload image. Please try again.');

@@ -4,7 +4,6 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Media } from '@/lib/types/media_types';
 import { RichTextEditor } from './RichTextEditor';
-import { uploadMediaImage, deleteMediaImage } from '@/lib/media-storage';
 import { MediaAttachment } from '@/lib/types/media_types';
 import Input from '@/shared/components/ui/Input';
 import Button from '@/shared/components/ui/Button';
@@ -105,8 +104,23 @@ export function MediaForm({ media, onSubmit, isSubmitting }: MediaFormProps) {
     try {
       setUploadingImage(true);
       const file = e.target.files[0];
-      const imageUrl = await uploadMediaImage(file);
-      setFeaturedImage(imageUrl);
+      
+      // Upload via API
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/media/upload-image', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Upload failed');
+      }
+
+      const result = await response.json();
+      setFeaturedImage(result.data.url);
     } catch (error) {
       console.error('Failed to upload image:', error);
       alert('Failed to upload featured image. Please try again.');
@@ -119,7 +133,20 @@ export function MediaForm({ media, onSubmit, isSubmitting }: MediaFormProps) {
     if (!featuredImage) return;
 
     try {
-      await deleteMediaImage(featuredImage);
+      // Delete via API
+      const response = await fetch('/api/media/delete-image', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: featuredImage }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Delete failed');
+      }
+
       setFeaturedImage(undefined);
     } catch (error) {
       console.error('Failed to delete image:', error);
