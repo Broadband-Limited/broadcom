@@ -4,10 +4,7 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Media } from '@/lib/types/media_types';
 import { RichTextEditor } from './RichTextEditor';
-import {
-  uploadMediaImage,
-  deleteMediaImage,
-} from '@/lib/media-storage';
+import { uploadMediaImage, deleteMediaImage } from '@/lib/media-storage';
 import { MediaAttachment } from '@/lib/types/media_types';
 import Input from '@/shared/components/ui/Input';
 import Button from '@/shared/components/ui/Button';
