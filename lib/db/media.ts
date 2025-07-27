@@ -2,7 +2,10 @@ import { createServer } from '@/lib/supabase/server';
 import { Media } from '@/lib/types/media_types';
 import { isAuthorised } from './auth';
 import { createClient } from '@supabase/supabase-js';
-import { deleteMultipleMediaImages } from '@/lib/media-storage';
+import {
+  deleteMultipleMediaImages,
+  deleteMultipleMediaAttachments,
+} from '@/lib/media-storage';
 
 export const getMediaCount = async () => {
   const supabase = await createServer();
@@ -118,10 +121,10 @@ export async function deleteMedia(id: string) {
 
     const supabase = await createServer();
 
-    // Get the media record first to retrieve image URLs
+    // Get the media record first to retrieve image URLs and attachments
     const { data: media, error: fetchError } = await supabase
       .from('media')
-      .select('featured_image, content')
+      .select('featured_image, content, attachments')
       .eq('id', id)
       .single();
 
@@ -164,11 +167,37 @@ export async function deleteMedia(id: string) {
       imagesToDelete.push(...contentImages);
     }
 
+    // Collect all attachments to delete
+    const attachmentsToDelete: string[] = [];
+    if (media?.attachments && Array.isArray(media.attachments)) {
+      media.attachments.forEach((attachment) => {
+        if (attachment.url) {
+          attachmentsToDelete.push(attachment.url);
+        }
+      });
+    }
+
     // Delete all images
-    try {
-      await deleteMultipleMediaImages(imagesToDelete)
-    } catch (error) {
-      console.error('Error deleting media images:', error);
+    if (imagesToDelete.length > 0) {
+      try {
+        await deleteMultipleMediaImages(imagesToDelete);
+        console.log('>>> Deleted media images:', imagesToDelete.length);
+      } catch (error) {
+        console.error('Error deleting media images:', error);
+      }
+    }
+
+    // Delete all attachments
+    if (attachmentsToDelete.length > 0) {
+      try {
+        await deleteMultipleMediaAttachments(attachmentsToDelete);
+        console.log(
+          '>>> Deleted media attachments:',
+          attachmentsToDelete.length
+        );
+      } catch (error) {
+        console.error('Error deleting media attachments:', error);
+      }
     }
 
     const { error } = await supabase.from('media').delete().eq('id', id);
