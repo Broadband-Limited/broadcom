@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import { useConfirmation } from '@/shared/hooks/useConfirmation';
+import ConfirmationModal from '@/shared/components/ui/ConfirmationModal';
 
 interface MediaContextMenuProps {
   itemId: string;
@@ -30,6 +32,7 @@ export default function MediaContextMenu({
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const { confirm, confirmationProps } = useConfirmation();
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -77,15 +80,20 @@ export default function MediaContextMenu({
   };
 
   const handleDelete = async () => {
-    if (
-      !confirm(
-        'Are you sure you want to delete this media item? This action cannot be undone.'
-      )
-    ) {
+    const confirmed = await confirm({
+      title: 'Delete Media Item',
+      message:
+        'Are you sure you want to delete this media item? This action cannot be undone.',
+      confirmText: 'Delete',
+      variant: 'danger',
+    });
+
+    if (!confirmed) {
       return;
     }
 
     setIsDeleting(true);
+    setIsOpen(false); // Close the menu when deletion starts
     try {
       const response = await fetch(`/api/media/${itemId}`, {
         method: 'DELETE',
@@ -102,13 +110,12 @@ export default function MediaContextMenu({
       console.error('Error deleting media item:', error);
     } finally {
       setIsDeleting(false);
-      setIsOpen(false);
     }
   };
 
   const handlePublish = async () => {
     setIsPublishing(true);
-    
+
     try {
       const response = await fetch(`/api/media/${itemId}/publish`, {
         method: 'PATCH',
@@ -244,6 +251,8 @@ export default function MediaContextMenu({
           </div>
         </>
       )}
+
+      <ConfirmationModal {...confirmationProps} isLoading={isDeleting} />
     </div>
   );
 }
