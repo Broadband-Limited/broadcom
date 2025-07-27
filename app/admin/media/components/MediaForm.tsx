@@ -7,7 +7,6 @@ import { RichTextEditor } from './RichTextEditor';
 import {
   uploadMediaImage,
   deleteMediaImage,
-  deleteMultipleMediaAttachments,
 } from '@/lib/media-storage';
 import { MediaAttachment } from '@/lib/types/media_types';
 import Input from '@/shared/components/ui/Input';
