@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function OurStoryPage() {
   return (
-    <main className="container mx-auto px-4 md:px-6 py-8">
+    <>
       <OurStory />
-    </main>
+    </>
   );
 }

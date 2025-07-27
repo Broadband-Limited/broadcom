@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function OurStory() {
   return (
-    <div className="max-w-5xl mx-auto">
+    <section className="!pt-6">
       <h1 className="w-fit mx-auto mb-12 lines-header text-3xl md:text-4xl lg:text-5xl font-bold">
         OUR STORY
       </h1>
@@ -195,6 +195,6 @@ export default function OurStory() {
           learn, improve, and lead.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

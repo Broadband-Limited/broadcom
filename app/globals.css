@@ -55,12 +55,32 @@ html {
     transition: height 0.3s ease-in-out;
 
     section {
+      width: 100%;
       flex-shrink: 0;
-      padding: 2rem 8rem;
     }
-    @media (max-width: 768px) {
+
+    @media (width < 40rem) {
       section {
-        padding: 1rem 1rem;
+        /* padding: y x */
+        padding: 4rem 1.2rem;
+      }
+    }
+
+    @media (width >= 48rem /* md */) {
+      section {
+        padding: 6rem 6rem;
+      }
+    }
+
+    @media (width >= 64rem /* lg */) {
+      section {
+        padding: 8rem 6rem;
+      }
+    }
+
+    @media (width >= 80rem /* xl */) {
+      section {
+        padding: 8rem 6rem;
       }
     }
   }
@@ -166,7 +186,7 @@ table {
       display: none;
     }
   }
-  
+
   &::-webkit-scrollbar-track {
     background: color-mix(in srgb, var(--color-light-blue), white);
   }
