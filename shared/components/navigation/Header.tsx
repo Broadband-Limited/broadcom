@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, ChevronRight, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -18,59 +18,96 @@ export default function Header() {
   const [isAboutHovered, setIsAboutHovered] = useState(false);
   const [isAboutSubmenuOpen, setIsAboutSubmenuOpen] = useState(false);
 
-  // fetch divisions from our API
+  // Memoize divisions fetch to prevent unnecessary re-fetches
   useEffect(() => {
-    fetch('/api/divisions')
-      .then((res) => res.json())
-      .then((data) => setDivisions(data || []));
+    let isMounted = true;
+
+    const fetchDivisions = async () => {
+      try {
+        const res = await fetch('/api/divisions');
+        if (!res.ok) throw new Error('Failed to fetch divisions');
+        const data = await res.json();
+        if (isMounted) {
+          setDivisions(data || []);
+        }
+      } catch (error) {
+        console.error('Error fetching divisions:', error);
+        if (isMounted) {
+          setDivisions([]);
+        }
+      }
+    };
+
+    fetchDivisions();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  const serviceDivisions = divisions.map((d) => ({
-    name: d.name,
-    href: `/division/${d.slug}/`,
-  }));
-
-  const pages = [
-    ...(pathname.startsWith('/admin')
-      ? [
-          { name: 'dashboard', href: '/admin/dashboard' },
-          { name: 'divisions & services', href: '/admin/divisions' },
-          { name: 'media', href: '/admin/media' },
-          { name: 'jobs', href: '/admin/jobs' },
-        ]
-      : [
-          { name: 'home', href: '/' },
-          {
-            name: 'solutions & services',
-            submenu: serviceDivisions,
-          },
-          {
-            name: 'about us',
-            href: '/about',
-            submenu: [
-              { name: 'Who we are', href: '/about' },
-              { name: 'Our Story', href: '/about/our-story' },
-            ],
-          },
-          { name: 'careers', href: '/careers' },
-          { name: 'media', href: '/media' },
-          { name: 'contact us', href: '/contact' },
-        ]),
-  ];
-
-  const isSolutionsActive = serviceDivisions.some((subItem) =>
-    pathname.includes(subItem.href)
+  // Memoize computed values
+  const serviceDivisions = useMemo(
+    () =>
+      divisions.map((d) => ({
+        name: d.name,
+        href: `/division/${d.slug}/`,
+      })),
+    [divisions]
   );
+
+  const isSolutionsActive = useMemo(
+    () => serviceDivisions.some((subItem) => pathname.includes(subItem.href)),
+    [serviceDivisions, pathname]
+  );
+
+  const pages = useMemo(
+    () => [
+      ...(pathname.startsWith('/admin')
+        ? [
+            { name: 'dashboard', href: '/admin/dashboard' },
+            { name: 'divisions & services', href: '/admin/divisions' },
+            { name: 'media', href: '/admin/media' },
+            { name: 'jobs', href: '/admin/jobs' },
+          ]
+        : [
+            { name: 'home', href: '/' },
+            {
+              name: 'solutions & services',
+              submenu: serviceDivisions,
+            },
+            {
+              name: 'about us',
+              href: '/about',
+              submenu: [
+                { name: 'Who we are', href: '/about' },
+                { name: 'Our Story', href: '/about/our-story' },
+              ],
+            },
+            { name: 'careers', href: '/careers' },
+            { name: 'media', href: '/media' },
+            { name: 'contact us', href: '/contact' },
+          ]),
+    ],
+    [pathname, serviceDivisions]
+  );
+
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+    setIsSolutionsSubmenuOpen(false);
+    setIsAboutSubmenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className="w-full shrink-0 sticky z-50 top-0 py-3 px-4 md:px-12 flex items-center justify-between bg-dark-blue">
-      <Link href="/" className="logo p-0 !m-0">
+      <Link href="/" className="logo p-0 !m-0" prefetch={true}>
         <Image
           src="/images/logo.png"
           alt="Broadband Communication Networks Ltd"
           width={150}
           height={150}
           className="object-contain"
+          priority
         />
       </Link>
 
@@ -114,7 +151,7 @@ export default function Header() {
                 {/* Desktop Dropdown */}
                 <div className="hidden md:block w-full">
                   {page.href ? (
-                    <Link href={page.href}>
+                    <Link href={page.href} prefetch={true}>
                       <button
                         className={cn(
                           'uppercase md:text-background md:!text-sm opacity-80',
@@ -142,15 +179,16 @@ export default function Header() {
                   {((isSolutionsPage && isSolutionsHovered) ||
                     (isAboutPage && isAboutHovered)) && (
                     <div className="absolute top-full left-0 shadow-2xl w-[45vw] pt-6">
-                      <div className="bg-background pt-2 pb-6">
+                      <div className="bg-background rounded-sm pt-2 pb-2 px-2">
                         {page.submenu.map(
                           (subItem, subIndex) =>
                             subItem.href !== '/about' && (
                               <Link
                                 key={subIndex}
                                 href={subItem.href}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100"
-                                onClick={() => setMenuOpen(false)}>
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-slate-200 rounded-sm"
+                                onClick={() => setMenuOpen(false)}
+                                prefetch={true}>
                                 <p
                                   className={cn(
                                     pathname.includes(subItem.href) &&
@@ -210,7 +248,8 @@ export default function Header() {
                             if (isSolutionsPage)
                               setIsSolutionsSubmenuOpen(false);
                             if (isAboutPage) setIsAboutSubmenuOpen(false);
-                          }}>
+                          }}
+                          prefetch={true}>
                           <p
                             className={cn(
                               'text-base',
@@ -238,7 +277,8 @@ export default function Header() {
                 'border-b border-black border-opacity-25',
                 'hover:pl-8 md:hover:pl-0'
               )}
-              onClick={() => setMenuOpen(false)}>
+              onClick={() => setMenuOpen(false)}
+              prefetch={true}>
               <p
                 className={cn(
                   'capitalize md:uppercase md:!text-background md:!text-sm',
