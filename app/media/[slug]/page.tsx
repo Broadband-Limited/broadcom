@@ -4,6 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { Metadata } from 'next';
+import { Download, FileText } from 'lucide-react';
+import Button from '@/shared/components/ui/Button';
+import { MediaAttachment } from '@/lib/types/media_types';
+import ShareLinkButton from './components/ShareLinkButton';
 
 interface MediaSlugPageProps {
   params: Promise<{
@@ -86,8 +90,11 @@ export default async function MediaSlugPage({ params }: MediaSlugPageProps) {
           </Link>
         </div>
         <h1 className="text-3xl md:text-4xl font-bold mb-4">{media.title}</h1>
-        <div className="text-sm text-gray-600 mb-8">
-          Published on {formatDate(media.published_at || media.created_at)}
+        <div className="flex items-center gap-4 text-sm text-gray-600 mb-8">
+          <ShareLinkButton slug={media.slug} title={media.title} />
+          <span>
+            Published on {formatDate(media.published_at || media.created_at)}
+          </span>
         </div>
         {media.featured_image && (
           <div className="relative w-full h-80 md:h-96 mb-8 overflow-hidden">
@@ -109,6 +116,41 @@ export default async function MediaSlugPage({ params }: MediaSlugPageProps) {
           className="prose prose-lg max-w-none"
           dangerouslySetInnerHTML={{ __html: media.content }}
         />
+
+        {/* PDF Attachments Download */}
+        {media.attachments && media.attachments.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-4">Downloads</h3>
+            <div className="space-y-2">
+              {media.attachments.map(
+                (attachment: MediaAttachment, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center space-x-3 flex-1 min-w-0">
+                      <FileText className="h-4 w-4 text-red-600 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-gray-900 truncate">
+                          {attachment.displayName || attachment.name}
+                        </p>
+                      </div>
+                    </div>
+
+                    <Button
+                      href={attachment.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      size="sm"
+                      className="flex items-center space-x-1">
+                      <Download className="w-3 h-3" />
+                      <span>Download</span>
+                    </Button>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        )}
       </article>
     </section>
   );

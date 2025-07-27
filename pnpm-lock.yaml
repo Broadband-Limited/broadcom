@@ -26,6 +26,9 @@ importers:
       '@tiptap/extension-link':
         specifier: ^2.12.0
         version: 2.26.1(@tiptap/core@2.26.1(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)
+      '@tiptap/extension-youtube':
+        specifier: ^3.0.7
+        version: 3.0.7(@tiptap/core@2.26.1(@tiptap/pm@2.26.1))
       '@tiptap/react':
         specifier: ^2.12.0
         version: 2.26.1(@tiptap/core@2.26.1(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -709,6 +712,11 @@ packages:
     resolution: {integrity: sha512-p2n8WVMd/2vckdJlol24acaTDIZAhI7qle5cM75bn01sOEZoFlSw6SwINOULrUCzNJsYb43qrLEibZb4j2LeQw==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-youtube@3.0.7':
+    resolution: {integrity: sha512-BD4rc7Xoi3O+puXSEArHAbBVu4dhj+9TuuVYzEFgNHI+FN/py9J5AiNf4TXGKBSlMUOYPpODaEROwyGmqAmpuA==}
+    peerDependencies:
+      '@tiptap/core': ^3.0.7
 
   '@tiptap/pm@2.26.1':
     resolution: {integrity: sha512-8aF+mY/vSHbGFqyG663ds84b+vca5Lge3tHdTMTKazxCnhXR9dn2oQJMnZ78YZvdRbkPkMJJHti9h3K7u2UQvw==}
@@ -3088,6 +3096,10 @@ snapshots:
       '@tiptap/core': 2.26.1(@tiptap/pm@2.26.1)
 
   '@tiptap/extension-text@2.26.1(@tiptap/core@2.26.1(@tiptap/pm@2.26.1))':
+    dependencies:
+      '@tiptap/core': 2.26.1(@tiptap/pm@2.26.1)
+
+  '@tiptap/extension-youtube@3.0.7(@tiptap/core@2.26.1(@tiptap/pm@2.26.1))':
     dependencies:
       '@tiptap/core': 2.26.1(@tiptap/pm@2.26.1)
 

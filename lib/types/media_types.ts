@@ -1,3 +1,10 @@
+export type MediaAttachment = {
+  url: string;
+  name: string; // Original filename
+  displayName: string; // User-defined display name
+  size?: number;
+};
+
 export type Media = {
   id: string;
   title: string;
@@ -6,6 +13,7 @@ export type Media = {
   content: any;
   summary?: string;
   featured_image?: string;
+  attachments?: MediaAttachment[];
   published: boolean;
   published_at?: string;
   created_at: string;

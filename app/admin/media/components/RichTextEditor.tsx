@@ -4,9 +4,11 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
-import { useCallback, useEffect } from 'react';
+import Youtube from '@tiptap/extension-youtube';
+import { useCallback, useEffect, useState } from 'react';
 import { uploadMediaImage } from '@/lib/media-storage';
 import Button from '@/shared/components/ui/Button';
+import Input from '@/shared/components/ui/Input';
 import {
   Bold,
   Italic,
@@ -20,6 +22,8 @@ import {
   Undo,
   Redo,
   Unlink,
+  Play,
+  X,
 } from 'lucide-react';
 
 interface RichTextEditorProps {
@@ -33,6 +37,9 @@ export function RichTextEditor({
   onChange,
   className,
 }: RichTextEditorProps) {
+  const [showYouTubeDialog, setShowYouTubeDialog] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState('');
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -40,6 +47,12 @@ export function RichTextEditor({
       Link.configure({
         openOnClick: false,
         validate: (href) => /^https?:\/\//.test(href),
+      }),
+      Youtube.configure({
+        width: 640,
+        height: 480,
+        ccLanguage: 'en',
+        interfaceLanguage: 'en',
       }),
     ],
     content: content || '<p></p>',
@@ -94,6 +107,32 @@ export function RichTextEditor({
     };
     input.click();
   }, [editor]);
+
+  const addYouTubeVideo = useCallback(() => {
+    setShowYouTubeDialog(true);
+  }, []);
+
+  const handleYouTubeSubmit = useCallback(() => {
+    if (!editor || !youtubeUrl) return;
+
+    try {
+      editor.commands.setYoutubeVideo({
+        src: youtubeUrl,
+        width: 640,
+        height: 480,
+      });
+      setYoutubeUrl('');
+      setShowYouTubeDialog(false);
+    } catch (error) {
+      console.error('Failed to add YouTube video:', error);
+      alert('Failed to add YouTube video. Please check the URL and try again.');
+    }
+  }, [editor, youtubeUrl]);
+
+  const handleYouTubeCancel = useCallback(() => {
+    setYoutubeUrl('');
+    setShowYouTubeDialog(false);
+  }, []);
 
   if (!editor) {
     return null;
@@ -212,6 +251,15 @@ export function RichTextEditor({
           <ImageIcon className="w-4 h-4" />
         </Button>
 
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={addYouTubeVideo}
+          aria-label="Add YouTube Video">
+          <Play className="w-4 h-4" />
+        </Button>
+
         <div className="ml-auto flex gap-1">
           <Button
             type="button"
@@ -236,6 +284,52 @@ export function RichTextEditor({
       </div>
 
       <EditorContent editor={editor} className="min-h-[300px] w-full p-2" />
+
+      {/* YouTube Dialog */}
+      {showYouTubeDialog && (
+        <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 max-w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Add YouTube Video</h3>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={handleYouTubeCancel}
+                aria-label="Close">
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <Input
+                label="YouTube URL"
+                name="youtubeUrl"
+                type="text"
+                value={youtubeUrl}
+                onChange={(e) => setYoutubeUrl(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=..."
+                required
+              />
+              
+              <div className="flex justify-end space-x-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleYouTubeCancel}>
+                  Cancel
+                </Button>
+                <Button
+                  type="button"
+                  onClick={handleYouTubeSubmit}
+                  disabled={!youtubeUrl}>
+                  Add Video
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
