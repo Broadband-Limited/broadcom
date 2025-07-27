@@ -15,9 +15,7 @@ export default async function Footer() {
   const linkGroups = [
     {
       title: 'Corporate',
-      links: [
-        { title: 'About Us', href: '/about' },
-      ],
+      links: [{ title: 'About Us', href: '/about' }],
     },
     {
       title: 'Areas of Expertise',
@@ -53,9 +51,7 @@ export default async function Footer() {
   return (
     <footer className="w-full flex flex-col">
       {/* News and Media Section */}
-      {featuredMedia.length > 0 && (
-        <ArticlesPreview articles={featuredMedia} />
-      )}
+      {featuredMedia.length > 0 && <ArticlesPreview articles={featuredMedia} />}
 
       <div className="footer-top w-full px-8 md:px-12 py-12 md:py-24 bg-gray grid grid-cols-1 md:grid-cols-4 gap-6 bg-foreground/90">
         {linkGroups.map((group, index) => (
@@ -79,7 +75,7 @@ export default async function Footer() {
 
         <div className="w-full flex flex-col gap-4 md:gap-2 mt-6 md:m-0">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="Broadband Communication Networks Ltd"
             width={200}
             height={200}

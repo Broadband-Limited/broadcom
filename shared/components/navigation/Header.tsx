@@ -102,7 +102,7 @@ export default function Header() {
     <header className="w-full shrink-0 sticky z-50 top-0 py-3 px-4 md:px-12 flex items-center justify-between bg-dark-blue">
       <Link href="/" className="logo p-0 !m-0" prefetch={true}>
         <Image
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="Broadband Communication Networks Ltd"
           width={150}
           height={150}
@@ -120,7 +120,7 @@ export default function Header() {
         )}>
         <div className="w-full flex items-center justify-between md:hidden logo mb-8">
           <Image
-            src="/images/logo-black.png"
+            src="/images/logo-black.webp"
             alt="Broadband Communication Networks Ltd"
             width={150}
             height={150}
