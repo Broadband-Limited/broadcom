@@ -42,7 +42,7 @@ export const featuredServices: FeaturedService[] = [
   },
   {
     name: 'Data Center Solutions',
-    href: '/products/enterprise-network-infrastructure',
+    href: '/products/data-center-power--cooling-solutions',
     icon: Server,
   },
 ];
